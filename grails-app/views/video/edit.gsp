@@ -24,7 +24,7 @@
                 <g:renderErrors bean="${videoInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" >
+            <g:form method="post" enctype="multipart/form-data">
                 <g:hiddenField name="id" value="${videoInstance?.id}" />
                 <g:hiddenField name="version" value="${videoInstance?.version}" />
                 <div class="dialog">
@@ -75,15 +75,24 @@
                                     <g:textArea name="description" value="${videoInstance?.description}"  rows="7" cols="40"/>                                    
                                 </td>
                             </tr>
-                        
+                            
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="homeOrder"><g:message code="video.homeOrder.label" default="Home Order" /></label>
+                                    <label for="url"><g:message code="video.movieFile.label" default="File Upload" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeOrder', 'errors')}">
-                                    <g:textField name="homeOrder" value="${fieldValue(bean: videoInstance, field: 'homeOrder')}" />
-                                </td>
+                                <td valign="top" class="value">
+									<input type="file" name="movieFile"/>
+								</td>
                             </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="url"><g:message code="video.thumbnail.label" default="Thumbnail Upload" /></label>
+                                </td>
+                                <td valign="top" class="value">
+									<input type="file" name="thumbnail"/>
+								</td>
+                            </tr>                        
 
                             <tr class="prop">
                                 <td valign="top" class="name">
@@ -127,6 +136,15 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'rating', 'errors')}">
                                     <g:textField name="rating" value="${fieldValue(bean: videoInstance, field: 'rating')}" />
+                                </td>
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="homeOrder"><g:message code="video.homeOrder.label" default="Home Order" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeOrder', 'errors')}">
+                                    <g:textField name="homeOrder" value="${fieldValue(bean: videoInstance, field: 'homeOrder')}" />
                                 </td>
                             </tr>
                         

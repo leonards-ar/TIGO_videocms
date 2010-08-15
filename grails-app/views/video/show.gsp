@@ -64,14 +64,7 @@
                             	<g:textArea name="description" value="${videoInstance?.description}"  rows="7" cols="40" readonly="true" />                                    
 							</td>                           
                         </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.homeOrder.label" default="Home Order" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "homeOrder")}</td>
-                            
-                        </tr>
-                        
+                                            
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.url.label" default="Url" /></td>
                             
@@ -104,6 +97,13 @@
                             <td valign="top" class="name"><g:message code="video.rating.label" default="Rating" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "rating")}</td>
+                            
+                        </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="video.homeOrder.label" default="Home Order" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "homeOrder")}</td>
                             
                         </tr>
                     

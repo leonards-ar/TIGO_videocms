@@ -23,7 +23,7 @@
                 <g:renderErrors bean="${videoInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" >
+            <g:form action="save" enctype="multipart/form-data" method="post">
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -71,6 +71,24 @@
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'description', 'errors')}">
                                     <g:textArea name="description" value="${videoInstance?.description}"  rows="7" cols="40"/>                                    
                                 </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="url"><g:message code="video.movieFile.label" default="File Upload" /></label>
+                                </td>
+                                <td valign="top" class="value">
+									<input type="file" name="movieFile"/>
+								</td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="url"><g:message code="video.thumbnail.label" default="Thumbnail Upload" /></label>
+                                </td>
+                                <td valign="top" class="value">
+									<input type="file" name="thumbnail"/>
+								</td>
                             </tr>
                                                                                 
                             <tr class="prop">
