@@ -26,6 +26,10 @@
                         
                             <g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
                         
+                            <g:sortableColumn property="firstName" title="${message(code: 'user.firstName.label', default: 'First Name')}" />
+                        
+                            <g:sortableColumn property="lastName" title="${message(code: 'user.lastName.label', default: 'Last Name')}" />
+                        
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +39,10 @@
                             <td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "id")}</g:link></td>
                         
                             <td>${fieldValue(bean: userInstance, field: "email")}</td>
+                        
+                            <td>${fieldValue(bean: userInstance, field: "firstName")}</td>
+                        
+                            <td>${fieldValue(bean: userInstance, field: "lastName")}</td>
                         
                         </tr>
                     </g:each>
