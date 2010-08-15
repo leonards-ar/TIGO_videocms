@@ -9,22 +9,25 @@ class BootStrap {
 	
 	def init = { 		
 		
-		def ireland = Country.findByCode("IE")?:new Country(code:"IE", name:"IRELAND")
+		def honduras = Country.findByCode("HN")?:new Country(code:"HN", name:"HONDURAS")
 		.save(failOnError:true)
 		
-		def argentina = Country.findByCode("AR")?:new Country(code:"AR", name:"ARGENTINA")
+		def salvador = Country.findByCode("SV")?:new Country(code:"SV", name:"EL SALVADOR")
+		.save(failOnError:true)
+		
+		def guatemala = Country.findByCode("GT")?:new Country(code:"GT", name:"GUATEMALA")
 		.save(failOnError:true)
 		
 		if(!User.findByEmail("cristian@mindpool-it.com")) {
 			new User(email:"cristian@mindpool-it.com",firstName:"Cristian",lastName:"Nunez")
-			.addToCountries(ireland)
-			.addToCountries(argentina)
+			.addToCountries(salvador)
+			.addToCountries(honduras)
 			.save(failOnError:true)
 		}
 		
 		if (!User.findByEmail("mariano@mindpool-it.com")) { 	
 			new User(email:"mariano@mindpool-it.com", firstName:"Mariano",lastName:"Capurro")
-			.addToCountries(argentina)
+			.addToCountries(honduras)
 			.save(failOnError:true)
 		}
 		
@@ -53,8 +56,8 @@ class BootStrap {
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToAudienceRestrictions(restrictionPG)
-			.addToCountries(ireland)
-			.addToCountries(argentina)
+			.addToCountries(salvador)
+			.addToCountries(honduras)
 			.save(failOnError:true)
 		}
 		
@@ -64,7 +67,7 @@ class BootStrap {
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToAudienceRestrictions(restrictionPG13)
-			.addToCountries(ireland)
+			.addToCountries(salvador)
 			.save(failOnError:true)
 		}
 		
@@ -73,7 +76,7 @@ class BootStrap {
 			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png")
 			.addToCategories(todos)
 			.addToAudienceRestrictions(restrictionG)
-			.addToCountries(argentina)
+			.addToCountries(honduras)
 			.save(failOnError:true)
 		}
 	}

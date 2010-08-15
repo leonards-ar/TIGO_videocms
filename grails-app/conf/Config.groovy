@@ -48,7 +48,7 @@ grails.spring.bean.packages = []
 environments {
 	production {
 		grails.serverURL = "http://www.changeme.com"
-		uploadServerLocation = "/tmp/www/"
+		uploadServerLocation = "/tmp/www/upload/"
 		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
 		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
 	}
