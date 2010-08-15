@@ -1,3 +1,4 @@
+import com.sun.imageio.plugins.jpeg.JFIFMarkerSegment.JFIFThumbJPEG.ThumbnailReadListener;
 import com.tigo.videocms.AudienceRestriction 
 import com.tigo.videocms.Country 
 import com.tigo.videocms.User
@@ -47,7 +48,8 @@ class BootStrap {
 		
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
-			new Video(title:"Gorilla Drummer", duration:1.5, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv")
+			new Video(title:"Gorilla Drummer", duration:1.5, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png")
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToAudienceRestrictions(restrictionPG)
@@ -57,7 +59,8 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The Extremist")){
-			new Video(title:"The Extremist", duration:4, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv")
+			new Video(title:"The Extremist", duration:4, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png")
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToAudienceRestrictions(restrictionPG13)
@@ -66,7 +69,8 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
-			new Video(title:"The lion sleeps tonight", duration:2.61, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv")
+			new Video(title:"The lion sleeps tonight", duration:2.61, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png")
 			.addToCategories(todos)
 			.addToAudienceRestrictions(restrictionG)
 			.addToCountries(argentina)

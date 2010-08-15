@@ -7,6 +7,7 @@ class Video {
 	Integer episode
 	String episodeName
 	String description
+	
 	String url
 	String thumbnailUrl
 	
@@ -24,6 +25,7 @@ class Video {
 		title(blank:false)
 		duration(blank:false)
 		url(blank:false)
+		thumbnailUrl(blank:false)
 		season(nullable:true)
 		episode(nullable:true)
 		episodeName(nullable:true)
