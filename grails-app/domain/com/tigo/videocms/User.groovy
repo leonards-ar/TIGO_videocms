@@ -1,6 +1,6 @@
 package com.tigo.videocms
 
-class User {
+class User extends SecUser {
 	
 	String firstName
 	String lastName

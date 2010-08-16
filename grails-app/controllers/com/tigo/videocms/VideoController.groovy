@@ -1,5 +1,7 @@
 package com.tigo.videocms
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_BACKOFFICE_USER','ROLE_ADMIN'])
 class VideoController {
 	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

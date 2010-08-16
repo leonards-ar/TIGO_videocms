@@ -1,14 +1,16 @@
+<!--
+  To change this template, choose Tools | Templates
+  and open the template in the editor.
+-->
+
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
   <head>
-    <title>${grailsApplication.config.application.name}</title>
-    <meta name="layout" content="main" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Tigo</title>
   </head>
   <body>
-    <div class="nav">
-      <span class="menuButton">
-        <g:link controller="user" action="list"><g:message code="tigo.videocms.bar.user"/></g:link>
-        <g:link controller="video" action="list"><g:message code="tigo.videocms.bar.video"/></g:link>
-      </span>
-    </div>
+    ${response.sendRedirect("home/index")}
   </body>
 </html>
