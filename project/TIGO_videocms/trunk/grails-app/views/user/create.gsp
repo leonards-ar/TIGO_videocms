@@ -56,6 +56,14 @@
                             </tr>
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="roles"><g:message code="user.roles.label" default="Roles" /></label>
+                                </td>
+                                <td valign="top" class="value">
+                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" multiple="no" optionKey="id" size="5"" />
+                                </td>
+                            </tr>                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                   <label for="countries"><g:message code="user.countries.label" default="Countries" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'countries', 'errors')}">

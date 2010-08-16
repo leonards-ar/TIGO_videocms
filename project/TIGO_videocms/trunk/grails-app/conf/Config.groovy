@@ -90,3 +90,9 @@ log4j = {
 	
 	warn   'org.mortbay.log'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.tigo.videocms.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.tigo.videocms.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'com.tigo.videocms.SecRole'
+grails.plugins.springsecurity.rejectIfNoRule = false
