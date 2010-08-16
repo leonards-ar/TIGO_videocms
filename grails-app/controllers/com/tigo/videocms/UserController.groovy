@@ -5,6 +5,8 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_ADMIN'])
 class UserController {
 	
+	def springSecurityService
+	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def index = {
@@ -24,7 +26,36 @@ class UserController {
 	
 	def save = {
 		def userInstance = new User(params)
+		
+		def passwordConfirmation = request.getParameter('passwordConfirmation')
+		def userPassword = userInstance?.getPassword()
+		
+		if (userPassword) {
+			if(!passwordConfirmation || !(userPassword?.equals(passwordConfirmation))){
+				userInstance.errors.rejectValue("password", "user.error.password.confirmation.doesnotmatch","Password does not match confirmation")
+				render(view: "create", model: [userInstance: userInstance])
+				return
+			}else{
+				def auxPassword = springSecurityService.encodePassword(userPassword)
+				userInstance.setPassword(auxPassword)
+			}
+		}
+		
+		if(userInstance?.getCountries()?.size() < 1){
+			userInstance.errors.rejectValue("countries", "user.error.nocountry","Country cannot be empty")
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+		
+		userInstance.setEnabled(true)
+		
 		if (userInstance.save(flush: true)) {
+			def userBackofficeRole = SecRole.findByAuthority('ROLE_BACKOFFICE_USER')
+			
+			if (!userInstance.authorities.contains(userBackofficeRole)) {
+				SecUserSecRole.create userInstance, userBackofficeRole
+			}
+			
 			flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
 			redirect(action: "show", id: userInstance.id)
 		}
@@ -67,7 +98,9 @@ class UserController {
 					return
 				}
 			}
+			
 			userInstance.properties = params
+			
 			if (!userInstance.hasErrors() && userInstance.save(flush: true)) {
 				flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
 				redirect(action: "show", id: userInstance.id)

@@ -23,7 +23,6 @@ class VideoController {
 	
 	def save = {
 		def videoInstance = new Video(params)
-		def tmpLocation = "/Users/cnunez/www/htdocs/upload/"
 		
 		//Upload Video & Thumbnail
 		uploadVideoAndThumnail(videoInstance)
