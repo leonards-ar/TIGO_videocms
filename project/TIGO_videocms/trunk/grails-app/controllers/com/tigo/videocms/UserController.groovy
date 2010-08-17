@@ -20,12 +20,14 @@ class UserController {
 	
 	def create = {
 		def userInstance = new User()
-		userInstance.properties = params
-		return [userInstance: userInstance]
+		userInstance.properties = params		
+		def defaultRole = SecRole.findByAuthority('ROLE_BACKOFFICE_USER').getId()		
+		return [userInstance: userInstance, role:defaultRole]
 	}
 	
 	def save = {
 		def userInstance = new User(params)
+		def roleAux = request.getParameter('role')
 		
 		def passwordConfirmation = request.getParameter('passwordConfirmation')
 		def userPassword = userInstance?.getPassword()
@@ -33,7 +35,7 @@ class UserController {
 		if (userPassword) {
 			if(!passwordConfirmation || !(userPassword?.equals(passwordConfirmation))){
 				userInstance.errors.rejectValue("password", "user.error.password.confirmation.doesnotmatch","Password does not match confirmation")
-				render(view: "create", model: [userInstance: userInstance])
+				render(view: "create", model: [userInstance: userInstance, role:roleAux])
 				return
 			}else{
 				def auxPassword = springSecurityService.encodePassword(userPassword)
@@ -43,24 +45,30 @@ class UserController {
 		
 		if(userInstance?.getCountries()?.size() < 1){
 			userInstance.errors.rejectValue("countries", "user.error.nocountry","Country cannot be empty")
-			render(view: "create", model: [userInstance: userInstance])
+			render(view: "create", model: [userInstance: userInstance, role:roleAux])
 			return
 		}
-		
+
+		if(!roleAux){
+			userInstance.errors.rejectValue("role", "user.error.norole","Role cannot be empty")
+			render(view: "create", model: [userInstance: userInstance, role:roleAux])
+			return
+		}
+
 		userInstance.setEnabled(true)
 		
 		if (userInstance.save(flush: true)) {
-			def userBackofficeRole = SecRole.findByAuthority('ROLE_BACKOFFICE_USER')
+			def userRole = SecRole.findById(roleAux)
 			
-			if (!userInstance.authorities.contains(userBackofficeRole)) {
-				SecUserSecRole.create userInstance, userBackofficeRole
+			if (!userInstance.authorities.contains(userRole)) {
+				SecUserSecRole.create userInstance, userRole
 			}
-			
+						
 			flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
 			redirect(action: "show", id: userInstance.id)
 		}
 		else {
-			render(view: "create", model: [userInstance: userInstance])
+			render(view: "create", model: [userInstance: userInstance, role:roleAux])
 		}
 	}
 	
@@ -120,6 +128,8 @@ class UserController {
 		if (userInstance) {
 			try {
 				userInstance.delete(flush: true)
+				SecUserSecRole.removeAll(userInstance)
+				
 				flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
 				redirect(action: "list")
 			}
