@@ -90,6 +90,16 @@
                                     <g:select name="countries" from="${com.tigo.videocms.Country.list()}" multiple="yes" optionKey="id" size="5" value="${userInstance?.countries*.id}" />
                                 </td>
                             </tr>                        
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="role"><g:message code="user.role.label" default="Role" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(field: 'roles', 'errors')}">
+                                    <g:select name="role" from="${com.tigo.videocms.SecRole.list()}" optionKey="id" size="5" value="${role}" />
+                                </td>
+                            </tr>                        
+
                         </tbody>
                     </table>
                 </div>

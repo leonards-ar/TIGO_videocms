@@ -68,6 +68,19 @@
                             </td>
                             
                         </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="user.roles.label" default="Roles" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                                <ul>
+                                <g:each in="${userInstance.getAuthorities()}" var="auths">
+                                    <li>${auths?.encodeAsHTML()}</li>
+                                </g:each>
+                                </ul>
+                            </td>
+                            
+                        </tr>
                     
                     </tbody>
                 </table>
