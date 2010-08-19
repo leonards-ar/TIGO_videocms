@@ -18,9 +18,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${userInstance}">
+            <g:hasErrors>
             <div class="errors">
-                <g:renderErrors bean="${userInstance}" as="list" />
+                <g:renderErrors as="list" />                
             </div>
             </g:hasErrors>
             <g:form action="save" >
@@ -75,10 +75,10 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="passwordConfirmation"><g:message code="user.passwordConfirmation.label" default="Password Confirmation" /></label>
+                                    <label for="confirmationPassword"><g:message code="user.confirmationPassword.label" default="Password Confirmation" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'username', 'errors')}">
-                                    <input id="passwordConfirmation" name="passwordConfirmation" type="password"/>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
+                                    <input id="confirmationPassword" name="confirmationPassword" type="password"/>
                                 </td>
                             </tr>
                             
@@ -93,10 +93,10 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="role"><g:message code="user.role.label" default="Role" /></label>
+                                  <label for="roles"><g:message code="user.roles.label" default="Roles" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(field: 'roles', 'errors')}">
-                                    <g:select name="role" from="${com.tigo.videocms.SecRole.list()}" optionKey="id" size="5" value="${role}" />
+                                <td valign="top" class="value ${hasErrors('errors')}">
+                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" multiple="yes" optionKey="id" size="5" value="${roles}" />
                                 </td>
                             </tr>                        
 

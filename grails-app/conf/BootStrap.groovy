@@ -29,7 +29,7 @@ class BootStrap {
 		email:"admin@mindpool-it.com",firstName:"Admin",lastName:"Admin")
 		.save(failOnError: true)
 		
-		if (!adminUser.authorities.contains(adminRole)) {
+		if (!adminUser.authorities?.contains(adminRole)) {
 			SecUserSecRole.create adminUser, adminRole
 		}
 		
@@ -39,7 +39,7 @@ class BootStrap {
 		.addToCountries(honduras)
 		.save(failOnError:true)
 		
-		if (!cristian.authorities.contains(userBackofficeRole)) {
+		if (!cristian.authorities?.contains(userBackofficeRole)) {
 			SecUserSecRole.create cristian, userBackofficeRole
 		}
 		
@@ -48,7 +48,7 @@ class BootStrap {
 		.addToCountries(honduras)
 		.save(failOnError:true)
 		
-		if (!mariano.authorities.contains(userBackofficeRole)) {
+		if (!mariano.authorities?.contains(userBackofficeRole)) {
 			SecUserSecRole.create mariano, userBackofficeRole
 		}
 		

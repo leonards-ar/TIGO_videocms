@@ -19,9 +19,9 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <g:hasErrors bean="${userInstance}">
+            <g:hasErrors>
             <div class="errors">
-                <g:renderErrors bean="${userInstance}" as="list" />
+                <g:renderErrors as="list" />
             </div>
             </g:hasErrors>
             <g:form method="post" >
@@ -66,7 +66,34 @@
                                     <g:textField name="username" value="${userInstance?.username}" />
                                 </td>
                             </tr>
-                        
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="password"><g:message code="user.oldpassword.label" default="Old Password" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
+                                    <input id="oldPassword" name="oldPassword" type="password"/>
+                                </td>
+                            </tr>
+ 
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="password"><g:message code="user.newpassword.label" default="New Password" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
+                                    <input id="newPassword" name="newPassword" type="password"/>
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="confirmationPassword"><g:message code="user.confirmationPassword.label" default="Password Confirmation" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: userInstance, field: 'password', 'errors')}">
+                                    <input id="confirmationPassword" name="confirmationPassword" type="password"/>
+                                </td>
+                            </tr>
+                         
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="countries"><g:message code="user.countries.label" default="Countries" /></label>
@@ -75,6 +102,15 @@
                                     <g:select name="countries" from="${com.tigo.videocms.Country.list()}" multiple="yes" optionKey="id" size="5" value="${userInstance?.countries*.id}" />
                                 </td>
                             </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                  <label for="role"><g:message code="user.role.label" default="Role" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(field: 'roles', 'errors')}">
+                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" multiple="yes" optionKey="id" size="5" value="${roles}" />
+                                </td>
+                            </tr>                        
                         
                         </tbody>
                     </table>
