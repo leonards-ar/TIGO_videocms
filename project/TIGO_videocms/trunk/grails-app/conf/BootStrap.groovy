@@ -90,6 +90,7 @@ class BootStrap {
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountries(salvador)
+			.addToCountries(guatemala)
 			.save(failOnError:true)
 		}
 		
