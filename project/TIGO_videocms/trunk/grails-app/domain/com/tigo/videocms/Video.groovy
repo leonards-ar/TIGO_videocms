@@ -20,6 +20,7 @@ class Video {
 	Date uploadDate = new Date()
 	
 	AudienceRestriction audienceRestriction
+	
 	Set countries = new HashSet()
 	Set categories = new HashSet()
 	
