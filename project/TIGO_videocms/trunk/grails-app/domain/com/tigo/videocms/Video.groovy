@@ -11,7 +11,8 @@ class Video {
 	String url
 	String thumbnailUrl
 	
-	//Minutes and seconds in decimal format I.e: 60.5= 60:30 (mm/ss)	
+	//Minutes and seconds in decimal format I.e: 60.5= 60:30 (mm/ss)
+	//TODO:check if it's better to enter a string	
 	Double duration
 	Double rating = 0.0	
 	Integer homeOrder = null
