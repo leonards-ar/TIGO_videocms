@@ -4,6 +4,8 @@ import grails.plugins.springsecurity.Secured
 @Secured(['ROLE_BACKOFFICE_USER','ROLE_ADMIN'])
 class VideoController {
 	
+	def springSecurityService
+	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
 	def index = {
@@ -11,14 +13,42 @@ class VideoController {
 	}
 	
 	def list = {
+		def userCountries = getLoggedUserCountries().collect{it.getName()}
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		[videoInstanceList: Video.list(params), videoInstanceTotal: Video.count()]
+		params.offset = params.offset? params.int('offset') : 0
+		params.order = params.order?params.order:'desc'
+		params.sort = params.sort?params.sort:'id'
+		
+		def videoCriteria = Video.createCriteria()
+
+		def videos = videoCriteria.listDistinct{			
+			maxResults(params.max)
+			firstResult(params.offset)
+			order(params.sort, params.order)
+						
+			countries {
+				inList('name',userCountries)
+			}
+		}
+				
+		def countCriteria = Video.createCriteria()
+		def videosCount = countCriteria.get {
+			projections { 
+				countDistinct('id') 
+			}
+			countries {
+				inList('name',userCountries)
+			}
+		}
+						
+		[videoInstanceList: videos, videoInstanceTotal: videosCount]
 	}
 	
 	def create = {
 		def videoInstance = new Video()
 		videoInstance.properties = params
-		return [videoInstance: videoInstance]
+		def countryList = getLoggedUserCountries()
+		return [videoInstance: videoInstance, countryList:countryList]
 	}
 	
 	def save = {
@@ -32,7 +62,8 @@ class VideoController {
 			redirect(action: "show", id: videoInstance.id)
 		}
 		else {
-			render(view: "create", model: [videoInstance: videoInstance])
+			def countryList = getLoggedUserCountries()
+			render(view: "create", model: [videoInstance: videoInstance, countryList: countryList])
 		}
 	}
 	
@@ -54,19 +85,22 @@ class VideoController {
 			redirect(action: "list")
 		}
 		else {
-			return [videoInstance: videoInstance]
+			def countryList = getLoggedUserCountries()			
+			return [videoInstance: videoInstance, countryList:countryList]
 		}
 	}
 	
 	def update = {
 		def videoInstance = Video.get(params.id)
+		def countryList = getLoggedUserCountries()
+		
 		if (videoInstance) {
 			if (params.version) {
 				def version = params.version.toLong()
 				if (videoInstance.version > version) {
 					
 					videoInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'video.label', default: 'Video')] as Object[], "Another user has updated this Video while you were editing")
-					render(view: "edit", model: [videoInstance: videoInstance])
+					render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList])
 					return
 				}
 			}
@@ -80,7 +114,7 @@ class VideoController {
 				redirect(action: "show", id: videoInstance.id)
 			}
 			else {
-				render(view: "edit", model: [videoInstance: videoInstance])
+				render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList])
 			}
 		}
 		else {
@@ -138,5 +172,13 @@ class VideoController {
 		}
 		
 		return fileName
+	}
+	
+	def getLoggedUserCountries(){
+		
+		def principal = springSecurityService.principal
+		User user = User.get(principal.id)
+				
+		return user.countries
 	}
 }
