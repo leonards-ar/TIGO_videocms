@@ -96,3 +96,5 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.tigo.videocm
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.tigo.videocms.SecUserSecRole'
 grails.plugins.springsecurity.authority.className = 'com.tigo.videocms.SecRole'
 grails.plugins.springsecurity.rejectIfNoRule = false
+
+grails.plugins.springsecurity.useSecurityEventListener = true

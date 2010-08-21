@@ -113,11 +113,11 @@
                         </tr>
 
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.audienceRestrictions.label" default="Audience Restrictions" /></td>
+                            <td valign="top" class="name"><g:message code="video.audienceRestriction.label" default="Audience Restriction" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${videoInstance.audienceRestrictions}" var="a">
+                                <g:each in="${videoInstance.audienceRestriction}" var="a">
                                     <li>${a?.encodeAsHTML()}</li>
                                 </g:each>
                                 </ul>

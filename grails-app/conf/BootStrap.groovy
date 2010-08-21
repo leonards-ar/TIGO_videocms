@@ -57,7 +57,7 @@ class BootStrap {
 			Category.findByName(it)?:new Category(name:it).save(failOnError:true)
 		}
 		
-		def audiencesRestrictions = ["G", "PG", "PG-13", "R", "NC-17"]
+		def audiencesRestrictions = ["T", "14", "18", "X"]
 		audiencesRestrictions.each{
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
@@ -66,17 +66,16 @@ class BootStrap {
 		def spcEvnts = Category.findByName("Eventos Especiales");
 		def deportes = Category.findByName("Deportes");
 		
-		def restrictionPG = AudienceRestriction.findByName("PG")
-		def restrictionG = AudienceRestriction.findByName("G")
-		def restrictionPG13 = AudienceRestriction.findByName("PG-13")
+		def restrictionT = AudienceRestriction.findByName("T")
+		def restriction14 = AudienceRestriction.findByName("14")
+		def restriction18 = AudienceRestriction.findByName("18")
 		
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
 			new Video(title:"Gorilla Drummer", duration:1.5, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png")
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png", audienceRestriction: restrictionT)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
-			.addToAudienceRestrictions(restrictionPG)
 			.addToCountries(salvador)
 			.addToCountries(honduras)
 			.save(failOnError:true)
@@ -84,19 +83,17 @@ class BootStrap {
 		
 		if(!Video.findByTitle("The Extremist")){
 			new Video(title:"The Extremist", duration:4, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png")
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png", audienceRestriction: restriction14)
 			.addToCategories(todos)
 			.addToCategories(deportes)
-			.addToAudienceRestrictions(restrictionPG13)
 			.addToCountries(salvador)
 			.save(failOnError:true)
 		}
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
 			new Video(title:"The lion sleeps tonight", duration:2.61, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png")
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png", audienceRestriction: restrictionT)
 			.addToCategories(todos)
-			.addToAudienceRestrictions(restrictionG)
 			.addToCountries(honduras)
 			.save(failOnError:true)
 		}

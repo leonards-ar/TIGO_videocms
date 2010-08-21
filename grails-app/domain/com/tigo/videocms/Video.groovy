@@ -19,13 +19,16 @@ class Video {
 	boolean active = true
 	Date uploadDate = new Date()
 	
-	static hasMany = [countries:Country, categories:Category, audienceRestrictions: AudienceRestriction]
+	AudienceRestriction audienceRestriction
+	
+	static hasMany = [countries:Country, categories:Category]
 	
 	static constraints = {
 		title(blank:false)
 		duration(blank:false)
 		url(blank:false)
 		thumbnailUrl(blank:false)
+		audienceRestriction(blank:false)
 		season(nullable:true)
 		episode(nullable:true)
 		episodeName(nullable:true)
