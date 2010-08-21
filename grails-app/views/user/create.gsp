@@ -96,7 +96,7 @@
                                   <label for="roles"><g:message code="user.roles.label" default="Roles" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors('errors')}">
-                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" multiple="yes" optionKey="id" size="5" value="${roles}" />
+                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" optionKey="id" size="5" value="${roles}" />
                                 </td>
                             </tr>                        
 

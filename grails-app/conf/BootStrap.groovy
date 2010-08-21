@@ -27,6 +27,9 @@ class BootStrap {
 		
 		def adminUser = User.findByUsername('admin') ?: new User(username: 'admin', password: springSecurityService.encodePassword('admin'), enabled: true,
 		email:"admin@mindpool-it.com",firstName:"Admin",lastName:"Admin")
+		.addToCountries(salvador)
+		.addToCountries(honduras)
+		.addToCountries(guatemala)
 		.save(failOnError: true)
 		
 		if (!adminUser.authorities?.contains(adminRole)) {

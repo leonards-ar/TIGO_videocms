@@ -108,7 +108,7 @@
                                   <label for="role"><g:message code="user.role.label" default="Role" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(field: 'roles', 'errors')}">
-                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" multiple="yes" optionKey="id" size="5" value="${roles}" />
+                                    <g:select name="roles" from="${com.tigo.videocms.SecRole.list()}" optionKey="id" size="5" value="${roles}" />
                                 </td>
                             </tr>                        
                         
@@ -117,7 +117,9 @@
                 </div>
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+					<g:unless test="${userInstance?.id == authenticateId}">
+                    	<span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+					</g:unless>
                 </div>
             </g:form>
         </div>

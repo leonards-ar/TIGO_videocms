@@ -20,6 +20,8 @@ class Video {
 	Date uploadDate = new Date()
 	
 	AudienceRestriction audienceRestriction
+	Set countries = new HashSet()
+	Set categories = new HashSet()
 	
 	static hasMany = [countries:Country, categories:Category]
 	
@@ -29,6 +31,8 @@ class Video {
 		url(blank:false)
 		thumbnailUrl(blank:false)
 		audienceRestriction(blank:false)
+		countries(nullable:false,minSize:1)
+		categories(nullable:false,minSize:1)
 		season(nullable:true)
 		episode(nullable:true)
 		episodeName(nullable:true)
