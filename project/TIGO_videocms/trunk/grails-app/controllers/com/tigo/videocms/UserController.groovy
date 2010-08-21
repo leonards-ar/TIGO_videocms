@@ -27,6 +27,7 @@ class UserController {
 		return [userInstance: userInstance, roles:defaultRole]
 	}
 	
+	//TODO: refactor to use a command object
 	def save = {
 		def errorFlag = false
 			
@@ -52,16 +53,11 @@ class UserController {
 			}
 		}
 		
-		//TODO: Check that the user is not admin		
-		if(userInstance?.getCountries()?.size() < 1){
-			userInstance.errors.rejectValue("countries", "user.error.nocountry","Country cannot be empty")
-			errorFlag = true
-		}
-
 		if(!rolesAux){
 			errors = new BindException(this, "com.tigo.videocms.UserController")
 			errors.reject("user.error.norole","Roles cannot be empty")	
 			errorFlag = true
+			rolexAux = SecRole.findByAuthority('ROLE_BACKOFFICE_USER').getId()		
 		}
 
 		userInstance.setEnabled(true)
@@ -78,45 +74,53 @@ class UserController {
 	
 	def show = {
 		def userInstance = User.get(params.id)
+		def authenticateId = springSecurityService.principal.id
+		
 		if (!userInstance) {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
 			redirect(action: "list")
 		}
 		else {
-			[userInstance: userInstance]
+			[userInstance: userInstance, authenticateId: authenticateId]
 		}
 	}
 	
 	def edit = {
 		def userInstance = User.get(params.id)
+		def authenticateId = springSecurityService.principal.id
+
 		if (!userInstance) {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])}"
 			redirect(action: "list")
 		}
 		else {
 			def rolesAux = userInstance.getAuthorities().collect {it.id} as Set
-			return [userInstance: userInstance, roles: rolesAux]
+			return [userInstance: userInstance, roles: rolesAux, authenticateId: authenticateId]
 		}
 	}
 	
+	//TODO: refactor to use a command object
 	def update = {
 		def errorFlag = false 		
 		def userInstance = User.get(params.id)
+		
 		String[] rolesAux = request.getParameterValues('roles')
+		def authenticateId = springSecurityService.principal.id
 		
 		if (userInstance) {
 			if (params.version) {
 				def version = params.version.toLong()
-				if (userInstance.version > version) {
-					
+				if (userInstance.version > version) {					
 					userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'user.label', default: 'User')] as Object[], "Another user has updated this User while you were editing")
-					render(view: "edit", model: [userInstance: userInstance, roles: rolesAux])
+					render(view: "edit", model: [userInstance: userInstance, roles: rolesAux, authenticateId: authenticateId])
 					return
 				}
 			}
 						
 			userInstance.properties = params
 			
+			//Need to validate here if not errors is overwriten by the error biding exception added for
+			//validations that are not associated to a model object.
 			if (!userInstance.validate())
 			{
 				errorFlag = true
@@ -155,27 +159,27 @@ class UserController {
 					errorFlag = true									
 				}
 			}
-			
-			if(userInstance?.getCountries()?.size() < 1){
-				userInstance.errors.rejectValue("countries", "user.error.nocountry","Country cannot be empty")
-				errorFlag = true
-			}
-	
+				
 			if(!rolesAux){
 				errors = new BindException(this, "com.tigo.videocms.UserController")
 				errors.reject("user.error.norole","Role cannot be empty")
 				errorFlag = true
+				rolexAux = SecRole.findByAuthority('ROLE_BACKOFFICE_USER').getId()				
 			}
 	
 			if (!errorFlag && userInstance.save(flush: true)) {
 				SecUserSecRole.removeAll(userInstance)
 				addRoles(rolesAux, userInstance)
-								
+				
+				if (springSecurityService.loggedIn && springSecurityService.principal.username == userInstance.username) {
+						springSecurityService.reauthenticate userInstance.username
+				}
+												
 				flash.message = "${message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
 				redirect(action: "show", id: userInstance.id)
 			}
 			else {
-				render(view: "edit", model: [userInstance: userInstance,roles:rolesAux])
+				render(view: "edit", model: [userInstance: userInstance,roles:rolesAux, authenticateId: authenticateId])
 			}
 		}
 		else {
