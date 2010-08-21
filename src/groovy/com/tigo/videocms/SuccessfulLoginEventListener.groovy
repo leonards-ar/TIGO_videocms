@@ -6,7 +6,7 @@ import org.springframework.security.authentication.event.AuthenticationSuccessEv
 class SuccessfulLoginEventListener implements ApplicationListener<AuthenticationSuccessEvent> {
 
 	void onApplicationEvent(AuthenticationSuccessEvent event) {
-		//In case we need to something at Login
+		//In case we need to something at Login if not we can remove it at the end of the project
 	}
 }
 
