@@ -57,9 +57,19 @@ class VideoController {
 		//Upload Video & Thumbnail
 		uploadVideoAndThumnail(videoInstance)
 		
-		if (videoInstance.save(flush: true)) {
-			flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), videoInstance.id])}"
-			redirect(action: "show", id: videoInstance.id)
+		if (videoInstance.validate()) {
+			def createdVideos = []
+			Set videoCountries = videoInstance.getCountries().collect{it.id} as Set
+			videoCountries.each{
+				Video auxVideo = new Video()
+				auxVideo.properties = videoInstance.properties
+				auxVideo.countries = new HashSet()
+				auxVideo.addToCountries(Country.get(it))
+				auxVideo.save(flush:true)
+				createdVideos << auxVideo.id
+			}
+			flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), createdVideos])}"
+			redirect(action: "list")
 		}
 		else {
 			def countryList = getLoggedUserCountries()
