@@ -26,7 +26,7 @@
                         
                             <g:sortableColumn property="title" title="${message(code: 'video.title.label', default: 'Title')}" />
                                                                         
-                            <g:sortableColumn property="season" title="${message(code: 'video.season.label', default: 'Season')}" />
+                            <g:sortableColumn property="show" title="${message(code: 'video.show.label', default: 'Show')}" />
                                                     
                             <g:sortableColumn property="duration" title="${message(code: 'video.duration.label', default: 'Duration')}" />                    
 
@@ -43,7 +43,7 @@
                         
                             <td>${fieldValue(bean: videoInstance, field: "title")}</td>
                                                                         
-                            <td>${fieldValue(bean: videoInstance, field: "season")}</td>
+                            <td>${fieldValue(bean: videoInstance, field: "show")}</td>
                         
                             <td>${fieldValue(bean: videoInstance, field: "duration")}</td>
 

@@ -22,7 +22,8 @@ class Video {
 	Date lastUpdate = uploadDate
 	
 	AudienceRestriction audienceRestriction
-
+	TVShow show
+	
 	//if countries is null the minSize validation won't kick off.
 	//Need to add constructor since grails does not create a default Set
 	//See http://jira.codehaus.org/browse/GRAILS-2808
@@ -48,6 +49,7 @@ class Video {
 		episodeName(nullable:true)
 		description(nullable:true)
 		duration(nullable:true)
+		show(nullable:true)
 	}
 	
 	String toString(){
