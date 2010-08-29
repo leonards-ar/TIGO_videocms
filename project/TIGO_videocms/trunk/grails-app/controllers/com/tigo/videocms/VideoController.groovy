@@ -53,25 +53,46 @@ class VideoController {
 	
 	def save = {
 		def videoInstance = new Video(params)
+			
+		//Upload Video
+		def videoUpload =  request.getFile("movieFile")
 		
-		//Upload Video & Thumbnail
-		uploadVideoAndThumnail(videoInstance)
+		if (!videoUpload.isEmpty()){
+			def fileName = videoUpload.getOriginalFilename()
+			videoInstance.setUrl(grailsApplication.config.videoUploadUrl+fileName)
+		}
 		
+		//Upload Thumbnail
+		def thumbUpload =  request.getFile("thumbnail")
+		
+		if (!thumbUpload.isEmpty()){
+			def fileName = thumbUpload.getOriginalFilename()
+			videoInstance.setThumbnailUrl(grailsApplication.config.thumbnailUploadUrl+fileName)
+		}
+				
 		if (videoInstance.validate()) {
+			//TODO:Add transactional behaviour to the creation of the videos and the transfer of the files
 			def createdVideos = []
 			Set videoCountries = videoInstance.getCountries().collect{it.id} as Set
 			videoCountries.each{
 				Video auxVideo = new Video()
 				auxVideo.properties = videoInstance.properties
 				auxVideo.countries = new HashSet()
-				auxVideo.addToCountries(Country.get(it))
+				auxVideo.addToCountries(Country.get(it))				
 				auxVideo.save(flush:true)
 				createdVideos << auxVideo.id
 			}
+			
+			//Transfering video & thumb to a temporary location in the server
+			storeFile(videoUpload)
+			storeFile(thumbUpload)
+
 			flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), createdVideos])}"
 			redirect(action: "list")
 		}
 		else {
+			videoInstance.setThumbnailUrl(null)
+			videoInstance.setUrl(null)
 			def countryList = getLoggedUserCountries()
 			render(view: "create", model: [videoInstance: videoInstance, countryList: countryList])
 		}
@@ -115,9 +136,9 @@ class VideoController {
 				}
 			}
 			videoInstance.properties = params
-			
-			//Upload Video & Thumbnail
-			uploadVideoAndThumnail(videoInstance)
+						
+			//Setting update date
+			videoInstance.lastUpdate = new Date()
 			
 			if (!videoInstance.hasErrors() && videoInstance.save(flush: true)) {
 				flash.message = "${message(code: 'default.updated.message', args: [message(code: 'video.label', default: 'Video'), videoInstance.id])}"
@@ -137,6 +158,7 @@ class VideoController {
 		def videoInstance = Video.get(params.id)
 		if (videoInstance) {
 			try {
+				//TODO: When we are deleting we should delete the video & thumbnail on the server
 				videoInstance.delete(flush: true)
 				flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
 				redirect(action: "list")
@@ -151,37 +173,16 @@ class VideoController {
 			redirect(action: "list")
 		}
 	}
+		
 	
-	def uploadVideoAndThumnail(videoInstance){
-		
-		//Upload Video
-		def uploadedVideo =  uploadFile("movieFile")
-		
-		if(uploadedVideo) {
-			videoInstance.setUrl(grailsApplication.config.videoUploadUrl+uploadedVideo)
+	def storeFile(fileToStore)
+	{		
+		if(!fileToStore.isEmpty())
+		{
+			def tmpLocation = grailsApplication.config.uploadServerLocation			
+			def fileName = fileToStore.getOriginalFilename();
+			fileToStore.transferTo(new File(tmpLocation+fileName))
 		}
-		
-		//Upload thumbnail
-		def uploadedThumbnail =  uploadFile("thumbnail")
-		
-		if(uploadedThumbnail) {
-			videoInstance.setThumbnailUrl(grailsApplication.config.thumbnailUploadUrl+uploadedThumbnail)
-		}
-	}
-	
-	def uploadFile(inputNameParam){
-		def tmpLocation = grailsApplication.config.uploadServerLocation
-		
-		//Upload Video
-		def uploadedFile =  request.getFile(inputNameParam)
-		
-		def fileName = null
-		if(!uploadedFile.isEmpty()) {
-			fileName = uploadedFile.getOriginalFilename();
-			uploadedFile.transferTo(new File(tmpLocation+fileName))
-		}
-		
-		return fileName
 	}
 	
 	def getLoggedUserCountries(){

@@ -80,7 +80,7 @@
                         </tr>
 
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.duration.label" default="Duration" /></td>
+                            <td valign="top" class="name"><g:message code="video.duration.label" default="Duration (mm:ss)" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "duration")}</td>
                             
@@ -99,18 +99,11 @@
                             <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "rating")}</td>
                             
                         </tr>
-
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.homeOrder.label" default="Home Order" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "homeOrder")}</td>
-                            
-                        </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.uploadDate.label" default="Upload Date" /></td>                            
-                            <td valign="top" class="value"><g:formatDate date="${videoInstance?.uploadDate}" /></td>                            
-                        </tr>
+                            <td valign="top" class="name"><g:message code="video.homeSection.label" default="Home Section" /></td>
+                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "homeSection")}</td>                            
+                       </tr>
 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.audienceRestriction.label" default="Audience Restriction" /></td>
@@ -121,8 +114,7 @@
                                     <li>${a?.encodeAsHTML()}</li>
                                 </g:each>
                                 </ul>
-                            </td>
-                            
+                            </td>                            
                         </tr>
                     
                         <tr class="prop">
@@ -148,7 +140,24 @@
                                 </ul>
                             </td>                            
                         </tr>
-                    
+
+						<tr class="prop">
+						    <td valign="top" class="name">
+						      <label for="uploadDate"><g:message code="video.uploadDate.label" default="Upload Date" /></label>
+						    </td>
+						    <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'uploadDate', 'errors')}">
+						        <g:formatDate date="${videoInstance?.uploadDate}" />                           
+						    </td>
+						</tr>
+						
+						<tr class="prop">
+						    <td valign="top" class="name">
+						      <label for="lastUpdate"><g:message code="video.lastUpdate.label" default="Last Update" /></label>
+						    </td>
+						    <td valign="top" class="value">
+						        <g:formatDate date="${videoInstance?.lastUpdate}" />                           
+						    </td>
+						</tr>                    
                     </tbody>
                 </table>
             </div>

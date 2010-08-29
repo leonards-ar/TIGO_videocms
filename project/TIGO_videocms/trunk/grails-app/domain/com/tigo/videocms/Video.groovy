@@ -7,18 +7,19 @@ class Video {
 	Integer episode
 	String episodeName
 	String description
+	String homeSection
 	
 	String url
 	String thumbnailUrl
 	
-	//Minutes and seconds in decimal format I.e: 60.5= 60:30 (mm/ss)
-	//TODO:check if it's better to enter a string	
-	Double duration
+	//In Hours, minutes and seconds I.e: 02:60:30 (hh:mm:ss)
+	String duration
+	
 	Double rating = 0.0	
-	Integer homeOrder = null
 	
 	boolean active = true
 	Date uploadDate = new Date()
+	Date lastUpdate = uploadDate
 	
 	AudienceRestriction audienceRestriction
 
@@ -27,23 +28,26 @@ class Video {
 	//See http://jira.codehaus.org/browse/GRAILS-2808
 	Set countries = new HashSet()
 	Set categories = new HashSet()
-	
+
+	//Static list of home section
+	//TODO: In the future this can be an entity
+	static final def HOME_SECTIONS = ['NEW_RELEASE','FULL_EPISODE']
+
 	static hasMany = [countries:Country, categories:Category]
 	
 	static constraints = {
 		title(blank:false)
-		duration(blank:false)
 		url(blank:false)
 		thumbnailUrl(blank:false)
 		audienceRestriction(blank:false)
+		homeSection(nullable:true,inList:HOME_SECTIONS)
 		countries(nullable:false,minSize:1)
-		categories(nullable:false,minSize:1)
+		categories(nullable:false)
 		season(nullable:true)
 		episode(nullable:true)
 		episodeName(nullable:true)
-		homeOrder(nullable:true)
-		thumbnailUrl(nullable:true)
 		description(nullable:true)
+		duration(nullable:true)
 	}
 	
 	String toString(){
