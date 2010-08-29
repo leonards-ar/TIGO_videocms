@@ -6,6 +6,7 @@ import com.tigo.videocms.Video
 import com.tigo.videocms.SecRole
 import com.tigo.videocms.SecUser
 import com.tigo.videocms.SecUserSecRole
+import com.tigo.videocms.TVShow
 
 class BootStrap {
 	
@@ -64,7 +65,12 @@ class BootStrap {
 		audiencesRestrictions.each{
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
-		
+
+		def shows = ["How I met your mother", "The Big Bang Theory", "Law and Order: Criminal Intent", "CSI: NY", "Dexter"]
+		shows.each{
+			TVShow.findByName(it)?:new TVShow(name:it).save(failOnError:true)
+		}
+
 		def todos = Category.findByName("Todos")
 		def spcEvnts = Category.findByName("Eventos Especiales")
 		def deportes = Category.findByName("Deportes")
@@ -73,10 +79,12 @@ class BootStrap {
 		def restriction14 = AudienceRestriction.findByName("14")
 		def restriction18 = AudienceRestriction.findByName("18")
 		
+		def lawAndOrder = TVShow.findByName("Law and Order: Criminal Intent")
+		def howIMetYourMother = TVShow.findByName("How I met your mother")
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
 			new Video(title:"Gorilla Drummer", duration:"01:30", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png", audienceRestriction: restrictionT)
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png", audienceRestriction: restrictionT, show:howIMetYourMother)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToCountries(salvador)
@@ -86,7 +94,7 @@ class BootStrap {
 		
 		if(!Video.findByTitle("The Extremist")){
 			new Video(title:"The Extremist", duration:"04:00", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png", audienceRestriction: restriction14)
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png", audienceRestriction: restriction14, show:lawAndOrder)
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountries(salvador)
@@ -96,7 +104,7 @@ class BootStrap {
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
 			new Video(title:"The lion sleeps tonight", duration:"02:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png", audienceRestriction: restrictionT)
+			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png", audienceRestriction: restrictionT, show:howIMetYourMother)
 			.addToCategories(todos)
 			.addToCountries(honduras)
 			.save(failOnError:true)

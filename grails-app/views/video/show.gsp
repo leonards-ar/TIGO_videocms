@@ -35,6 +35,11 @@
                             <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "title")}</td>
                             
                         </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="video.show.label" default="Show" /></td>                            
+                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "show")}</td>                            
+                        </tr>
                                         
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.season.label" default="Season" /></td>
