@@ -65,9 +65,9 @@ class BootStrap {
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
 		
-		def todos = Category.findByName("Todos");
-		def spcEvnts = Category.findByName("Eventos Especiales");
-		def deportes = Category.findByName("Deportes");
+		def todos = Category.findByName("Todos")
+		def spcEvnts = Category.findByName("Eventos Especiales")
+		def deportes = Category.findByName("Deportes")
 		
 		def restrictionT = AudienceRestriction.findByName("T")
 		def restriction14 = AudienceRestriction.findByName("14")
@@ -75,7 +75,7 @@ class BootStrap {
 		
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
-			new Video(title:"Gorilla Drummer", duration:1.5, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
+			new Video(title:"Gorilla Drummer", duration:"01:30", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
 			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png", audienceRestriction: restrictionT)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
@@ -85,7 +85,7 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The Extremist")){
-			new Video(title:"The Extremist", duration:4, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
+			new Video(title:"The Extremist", duration:"04:00", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
 			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png", audienceRestriction: restriction14)
 			.addToCategories(todos)
 			.addToCategories(deportes)
@@ -95,7 +95,7 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
-			new Video(title:"The lion sleeps tonight", duration:2.61, url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
+			new Video(title:"The lion sleeps tonight", duration:"02:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
 			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png", audienceRestriction: restrictionT)
 			.addToCategories(todos)
 			.addToCountries(honduras)

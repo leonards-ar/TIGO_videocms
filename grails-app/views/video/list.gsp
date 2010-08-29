@@ -27,12 +27,12 @@
                             <g:sortableColumn property="title" title="${message(code: 'video.title.label', default: 'Title')}" />
                                                                         
                             <g:sortableColumn property="season" title="${message(code: 'video.season.label', default: 'Season')}" />
-                        
-                            <g:sortableColumn property="episode" title="${message(code: 'video.episode.label', default: 'Episode')}" />
-                            
+                                                    
                             <g:sortableColumn property="duration" title="${message(code: 'video.duration.label', default: 'Duration')}" />                    
 
-                            <g:sortableColumn property="duration" title="${message(code: 'video.homeOrder.label', default: 'Home')}" />                    
+                            <g:sortableColumn property="homeSection" title="${message(code: 'video.homeSection.label', default: 'Home Section')}" />                    
+
+                            <g:sortableColumn property="lastUpdate" title="${message(code: 'video.lastUpdate.label', default: 'Last Update')}" />
                         </tr>
                     </thead>
                     <tbody>
@@ -42,14 +42,14 @@
                             <td><g:link action="show" id="${videoInstance.id}">${fieldValue(bean: videoInstance, field: "id")}</g:link></td>
                         
                             <td>${fieldValue(bean: videoInstance, field: "title")}</td>
-                        
-                            <td>${fieldValue(bean: videoInstance, field: "episode")}</td>
-                                                
+                                                                        
                             <td>${fieldValue(bean: videoInstance, field: "season")}</td>
                         
                             <td>${fieldValue(bean: videoInstance, field: "duration")}</td>
 
-                            <td>${fieldValue(bean: videoInstance, field: "homeOrder")}</td>                        
+                            <td>${fieldValue(bean: videoInstance, field: "homeSection")}</td>  
+
+                            <td><g:formatDate date="${videoInstance.lastUpdate}" /></td>                                                  
                         </tr>
                     </g:each>
                     </tbody>

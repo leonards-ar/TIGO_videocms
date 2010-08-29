@@ -78,7 +78,7 @@
                                     <label for="url"><g:message code="video.movieFile.label" default="File Upload" /></label>
                                 </td>
                                 <td valign="top" class="value">
-									<input type="file" name="movieFile"/>
+									<input type="file" name="movieFile" />
 								</td>
                             </tr>
 
@@ -95,7 +95,7 @@
                                 <td valign="top" class="name">
                                     <label for="url"><g:message code="video.url.label" default="Url" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'url', 'errors')}">
+                                <td valign="top" class="value">
                                     <g:textField name="url" value="${videoInstance?.url}" />
                                 </td>
                             </tr>
@@ -104,20 +104,20 @@
                                 <td valign="top" class="name">
                                     <label for="thumbnailUrl"><g:message code="video.thumbnailUrl.label" default="Thumbnail Url" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'thumbnailUrl', 'errors')}">
+                                <td valign="top" class="value">
                                     <g:textField name="thumbnailUrl" value="${videoInstance?.thumbnailUrl}" />
                                 </td>
                             </tr>
-
+<!-- Descomentar cuando implementemos url con duracion
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="duration"><g:message code="video.duration.label" default="Duration" /></label>
+                                    <label for="duration"><g:message code="video.duration.label" default="Duration (mm:ss)" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'duration', 'errors')}">
                                     <g:textField name="duration" value="${fieldValue(bean: videoInstance, field: 'duration')}" />
                                 </td>
                             </tr>
-                        
+ -->                        
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="active"><g:message code="video.active.label" default="Active" /></label>
@@ -136,14 +136,14 @@
                                 </td>
                             </tr>
 
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="homeOrder"><g:message code="video.homeOrder.label" default="Home Order" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeOrder', 'errors')}">
-                                    <g:textField name="homeOrder" value="${fieldValue(bean: videoInstance, field: 'homeOrder')}" />
-                                </td>
-                            </tr>
+							<tr class="prop">
+							  <td valign="top" class="name">
+							    <label for="dose"><g:message code="video.homeSection.label" default="Home Section" />:</label>
+							  </td>
+							  <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeSection', 'errors')}">
+							    	<g:select name="homeSection" from="${com.tigo.videocms.Video.HOME_SECTIONS}" size="1" value="${fieldValue(bean: videoInstance, field: 'homeSection')}" noSelection="['':'NO_HOME_SECTION']"/>
+							  </td>
+							</tr>
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
