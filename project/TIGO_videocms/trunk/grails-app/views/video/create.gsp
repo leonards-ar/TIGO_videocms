@@ -39,10 +39,10 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="show"><g:message code="video.show.label" default="Show" /></label>
+                                  <label for="show"><g:message code="video.show.label" default="TV Show" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'show', 'errors')}">
-                                    <g:select name="show.id" from="${com.tigo.videocms.TVShow.list()}" optionKey="id" size="5" value="${videoInstance?.show?.id}" noSelection="['':'No selection...']" />
+                                    <g:select name="show.id" from="${com.tigo.videocms.TVShow.listOrderByName()}" optionKey="id" size="5" value="${videoInstance?.show?.id}" noSelection="['':'No selection...']" />
                                 </td>
                             </tr>
                                                 
