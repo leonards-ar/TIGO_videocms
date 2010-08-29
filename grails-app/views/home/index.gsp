@@ -12,6 +12,9 @@
         <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_BACKOFFICE_USER">
         	<g:link controller="video" action="list"><g:message code="tigo.videocms.bar.video"/></g:link>
         </sec:ifAnyGranted>
+        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_BACKOFFICE_USER">
+            <g:link controller="TVShow" action="list"><g:message code="tigo.videocms.bar.tvshow"/></g:link>
+        </sec:ifAnyGranted>
       </span>
     </div>
   </body>

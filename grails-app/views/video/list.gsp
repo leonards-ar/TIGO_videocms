@@ -26,7 +26,7 @@
                         
                             <g:sortableColumn property="title" title="${message(code: 'video.title.label', default: 'Title')}" />
                                                                         
-                            <g:sortableColumn property="show" title="${message(code: 'video.show.label', default: 'Show')}" />
+                            <g:sortableColumn property="show" title="${message(code: 'video.show.label', default: 'TV Show')}" />
                                                     
                             <g:sortableColumn property="duration" title="${message(code: 'video.duration.label', default: 'Duration')}" />                    
 
