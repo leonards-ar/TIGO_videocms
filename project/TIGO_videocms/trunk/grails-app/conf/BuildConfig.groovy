@@ -30,10 +30,16 @@ grails.project.dependency.resolution = {
 		runtime 'org.apache.ant:ant-jsch:1.7.1',
 				'com.jcraft:jsch:0.1.42',
 				'org.apache.ant:ant-commons-net:1.7.1',
-				'commons-net:commons-net:2.0'
+				'commons-net:commons-net:2.0',
+				'commons-httpclient:commons-httpclient:3.1',
+				'org.apache.xmlbeans:xmlbeans:2.4.0'
+				
 		test 'org.apache.ant:ant-jsch:1.7.1',
  			 'com.jcraft:jsch:0.1.42',
 			 'org.apache.ant:ant-commons-net:1.7.1',
-			 'commons-net:commons-net:2.0'
+			 'commons-net:commons-net:2.0',
+			 'commons-httpclient:commons-httpclient:3.1',
+			 'org.apache.xmlbeans:xmlbeans:2.4.0'
+
     }
 }
