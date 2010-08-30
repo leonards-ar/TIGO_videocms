@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {  
+  font-family: 'cronos' ;  
+  src: url( ../fonts/cronos.otf ) format("opentype");  
+}  
+ /* PARA INTERNET EXPLORER*/
+/* Then use it like you would any other font */  
+. { font-family: cronos , verdana, helvetica, sans-serif;  
+}  
+
+body{background-image:url(../img/background.jpg); background-repeat:no-repeat; background-position:top center; margin:0px; padding:0px; font-family:'cronos',Arial, Helvetica, sans-serif;}
+#banner_container{position:relative; width:728px; height:90px; margin:50px 0px 0px 40px;}
+#main_container{position:relative; background-image:url(../img/main_back.png); width:770px; height:365px; background-position:0px -5px; background-repeat:no-repeat;}
+#date{position:absolute; left:210px; top:15px; font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px;}
+
+#search{ position:absolute; width:360px; height:28px; left:390px; top:5px; background-image:url(../img/search_back.png); background-repeat:no-repeat; background-position:0px 5px; }
+form.search{margin:0px; padding:0px;}
+form input.search_content{border:0px; width:300px; font-size:10px; margin:6px 0px 0px 10px;}
+form input.button{width:60px; height:22px; margin:5px 10px 0px 0px;}
+#left_menu{position:absolute; width:200px; height:200px; top:215px; left:-10px;}
+
+#main_gallery_container{position:absolute; width:580px; height:350px; left:200px; top:40px;}
+
+#series_container{position:relative; float:left; text-align:center; width:715px; height:120px; margin:10px 0px 0px 50px;}
+
+#tv_online{position:relative; float:left; top:20px;}
+#left_col{position:relative; float:left; width:130px;  text-align:right; left:50px;}
+#left_col div.noticia{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:11px; color:#FFFFFF; text-align:right;}
+#left_col div.noticia span.titulo{font-size:16px; font-weight:bold;}
+#left_col div.noticia p.texto{margin:0px;}
+
+#tv_online_container{position:relative; float:left; background-image:url(../img/tv_online_back.png); background-repeat:no-repeat; width:582px; height:370px; left:60px;}
+#tv_online_content{position:relative; float:left; top:40px; left:20px;width:400px; height:310px;}
+#tv_online_content table{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold;}
+#tv_online_banner{position:relative; float:left;width:140px; height:345px; left:30px; top:20px;}
+
+
+#footer{position:relative; float:left; width:740px;margin: 30px 0px 20px 30px; clear:both;font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px; color:#FFFFFF; border-top:1px solid #FFFFFF;border-bottom:1px solid #FFFFFF; text-align:center; height:25px; vertical-align:middle; line-height:2em; text-indent:30px;}
+#footer a{ color:#FFFFFF; text-decoration:none;}
+
+#nav_text{position:absolute; width:110px; height:60px; top:210px; left:70px; font-family:'cronos',Arial, Helvetica, sans-serif; color:#FFFFFF;}
