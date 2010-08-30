@@ -83,9 +83,10 @@ class BotRInterfaceService {
 	}
 
 	def formatSecondsDuration(Double duration) {
+		//:TODO: Handle hours?
 		Integer mins = duration / 60
 		Integer secs = duration % 60
-		return mins + ':' + secs
+		return mins.toString().padLeft(2, '0') + ':' + secs.toString().padLeft(2, '0')
 	}
 	
 	def getVideosToRefresh() {
