@@ -65,7 +65,7 @@ class BotRInterfaceService {
 				
 				if(apiVideo.isReady()) {
 					aVideo.setUploadStatus(Video.UPLOAD_SUCCESS_STATUS)
-					aVideo.setDuration(apiVideo.getDuration())
+					aVideo.setDuration(formatSecondsDuration(apiVideo.getDuration()))
 					aVideo.setActive(true)
 				} else if(apiVideo.isFailed()) {
 					aVideo.setUploadStatus(Video.UPLOAD_FAIL_STATUS)
@@ -82,6 +82,12 @@ class BotRInterfaceService {
 		}
 	}
 
+	def formatSecondsDuration(Double duration) {
+		Integer mins = duration / 60
+		Integer secs = duration % 60
+		return mins + ':' + secs
+	}
+	
 	def getVideosToRefresh() {
 		Video.withCriteria {
 			eq("uploadStatus", Video.UPLOAD_IN_PROGRESS_STATUS)

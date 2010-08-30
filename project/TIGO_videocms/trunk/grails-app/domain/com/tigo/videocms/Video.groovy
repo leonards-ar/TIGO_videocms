@@ -1,6 +1,10 @@
 package com.tigo.videocms
 
 class Video {
+	public static String UPLOAD_SUCCESS_STATUS = 'upload_success'
+	public static String UPLOAD_IN_PROGRESS_STATUS = 'upload_progress'
+	public static String UPLOAD_PENDING_STATUS = 'upload_pending'
+	public static String UPLOAD_FAIL_STATUS = 'upload_fail'
 	
 	String title
 	Integer season
@@ -19,6 +23,12 @@ class Video {
 	
 	boolean active = true
 	Date uploadDate = new Date()
+
+	String localTmpFile
+	String uploadStatus
+	Integer uploadRetriesCount
+	String videoKey
+
 	Date lastUpdate = uploadDate
 	
 	AudienceRestriction audienceRestriction
@@ -36,6 +46,8 @@ class Video {
 
 	static hasMany = [countries:Country, categories:Category]
 	
+	static transients = [ "extension" ] 
+	
 	static constraints = {
 		title(blank:false)
 		url(blank:false)
@@ -50,9 +62,25 @@ class Video {
 		description(nullable:true)
 		duration(nullable:true)
 		show(nullable:true)
+		localTmpFile(nullable:true)
+		uploadRetriesCount(nullable:true)
+		videoKey(nullable:true)
+		uploadStatus(nullable:true, inList:[UPLOAD_SUCCESS_STATUS, UPLOAD_FAIL_STATUS, UPLOAD_PENDING_STATUS, UPLOAD_IN_PROGRESS_STATUS])
 	}
 	
 	String toString(){
 		return title
+	}
+	
+	String getExtension() {
+		if(localTmpFile) {
+			def i = localTmpFile.lastIndexOf('.');
+			return localTmpFile.substring(i >= 0 ? i : 0)
+		} else if(url) {
+			def i = url.lastIndexOf('.');
+			return url.substring(i >= 0 ? i : 0)
+		} else {
+			return ""
+		}	
 	}
 }
