@@ -60,6 +60,13 @@ class VideoController {
 		if (!videoUpload.isEmpty()){
 			def fileName = videoUpload.getOriginalFilename()
 			videoInstance.setUrl(grailsApplication.config.videoUploadUrl+fileName)
+			// Signal the video to be uploaded by Quartz (Added by Mariano)
+			videoInstance.setUploadStatus(Video.UPLOAD_PENDING_STATUS)
+			//:TODO: This should be the same as storeFile
+			videoInstance.setLocalTmpFile(grailsApplication.config.uploadServerLocation + fileName)
+			videoInstance.setUploadRetriesCount(0)
+			videoInstance.setActive(false) // Video will be set active after complete upload
+			// Finish
 		}
 		
 		//Upload Thumbnail
