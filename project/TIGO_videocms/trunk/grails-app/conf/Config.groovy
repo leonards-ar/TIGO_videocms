@@ -48,22 +48,29 @@ grails.spring.bean.packages = []
 environments {
 	production {
 		grails.serverURL = "http://www.changeme.com"
-		uploadServerLocation = "/tmp/www/upload/"
+		uploadServerLocation = "d:\\tigo\\"
 		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
 		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		videoUploadRetries = 3
+		videoDeleteTmpFile = true
 	}
+	
 	development {
 		grails.serverURL = "http://localhost:8080/${appName}"
-		uploadServerLocation = "/temp/"
-		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
+		uploadServerLocation = "d:\\tigo\\"
+		videoUploadUrl = "http://content.bitsontherun.com/videos/"
 		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		videoUploadRetries = 3
+		videoDeleteTmpFile = true
 	}
 	
 	test {
 		grails.serverURL = "http://localhost:8080/${appName}"
-		uploadServerLocation = "/temp/"
 		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
+		uploadServerLocation = "d:\\tigo\\"
 		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		videoUploadRetries = 3
+		videoDeleteTmpFile = true
 	}
 }
 
@@ -72,11 +79,8 @@ log4j = {
 	// Example of changing the log pattern for the default console
 	// appender:
 	//
-	//appenders {
-	//    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-	//}
 	
-	error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
+	error	'org.codehaus.groovy.grails.web.servlet',  //  controllers
 			'org.codehaus.groovy.grails.web.pages', //  GSP
 			'org.codehaus.groovy.grails.web.sitemesh', //  layouts
 			'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
@@ -88,7 +92,19 @@ log4j = {
 			'org.hibernate',
 			'net.sf.ehcache.hibernate'
 	
-	warn   'org.mortbay.log'
+	warn	'org.mortbay.log'
+
+	debug	'com.tigo.videocms',
+			'ar.com.mindpool'
+
+	appenders {
+		console name:'stdout', layout:pattern(conversionPattern: '[%d{ISO8601}]%10p %C{1} - %m%n')
+	}
+	
+	root {
+	    error 'stdout'
+	    additivity = true
+	}
 }
 
 // Added by the Spring Security Core plugin:
