@@ -84,7 +84,8 @@ class BootStrap {
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
 			new Video(title:"Gorilla Drummer", duration:"01:30", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.png", audienceRestriction: restrictionT, show:howIMetYourMother)
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/gorilla.gif", homeSection:'NEW_RELEASE',
+			audienceRestriction: restrictionT, show:howIMetYourMother, active:true, rating: 5)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToCountries(salvador)
@@ -94,7 +95,8 @@ class BootStrap {
 		
 		if(!Video.findByTitle("The Extremist")){
 			new Video(title:"The Extremist", duration:"04:00", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.png", audienceRestriction: restriction14, show:lawAndOrder)
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/extremists.gif", homeSection:'FULL_EPISODE',
+			 audienceRestriction: restriction14, show:lawAndOrder, active:true, rating:3.4)
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountries(salvador)
@@ -104,7 +106,17 @@ class BootStrap {
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
 			new Video(title:"The lion sleeps tonight", duration:"02:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
-			thumbnailUrl:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.png", audienceRestriction: restrictionT, show:howIMetYourMother)
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/lionsleepstonight.gif", homeSection:'NEW_RELEASE', active:true,
+			audienceRestriction: restrictionT, show:howIMetYourMother, rating:4)
+			.addToCategories(todos)
+			.addToCountries(honduras)
+			.save(failOnError:true)
+		}
+
+		if(!Video.findByTitle("HS Americas")){
+			new Video(title:"HS Americas", duration:"05:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/hsamericas.flv",
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/hsamericas.gif", homeSection:'FULL_EPISODE', active:true,
+			audienceRestriction: restrictionT, show:howIMetYourMother)
 			.addToCategories(todos)
 			.addToCountries(honduras)
 			.save(failOnError:true)

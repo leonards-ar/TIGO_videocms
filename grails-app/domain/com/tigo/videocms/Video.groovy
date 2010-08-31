@@ -6,6 +6,9 @@ class Video {
 	public static String UPLOAD_PENDING_STATUS = 'upload_pending'
 	public static String UPLOAD_FAIL_STATUS = 'upload_fail'
 	
+	public static String NEW_RELEASE = 'NEW_RELEASE'
+	public static String FULL_EPISODE = 'FULL_EPISODE'
+	
 	String title
 	Integer season
 	Integer episode
@@ -21,7 +24,7 @@ class Video {
 	
 	Double rating = 0.0	
 	
-	boolean active = true
+	boolean active = false
 	Date uploadDate = new Date()
 
 	String localTmpFile
@@ -42,7 +45,7 @@ class Video {
 
 	//Static list of home section
 	//TODO: In the future this can be an entity
-	static final def HOME_SECTIONS = ['NEW_RELEASE','FULL_EPISODE']
+	static final def HOME_SECTIONS = [NEW_RELEASE,FULL_EPISODE]
 
 	static hasMany = [countries:Country, categories:Category]
 	
@@ -82,5 +85,9 @@ class Video {
 		} else {
 			return ""
 		}	
+	}
+	
+	public Integer ratingAsInt(){
+		return this.rating.intValue()	
 	}
 }
