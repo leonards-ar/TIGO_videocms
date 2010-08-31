@@ -128,76 +128,97 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 						<td align="left"><img src="${resource(dir:'img',file:'flecha_roja.png')}"/></td>
 						<td align="left"><img src="${resource(dir:'img',file:'flecha_amarilla.png')}" /></td>
 					</tr>
-					<!-- comienza es un reglon completo-->
-					<g:each in ="${rowList}">                 
+					<!-- comienza es un reglon completo-->                    
 					<tr>
-						<td><img src="${newReleases[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
-                        <td><img src="${mostPopular[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
-                        <td><img src="${fullEpisodes[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
+						<td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
+                        <td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
+                        <td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
 					</tr>
 					<tr>
-						<td>
-
-                        <table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nGreen" value="${newReleases[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyRelease" value="${5 - newReleases[it]?.ratingAsInt()}" />
-                                    <g:while test="${nGreen > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_verde.png')}" />
-                                       <g:set var = "nGreen" value="${nGreen -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyRelease > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyRelease" value="${nGreyRelease -1}" /> 
-                                    </g:while>    
-                                    </td>
-                                    <td>${newReleases[it]?.duration}</td>
-                                </tr>   
-                            </table>
-						
-						</td>
 						<td><table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nRed" value="${mostPopular[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyPopular" value="${5 - mostPopular[it]?.ratingAsInt()}" />
-                                    <g:while test="${nRed > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_roja.png')}" />
-                                       <g:set var = "nRed" value="${nRed -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyPopular > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyPopular" value="${nGreyPopular -1}" /> 
-                                    </g:while>    
-                                    </td>
-                                    <td>${mostPopular[it]?.duration}</td>
-                                </tr>   
+								<tr>
+									<td width="95">
+									   <img src="${resource(dir:'img',file:'estrella_verde.png')}" /><img src="${resource(dir:'img',file:'estrella_verde.png')}" />
+									   <img src="${resource(dir:'img',file:'estrella_verde.png')}" /><img src="${resource(dir:'img',file:'estrella_verde.png')}" /> 
+									   <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
+									</td>
+									<td>21:02</td>
 							</table></td>
 						<td><table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nYellow" value="${fullEpisodes[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyEpisodes" value="${5 - fullEpisodes[it]?.ratingAsInt()}" />
-                                    <g:while test="${nYellow > 0}">
+								<tr>
+									<td width="95">
+									   <img src="${resource(dir:'img',file:'estrella_roja.png')}" /><img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+						               <img src="${resource(dir:'img',file:'estrella_roja.png')}" /><img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+						               <img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+									</td>
+									<td>21:02</td>
+							</table></td>
+						<td><table>
+								<tr>
+									<td width="95">
+									   <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
                                        <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
-                                       <g:set var = "nYellow" value="${nYellow -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyEpisodes > 0}">
+                                       <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
                                        <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyEpisodes" value="${nGreyEpisodes -1}" /> 
-                                    </g:while>    
+                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
                                     </td>
-                                    <td>${fullEpisodes[it]?.duration}</td>
-                                </tr> 
+									<td>21:02</td>
 							</table></td>
 					</tr>
 					<tr>
-						<td>${newReleases[it]?.title}<br />${newReleases[it]?.episodeName}</td>
-                        <td>${mostPopular[it]?.title}<br />${mostPopular[it]?.episodeName}</td>
-                        <td>${fullEpisodes[it]?.title}<br />${fullEpisodes[it]?.episodeName}</td>
+						<td>Futurama <br />
+							Capitulo 8</td>
+						<td>Futurama <br />
+							Capitulo 8</td>
+						<td>Futurama <br />
+							Capitulo 8</td>
 					</tr>
-					</g:each>
+					<!-- fin reglon completo-->
+					<!-- comienza es un reglon completo-->
+                    <tr>
+                        <td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
+                        <td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
+                        <td><img src="${resource(dir:'img/series',file:'2.jpg')}" width="120" height="75" border="0"/></td>
+                    </tr>
+                    <tr>
+                        <td><table>
+                                <tr>
+                                    <td width="95">
+                                       <img src="${resource(dir:'img',file:'estrella_verde.png')}" /><img src="${resource(dir:'img',file:'estrella_verde.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_verde.png')}" /><img src="${resource(dir:'img',file:'estrella_verde.png')}" /> 
+                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
+                                    </td>
+                                    <td>21:02</td>
+                            </table></td>
+                        <td><table>
+                                <tr>
+                                    <td width="95">
+                                       <img src="${resource(dir:'img',file:'estrella_roja.png')}" /><img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_roja.png')}" /><img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_roja.png')}" />
+                                    </td>
+                                    <td>21:02</td>
+                            </table></td>
+                        <td><table>
+                                <tr>
+                                    <td width="95">
+                                       <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
+                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
+                                    </td>
+                                    <td>21:02</td>
+                            </table></td>
+                    </tr>
+                    <tr>
+                        <td>Futurama <br />
+                            Capitulo 8</td>
+                        <td>Futurama <br />
+                            Capitulo 8</td>
+                        <td>Futurama <br />
+                            Capitulo 8</td>
+                    </tr>
 					<!-- fin reglon completo-->
 					<tr>
 						<td><a href=""><img src="${resource(dir:'img',file:'ver_mas.png')}" border="0"/></a></td>
