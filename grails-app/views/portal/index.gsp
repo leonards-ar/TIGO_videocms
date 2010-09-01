@@ -12,7 +12,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 </style>
 <![endif]-->
 
-
+<script language="javascript">AC_FL_RunContent = 0;</script>
 <script language="javascript" src="${resource(dir:'js',file:'AC_RunActiveContent.js')}"></script>
 <script type="text/javascript" src="${resource(dir:'js',file:'jquery.js')}"></script>
 <link rel="stylesheet" href="${resource(dir:'css',file:'nav.css')}" />
@@ -54,7 +54,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		alert("Esta pagina requiere el archivo AC_RunActiveContent.js.");
 	} else {
 		AC_FL_RunContent(
-			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0',
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0',
 			'width', '560',
 			'height', '310',
 			'src', '${resource(dir:'swf',file:'main_gallery')}',
@@ -73,19 +73,23 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			'allowFullScreen', 'false',
 			'allowScriptAccess','sameDomain',
 			'movie', '${resource(dir:'swf',file:'main_gallery')}',
-			'salign', ''
+			'salign', '',
+			'FlashVars', 'xmlFile=${resource(dir:'swf',file:'config.xml')}'
 			); //end AC code
 	}
 </script>
+
+
             <noscript>
-            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="560" height="310" id="main_gallery" align="middle">
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="560" height="310" id="main_gallery" align="middle">
                 <param name="allowScriptAccess" value="sameDomain" />
                 <param name="allowFullScreen" value="false" />
                 <param name="movie" value="${resource(dir:'swf',file:'main_gallery.swf')}" />
                 <param name="quality" value="high" />
                 <param name="wmode" value="transparent" />
                 <param name="bgcolor" value="#000000" />
-                <embed src="${resource(dir:'swf',file:'main_gallery.swf')}" quality="high" wmode="transparent" bgcolor="#000000" width="560" height="310" name="main_gallery" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                <param name="FlashVars" value="xmlFile=${resource(dir:'swf',file:'config.xml')}" />
+                <embed src="${resource(dir:'swf',file:'main_gallery.swf')}" FlashVars="xmlFile=${resource(dir:'swf',file:'config.xml')}" quality="high" wmode="transparent" bgcolor="#000000" width="560" height="310" name="main_gallery" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
             </object>
             </noscript>
 
