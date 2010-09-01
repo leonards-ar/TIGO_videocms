@@ -20,13 +20,24 @@ class PortalController {
 		}
 
 		def mostPopularCriteria = Video.createCriteria()
-		def mostPopular = mostPopularCriteria.listDistinct{
+		def mostPopulars = mostPopularCriteria.listDistinct{
 			maxResults(2)
 			order("rating", "desc")
 			eq('active',true)
 		}
 
 		def rowList = [0,1]
-		[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopular:mostPopular, rowList: rowList]
+		[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]
+	}
+	
+	def playVideo = {
+		def videoInstance = Video.get(params.id)
+		if (!videoInstance) {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
+			redirect(action: "index")
+		}
+		else {
+			render(view: "playvideo", model:[videoInstance: videoInstance])
+		}	
 	}
 }

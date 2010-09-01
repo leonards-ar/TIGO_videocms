@@ -146,6 +146,11 @@
                             </td>                            
                         </tr>
 
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="video.uploadStatus.label" default="Upload Status" /></td>
+                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "uploadStatus")}</td>                            
+                       </tr>
+
 						<tr class="prop">
 						    <td valign="top" class="name">
 						      <label for="uploadDate"><g:message code="video.uploadDate.label" default="Upload Date" /></label>

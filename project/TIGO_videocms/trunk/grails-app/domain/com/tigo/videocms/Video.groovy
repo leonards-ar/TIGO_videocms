@@ -6,8 +6,8 @@ class Video {
 	public static String UPLOAD_PENDING_STATUS = 'upload_pending'
 	public static String UPLOAD_FAIL_STATUS = 'upload_fail'
 	
-	public static String NEW_RELEASE = 'NEW_RELEASE'
-	public static String FULL_EPISODE = 'FULL_EPISODE'
+	public static String NEW_RELEASE = 'new_release'
+	public static String FULL_EPISODE = 'full_episode'
 	
 	String title
 	Integer season
