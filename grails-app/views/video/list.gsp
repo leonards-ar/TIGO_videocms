@@ -32,6 +32,8 @@
 
                             <g:sortableColumn property="homeSection" title="${message(code: 'video.homeSection.label', default: 'Home Section')}" />                    
 
+                            <g:sortableColumn property="lastUpdate" title="${message(code: 'video.uploadstatus.label', default: 'Upload Status')}" />
+
                             <g:sortableColumn property="lastUpdate" title="${message(code: 'video.lastUpdate.label', default: 'Last Update')}" />
                         </tr>
                     </thead>
@@ -48,6 +50,8 @@
                             <td>${fieldValue(bean: videoInstance, field: "duration")}</td>
 
                             <td>${fieldValue(bean: videoInstance, field: "homeSection")}</td>  
+
+                            <td>${fieldValue(bean: videoInstance, field: "uploadStatus")}</td>  
 
                             <td><g:formatDate date="${videoInstance.lastUpdate}" /></td>                                                  
                         </tr>

@@ -22,7 +22,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 <div id="wrapper" style="position:relative; margin:0px auto; width:770px;">
 	<div id="banner_container"><img src="${resource(dir:'img',file:'banner.jpg')}" /></div>
 	<div id="main_container">
-		<div id="date">20 de Agosto de 2010</div>
+		<div id="date"><g:formatDate date="${new Date()}" type="date" style="LONG" locale="es"/></div>
 		<div id="search">
 			<form class="search" action="search" method="post">
 				<table width="380" border="0" cellspacing="0" cellpadding="0">
@@ -133,11 +133,14 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 						<td align="left"><img src="${resource(dir:'img',file:'flecha_amarilla.png')}" /></td>
 					</tr>
 					<!-- comienza es un reglon completo-->
-					<g:each in ="${rowList}">                 
+					<g:each in ="${rowList}">
+					<g:set var="newRelease" value="${newReleases[it]}" />                 
+                    <g:set var="mostPopular" value="${mostPopulars[it]}" />                 
+                    <g:set var="fullEpisode" value="${fullEpisodes[it]}" />                 
 					<tr>
-						<td><img src="${newReleases[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
-                        <td><img src="${mostPopular[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
-                        <td><img src="${fullEpisodes[it]?.thumbnailUrl}" width="120" height="75" border="0"/></td>
+						<td><g:link action="playVideo" id="${newRelease?.id}"><img src="${newRelease?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
+                        <td><g:link action="playVideo" id="${mostPopular?.id}"><img src="${mostPopular?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
+                        <td><g:link action="playVideo" id="${fullEpisode?.id}"><img src="${fullEpisode?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
 					</tr>
 					<tr>
 						<td>
@@ -145,8 +148,8 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
                         <table>
                                 <tr>
                                     <td width="95">
-                                     <g:set var="nGreen" value="${newReleases[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyRelease" value="${5 - newReleases[it]?.ratingAsInt()}" />
+                                     <g:set var="nGreen" value="${newRelease?.ratingAsInt()}" />
+                                     <g:set var = "nGreyRelease" value="${5 - newRelease?.ratingAsInt()}" />
                                     <g:while test="${nGreen > 0}">
                                        <img src="${resource(dir:'img',file:'estrella_verde.png')}" />
                                        <g:set var = "nGreen" value="${nGreen -1}" /> 
@@ -156,7 +159,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
                                        <g:set var = "nGreyRelease" value="${nGreyRelease -1}" /> 
                                     </g:while>    
                                     </td>
-                                    <td>${newReleases[it]?.duration}</td>
+                                    <td>${newRelease?.duration}</td>
                                 </tr>   
                             </table>
 						
@@ -164,8 +167,8 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 						<td><table>
                                 <tr>
                                     <td width="95">
-                                     <g:set var="nRed" value="${mostPopular[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyPopular" value="${5 - mostPopular[it]?.ratingAsInt()}" />
+                                     <g:set var="nRed" value="${mostPopular?.ratingAsInt()}" />
+                                     <g:set var = "nGreyPopular" value="${5 - mostPopular?.ratingAsInt()}" />
                                     <g:while test="${nRed > 0}">
                                        <img src="${resource(dir:'img',file:'estrella_roja.png')}" />
                                        <g:set var = "nRed" value="${nRed -1}" /> 
@@ -175,14 +178,14 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
                                        <g:set var = "nGreyPopular" value="${nGreyPopular -1}" /> 
                                     </g:while>    
                                     </td>
-                                    <td>${mostPopular[it]?.duration}</td>
+                                    <td>${mostPopular?.duration}</td>
                                 </tr>   
 							</table></td>
 						<td><table>
                                 <tr>
                                     <td width="95">
-                                     <g:set var="nYellow" value="${fullEpisodes[it]?.ratingAsInt()}" />
-                                     <g:set var = "nGreyEpisodes" value="${5 - fullEpisodes[it]?.ratingAsInt()}" />
+                                     <g:set var="nYellow" value="${fullEpisode?.ratingAsInt()}" />
+                                     <g:set var = "nGreyEpisodes" value="${5 - fullEpisode?.ratingAsInt()}" />
                                     <g:while test="${nYellow > 0}">
                                        <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
                                        <g:set var = "nYellow" value="${nYellow -1}" /> 
@@ -192,14 +195,14 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
                                        <g:set var = "nGreyEpisodes" value="${nGreyEpisodes -1}" /> 
                                     </g:while>    
                                     </td>
-                                    <td>${fullEpisodes[it]?.duration}</td>
+                                    <td>${fullEpisode?.duration}</td>
                                 </tr> 
 							</table></td>
 					</tr>
 					<tr>
-						<td>${newReleases[it]?.title}<br />${newReleases[it]?.episodeName}</td>
-                        <td>${mostPopular[it]?.title}<br />${mostPopular[it]?.episodeName}</td>
-                        <td>${fullEpisodes[it]?.title}<br />${fullEpisodes[it]?.episodeName}</td>
+						<td>${newRelease?.title}<br />${newRelease?.show}</td>
+                        <td>${mostPopular?.title}<br />${mostPopular?.show}</td>
+                        <td>${fullEpisode?.title}<br />${fullEpisode?.show}</td>
 					</tr>
 					</g:each>
 					<!-- fin reglon completo-->

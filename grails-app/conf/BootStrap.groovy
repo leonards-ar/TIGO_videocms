@@ -66,7 +66,7 @@ class BootStrap {
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
 
-		def shows = ["How I met your mother", "The Big Bang Theory", "Law and Order: Criminal Intent", "CSI: NY", "Dexter"]
+		def shows = ["Cartoon TV", "Cadbury Ads", "CSI: NY", "Dexter"]
 		shows.each{
 			TVShow.findByName(it)?:new TVShow(name:it).save(failOnError:true)
 		}
@@ -79,13 +79,16 @@ class BootStrap {
 		def restriction14 = AudienceRestriction.findByName("14")
 		def restriction18 = AudienceRestriction.findByName("18")
 		
-		def lawAndOrder = TVShow.findByName("Law and Order: Criminal Intent")
-		def howIMetYourMother = TVShow.findByName("How I met your mother")
+		def cartoonTV = TVShow.findByName("Cartoon TV")
+		def cadbury = TVShow.findByName("Cadbury Ads")
 		
 		if(!Video.findByTitle("Gorilla Drummer")){			
-			new Video(title:"Gorilla Drummer", duration:"01:30", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/gorilla.gif", homeSection:'NEW_RELEASE',
-			audienceRestriction: restrictionT, show:howIMetYourMother, active:true, rating: 5)
+			new Video(title:"Gorilla Drummer", duration:"01:30", 
+			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/gorilla.gif",
+			videoKey:'JobN6UuK',
+			homeSection:Video.NEW_RELEASE,audienceRestriction: restrictionT, show:cadbury, 
+			active:true, rating: 5, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToCountries(salvador)
@@ -94,9 +97,13 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The Extremist")){
-			new Video(title:"The Extremist", duration:"04:00", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/extremists.gif", homeSection:'FULL_EPISODE',
-			 audienceRestriction: restriction14, show:lawAndOrder, active:true, rating:3.4)
+			new Video(title:"The Extremist", duration:"04:00", 
+			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/extremists.gif", 
+			videoKey:'soInU17z',
+			homeSection:Video.FULL_EPISODE,
+			audienceRestriction: restriction14,
+			active:true, rating:3.4, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountries(salvador)
@@ -105,18 +112,27 @@ class BootStrap {
 		}
 		
 		if(!Video.findByTitle("The lion sleeps tonight")){
-			new Video(title:"The lion sleeps tonight", duration:"02:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/lionsleepstonight.gif", homeSection:'NEW_RELEASE', active:true,
-			audienceRestriction: restrictionT, show:howIMetYourMother, rating:4)
+			new Video(title:"The lion sleeps tonight", duration:"02:42", 
+			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/lionsleepstonight.gif", 
+			videoKey:'iW5iQrSS',
+			homeSection:Video.NEW_RELEASE, 
+			active:true,
+			audienceRestriction: restrictionT, show:cartoonTV, rating:4,
+			uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCountries(honduras)
 			.save(failOnError:true)
 		}
 
 		if(!Video.findByTitle("HS Americas")){
-			new Video(title:"HS Americas", duration:"05:42", url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/hsamericas.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/hsamericas.gif", homeSection:'FULL_EPISODE', active:true,
-			audienceRestriction: restrictionT, show:howIMetYourMother)
+			new Video(title:"HS Americas", duration:"05:42", 
+			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/hsamericas.flv",
+			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/hsamericas.gif", 
+			videoKey:'H2J5lDU4',
+			homeSection:Video.FULL_EPISODE, active:true, rating:1,
+			uploadStatus:Video.UPLOAD_SUCCESS_STATUS,
+			audienceRestriction: restrictionT)
 			.addToCategories(todos)
 			.addToCountries(honduras)
 			.save(failOnError:true)
