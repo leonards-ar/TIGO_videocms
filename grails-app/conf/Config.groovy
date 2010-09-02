@@ -95,7 +95,8 @@ log4j = {
 	warn	'org.mortbay.log'
 
 	debug	'com.tigo.videocms',
-			'ar.com.mindpool'
+			'ar.com.mindpool',
+			'grails.app.task'
 
 	appenders {
 		console name:'stdout', layout:pattern(conversionPattern: '[%d{ISO8601}]%10p %C{1} - %m%n')
