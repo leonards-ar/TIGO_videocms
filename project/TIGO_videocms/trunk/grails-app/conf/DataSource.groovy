@@ -14,12 +14,12 @@ environments {
 	development {
 		dataSource {
 			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-			url = "jdbc:mysql://localhost/tigo_videocms_db?useUnicode=true&characterEncoding=utf-8"
+			url = "jdbc:mysql://devdb/tigo_videocms_db?useUnicode=true&characterEncoding=utf-8"
 		}
 	}
 	test {
 		dataSource {
-			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+			dbCreate = "update" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://localhost/tigo_videocms_db?useUnicode=true&characterEncoding=utf-8"
 		}
 	}
