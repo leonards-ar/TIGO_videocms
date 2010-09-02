@@ -65,10 +65,10 @@ environments {
 	}
 	
 	test {
-		grails.serverURL = "http://localhost:8080/${appName}"
+		grails.serverURL = "http://labs.mindpool.com.ar:8080/${appName}"
 		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
-		uploadServerLocation = "d:\\tigo\\"
-		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		uploadServerLocation = "/opt/apache-tomcat-6.0.20/webapps/tigo_videocms/img/"
+		thumbnailUploadUrl = "http://labs.mindpool.com.ar:8080/${appName}/img/"
 		videoUploadRetries = 3
 		videoDeleteTmpFile = true
 	}
