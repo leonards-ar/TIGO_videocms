@@ -9,7 +9,7 @@ class VideoUploaderJob {
     def timeout = 30000l // execute job once in 30 seconds
 
     def execute() {
-		println "Running video uploader"
+		log.debug "Running video uploader"
 		botRInterfaceService.refreshVideos()
 		botRInterfaceService.uploadVideos()
     }
