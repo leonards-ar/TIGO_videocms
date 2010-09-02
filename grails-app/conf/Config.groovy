@@ -65,10 +65,10 @@ environments {
 	}
 	
 	test {
-		grails.serverURL = "http://labs.mindpool.com.ar:8080/${appName}"
-		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
-		uploadServerLocation = "/opt/apache-tomcat-6.0.20/webapps/tigo_videocms/img/"
-		thumbnailUploadUrl = "http://labs.mindpool.com.ar:8080/${appName}/img/"
+		grails.serverURL = "http://labs.mindpool.com.ar:8080/tigo"
+		videoUploadUrl = "http://content.bitsontherun.com/videos/"
+		uploadServerLocation = "/opt/apache-tomcat-6.0.20/webapps/tigo/img/"
+		thumbnailUploadUrl = "http://labs.mindpool.com.ar:8080/tigo/img/"
 		videoUploadRetries = 3
 		videoDeleteTmpFile = true
 	}
