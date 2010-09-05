@@ -5,8 +5,31 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
+        <sfu:generateConfiguration fileSize="100" form="videoForm"/>
         <g:set var="entityName" value="${message(code: 'video.label', default: 'Video')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <script language="javascript" type="text/javascript">
+        <!--  to hide script contents from old browsers
+			function showExternalURLs() {
+				if(document.videoForm && document.videoForm.external && document.videoForm.external.checked) {
+					hideObject('videoFileUploadRow');
+					showObject('videoUrlRow');
+					showObject('thumbnailUrlRow');
+				} else {
+					showObject('videoFileUploadRow');
+					hideObject('videoUrlRow');
+					hideObject('thumbnailUrlRow');
+				}
+        	}
+
+    		function submitForm(f) {
+				if(document.videoForm && document.videoForm.external && document.videoForm.external.checked) {
+					return true;
+				} else {
+					sfuSubmitForm(f);				}
+    		}
+     	// end hiding contents from old browsers  -->
+        </script>
     </head>
     <body>
         <div class="nav">
@@ -23,7 +46,7 @@
                 <g:renderErrors bean="${videoInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" enctype="multipart/form-data" method="post">
+            <g:form name="videoForm" id="videoForm" action="save" enctype="multipart/form-data" method="post" onsubmit="return submitForm(this);">
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -51,7 +74,7 @@
                                     <label for="season"><g:message code="video.season.label" default="Season" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'season', 'errors')}">
-                                    <g:textField name="season" value="${fieldValue(bean: videoInstance, field: 'season')}" />
+                                    <g:textField size="4" name="season" value="${fieldValue(bean: videoInstance, field: 'season')}" />
                                 </td>
                             </tr>
                         
@@ -60,7 +83,7 @@
                                     <label for="episode"><g:message code="video.episode.label" default="Episode Number" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'episode', 'errors')}">
-                                    <g:textField name="episode" value="${fieldValue(bean: videoInstance, field: 'episode')}" />
+                                    <g:textField size="4" name="episode" value="${fieldValue(bean: videoInstance, field: 'episode')}" />
                                 </td>
                             </tr>
                         
@@ -84,58 +107,40 @@
 
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                  <label for="external"><g:message code="video.external.label" default="External Video" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'external', 'errors')}">
+									<g:checkBox name="external" value="${videoInstance?.external}" onclick="showExternalURLs()" onchange="showExternalURLs()"/>
+                                </td>
+                            </tr>
+
+                            <tr class="prop" id="videoFileUploadRow" <g:if test="${videoInstance?.external}">style="display:none"</g:if>>
+                                <td valign="top" class="name">
                                     <label for="url"><g:message code="video.movieFile.label" default="File Upload" /></label>
                                 </td>
                                 <td valign="top" class="value">
-									<input type="file" name="movieFile" />
+									<sfu:fileUploadControl/>&nbsp;<sfu:fileUploadProgressBar/>
 								</td>
                             </tr>
 
-                            <tr class="prop">
+                            <tr class="prop" id="videoUrlRow" <g:if test="!${videoInstance?.external}">style="display:none"</g:if>>
                                 <td valign="top" class="name">
-                                    <label for="url"><g:message code="video.thumbnail.label" default="Thumbnail Upload" /></label>
+                                    <label for="url"><g:message code="video.url.label" default="Video URL" /></label>
                                 </td>
                                 <td valign="top" class="value">
-									<input type="file" name="thumbnail"/>
-								</td>
+                                    <g:textField size="80" name="url" value="${videoInstance?.url}" />
+                                </td>
                             </tr>
-                                                                                
-                            <tr class="prop">
+
+                            <tr class="prop" id="thumbnailUrlRow" <g:if test="!${videoInstance?.external}">style="display:none"</g:if>>
                                 <td valign="top" class="name">
-                                    <label for="url"><g:message code="video.url.label" default="Url" /></label>
+                                  <label for="thumbnailUrl"><g:message code="video.thumbnailUrl.label" default="Thumbnail URL" /></label>
                                 </td>
-                                <td valign="top" class="value">
-                                    <g:textField name="url" value="${videoInstance?.url}" />
-                                </td>
-                            </tr>
-                                                
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="thumbnailUrl"><g:message code="video.thumbnailUrl.label" default="Thumbnail Url" /></label>
-                                </td>
-                                <td valign="top" class="value">
-                                    <g:textField name="thumbnailUrl" value="${videoInstance?.thumbnailUrl}" />
+                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'thumbnailUrl', 'errors')}">
+                                    <g:textField size="80" name="thumbnailUrl" value="${videoInstance?.thumbnailUrl}" />
                                 </td>
                             </tr>
-<!-- Descomentar cuando implementemos url con duracion
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="duration"><g:message code="video.duration.label" default="Duration (mm:ss)" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'duration', 'errors')}">
-                                    <g:textField name="duration" value="${fieldValue(bean: videoInstance, field: 'duration')}" />
-                                </td>
-                            </tr>
- -->                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="active"><g:message code="video.active.label" default="Active" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'active', 'errors')}">
-                                    <g:checkBox name="active" value="${videoInstance?.active}" />
-                                </td>
-                            </tr>
-                        
+                       
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="rating"><g:message code="video.rating.label" default="Rating" /></label>
@@ -150,7 +155,7 @@
 							    <label for="dose"><g:message code="video.homeSection.label" default="Home Section" />:</label>
 							  </td>
 							  <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeSection', 'errors')}">
-							    	<g:select name="homeSection" from="${com.tigo.videocms.Video.HOME_SECTIONS}" size="1" value="${fieldValue(bean: videoInstance, field: 'homeSection')}" noSelection="['':'NO_HOME_SECTION']"/>
+							    	<g:select name="homeSection" valueMessagePrefix="tigo.videocms.video" from="${com.tigo.videocms.Video.HOME_SECTIONS}" size="1" value="${fieldValue(bean: videoInstance, field: 'homeSection')}"/>
 							  </td>
 							</tr>
                         

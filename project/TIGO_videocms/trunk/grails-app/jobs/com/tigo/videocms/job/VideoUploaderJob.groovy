@@ -1,16 +1,17 @@
 package com.tigo.videocms.job
 
-import com.tigo.videocms.BotRInterfaceService;
+import com.tigo.videocms.RemoteVideoService;
+
 
 class VideoUploaderJob {
-	BotRInterfaceService botRInterfaceService
+	RemoteVideoService remoteVideoService
 
 	def concurrent = false
     def timeout = 30000l // execute job once in 30 seconds
 
     def execute() {
 		log.debug "Running video uploader"
-		botRInterfaceService.refreshVideos()
-		botRInterfaceService.uploadVideos()
+		remoteVideoService.refreshVideos()
+		remoteVideoService.uploadVideos()
     }
 }

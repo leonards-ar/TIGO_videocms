@@ -8,6 +8,7 @@ class Video {
 	
 	public static String NEW_RELEASE = 'new_release'
 	public static String FULL_EPISODE = 'full_episode'
+	public static String NO_HOME_SECTION = 'no_home'
 	
 	String title
 	Integer season
@@ -25,6 +26,8 @@ class Video {
 	Double rating = 0.0	
 	
 	boolean active = false
+	boolean external = false
+	
 	Date uploadDate = new Date()
 
 	String localTmpFile
@@ -45,7 +48,7 @@ class Video {
 
 	//Static list of home section
 	//TODO: In the future this can be an entity
-	static final def HOME_SECTIONS = [NEW_RELEASE,FULL_EPISODE]
+	static final def HOME_SECTIONS = [NO_HOME_SECTION,NEW_RELEASE,FULL_EPISODE]
 
 	static hasMany = [countries:Country, categories:Category]
 	
@@ -53,10 +56,10 @@ class Video {
 	
 	static constraints = {
 		title(blank:false)
-		url(blank:false)
-		thumbnailUrl(blank:false)
+		url(blank:true)
+		thumbnailUrl(blank:true)
 		audienceRestriction(blank:false)
-		homeSection(nullable:true,inList:HOME_SECTIONS)
+		homeSection(nullable:true, inList:HOME_SECTIONS)
 		countries(nullable:false,minSize:1)
 		categories(nullable:false)
 		season(nullable:true)

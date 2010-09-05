@@ -47,6 +47,7 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
 	production {
+		sfu.tempUploadDirectory = "/"
 		grails.serverURL = "http://www.changeme.com"
 		uploadServerLocation = "d:\\tigo\\"
 		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
@@ -56,15 +57,17 @@ environments {
 	}
 	
 	development {
+		sfu.tempUploadDirectory = "d:\\tigo\\"
 		grails.serverURL = "http://localhost:8080/${appName}"
 		uploadServerLocation = "d:\\tigo\\"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
-		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		thumbnailUploadUrl = "http://content.bitsontherun.com/thumbs/"
 		videoUploadRetries = 3
 		videoDeleteTmpFile = true
 	}
 	
 	test {
+		sfu.tempUploadDirectory = "/tmp/"
 		grails.serverURL = "http://labs.mindpool.com.ar:8080/tigo"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
 		uploadServerLocation = "/opt/apache-tomcat-6.0.20/webapps/tigo/img/"
@@ -92,11 +95,12 @@ log4j = {
 			'org.hibernate',
 			'net.sf.ehcache.hibernate'
 	
-	warn	'org.mortbay.log'
+	warn	'org.mortbay.log',
+			'grails.app.task'
 
 	debug	'com.tigo.videocms',
-			'ar.com.mindpool',
-			'grails.app.task'
+			'ar.com.mindpool'
+			
 
 	appenders {
 		console name:'stdout', layout:pattern(conversionPattern: '[%d{ISO8601}]%10p %C{1} - %m%n')

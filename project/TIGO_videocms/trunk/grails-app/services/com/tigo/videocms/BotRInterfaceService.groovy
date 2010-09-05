@@ -30,6 +30,7 @@ class BotRInterfaceService {
 				}
 				
 				aVideo.setUrl(config.videoUploadUrl + videoToCreate.getKey() + aVideo.getExtension())
+				aVideo.setThumbnailUrl(config.thumbnailUploadUrl + videoToCreate.getKey() + ".jpg")
 				aVideo.setUploadStatus(Video.UPLOAD_IN_PROGRESS_STATUS)
 				aVideo.setLocalTmpFile(null)
 				aVideo.setUploadRetriesCount(0)
@@ -51,11 +52,6 @@ class BotRInterfaceService {
 		}
 	}
 
-	def deleteFile(String filename) {
-		File f = new File(filename)
-		return f.delete()	
-	}
-	
 	def refreshVideos() {
 		getVideosToRefresh().each { aVideo ->
 			log.info "Refreshing video " + aVideo
@@ -82,6 +78,17 @@ class BotRInterfaceService {
 		}
 	}
 
+	def delete(Video video) {
+		api.delete(video.getVideoKey())
+	}
+	
+	// Helper Methods
+	
+	def deleteFile(String filename) {
+		File f = new File(filename)
+		return f.delete()
+	}
+	
 	def formatSecondsDuration(Double duration) {
 		//:TODO: Handle hours?
 		Integer mins = duration / 60

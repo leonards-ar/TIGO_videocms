@@ -6,6 +6,7 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'video.label', default: 'Video')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
+        <resource:rating />
     </head>
     <body>
         <div class="nav">
@@ -23,7 +24,7 @@
                     <tbody>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.id.label" default="Id" /></td>
+                            <td valign="top" class="name"><g:message code="video.id.label" default="ID" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "id")}</td>
                             
@@ -69,6 +70,11 @@
                             	<g:textArea name="description" value="${videoInstance?.description}"  rows="7" cols="40" readonly="true" />                                    
 							</td>                           
                         </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="video.uploadStatus.label" default="Upload Status" /></td>
+                            <td valign="top" class="value">${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "uploadStatus"))}</td>                            
+                       </tr>
                                             
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.url.label" default="Url" /></td>
@@ -101,13 +107,15 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.rating.label" default="Rating" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "rating")}</td>
+                            <td valign="top" class="value">
+                            <richui:rating dynamic="false" id="videoInstance" units="5" rating="${fieldValue(bean: videoInstance, field: "rating")}" noAjax="true" showCurrent="false"/></td>
+                            
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.homeSection.label" default="Home Section" /></td>
-                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "homeSection")}</td>                            
+                            <td valign="top" class="value">${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "homeSection"))}</td>                            
                        </tr>
 
                         <tr class="prop">
@@ -145,11 +153,6 @@
                                 </ul>
                             </td>                            
                         </tr>
-
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="video.uploadStatus.label" default="Upload Status" /></td>
-                            <td valign="top" class="value">${fieldValue(bean: videoInstance, field: "uploadStatus")}</td>                            
-                       </tr>
 
 						<tr class="prop">
 						    <td valign="top" class="name">

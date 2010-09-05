@@ -2,7 +2,7 @@ package com.tigo.videocms
 
 import grails.test.*
 
-class FileUploaderServiceTests extends GrailsUnitTestCase {
+class RemoteVideoServiceTests extends GrailsUnitTestCase {
     protected void setUp() {
         super.setUp()
     }

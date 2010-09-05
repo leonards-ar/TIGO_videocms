@@ -1,10 +1,16 @@
 package com.tigo.videocms
+import java.io.File;
+
 import grails.plugins.springsecurity.Secured
+import com.solution51.sfu.SuperFileUploadService
 
 @Secured(['ROLE_BACKOFFICE_USER','ROLE_ADMIN'])
+
 class VideoController {
+	SuperFileUploadService superFileUploadService
 	
 	def springSecurityService
+	def remoteVideoService
 	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
@@ -55,24 +61,34 @@ class VideoController {
 		def videoInstance = new Video(params)
 			
 		//Upload Video
-		def videoUpload =  request.getFile("movieFile")
+		String uploadFilename = params.uploadedFileId
+		File videoFile = null
+		if (uploadFilename) {
+			// get the full path name of the file from the temp directory
+			videoFile = superFileUploadService.getTempUploadFile(uploadFilename)
+		} else {
+			// file was not uploaded by flash. User might have javascript off
+			def videoUpload = request.getFile('sfuFile');
+			if (videoUpload != null && !videoUpload.isEmpty()) {
+				def fileName = videoUpload.getOriginalFilename()
+				videoFile = storeFile(videoUpload)
+			}
+		}
 		
-		if (!videoUpload.isEmpty()){
-			def fileName = videoUpload.getOriginalFilename()
-			videoInstance.setUrl(grailsApplication.config.videoUploadUrl+fileName)
-			// Signal the video to be uploaded by Quartz (Added by Mariano)
+		if(videoInstance.isExternal()) {
+			videoInstance.setUploadStatus(Video.UPLOAD_SUCCESS_STATUS)
+		} else if(videoFile != null) {
+			// Signal the video to be uploaded by Quartz
 			videoInstance.setUploadStatus(Video.UPLOAD_PENDING_STATUS)
-			//:TODO: This should be the same as storeFile (make a unique method to return the value)
-			videoInstance.setLocalTmpFile(grailsApplication.config.uploadServerLocation + fileName)
+			videoInstance.setLocalTmpFile(videoFile.getAbsolutePath())
 			videoInstance.setUploadRetriesCount(0)
 			videoInstance.setActive(false) // Video will be set active after complete upload
-			// Finish
 		}
 		
 		//Upload Thumbnail
 		def thumbUpload =  request.getFile("thumbnail")
 		
-		if (!thumbUpload.isEmpty()){
+		if (thumbUpload != null && !thumbUpload.isEmpty()){
 			def fileName = thumbUpload.getOriginalFilename()
 			videoInstance.setThumbnailUrl(grailsApplication.config.thumbnailUploadUrl+fileName)
 		}
@@ -91,13 +107,14 @@ class VideoController {
 			}
 			
 			//Transfering video & thumb to a temporary location in the server
-			storeFile(videoUpload)
 			storeFile(thumbUpload)
 
 			flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), createdVideos])}"
 			redirect(action: "list")
-		}
-		else {
+		} else {
+			if (videoFile != null) {
+				videoFile.delete()
+			}
 			videoInstance.setThumbnailUrl(null)
 			videoInstance.setUrl(null)
 			def countryList = getLoggedUserCountries()
@@ -165,7 +182,8 @@ class VideoController {
 		def videoInstance = Video.get(params.id)
 		if (videoInstance) {
 			try {
-				//TODO: When we are deleting we should delete the video & thumbnail on the server
+				// Delete remote video
+				remoteVideoService.delete(videoInstance)
 				videoInstance.delete(flush: true)
 				flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
 				redirect(action: "list")
@@ -184,12 +202,15 @@ class VideoController {
 	
 	def storeFile(fileToStore)
 	{		
+		File file = null
 		if(!fileToStore.isEmpty())
 		{
 			def tmpLocation = grailsApplication.config.uploadServerLocation			
-			def fileName = fileToStore.getOriginalFilename();
-			fileToStore.transferTo(new File(tmpLocation+fileName))
+			def fileName = fileToStore.getOriginalFilename()
+			file = new File(tmpLocation+fileName)
+			fileToStore.transferTo(file)
 		}
+		return file
 	}
 	
 	def getLoggedUserCountries(){

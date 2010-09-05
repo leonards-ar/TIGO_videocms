@@ -49,9 +49,9 @@
                         
                             <td>${fieldValue(bean: videoInstance, field: "duration")}</td>
 
-                            <td>${fieldValue(bean: videoInstance, field: "homeSection")}</td>  
+                            <td>${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "homeSection"))}</td>  
 
-                            <td>${fieldValue(bean: videoInstance, field: "uploadStatus")}</td>  
+                            <td>${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "uploadStatus"))}</td>  
 
                             <td><g:formatDate date="${videoInstance.lastUpdate}" /></td>                                                  
                         </tr>

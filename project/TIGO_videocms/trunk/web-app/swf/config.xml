@@ -74,8 +74,8 @@
 	<object param="titleXOffset" value="50" />
 	<object param="titleYOffset" value="70" />
 
-        <object param="thumbsScrollAlpha" value="0" /> <!-- a numeric value between 0 and 1 -->
-        <object param="thumbsScrollViewAreaWidth" value="100" /> <!-- visible area width -->
+    <object param="thumbsScrollAlpha" value="0" /> <!-- a numeric value between 0 and 1 -->
+    <object param="thumbsScrollViewAreaWidth" value="100" /> <!-- visible area width -->
 	<object param="thumbsScrollViewAreaHeight" value="300" /> <!-- visible area height -->
 	<object param="thumbsScrollAcceleration" value="0.2" />
 	<object param="thumbsScrollMode" value="scrollBar" /> <!-- can be full, scrollBar, buttons -->
