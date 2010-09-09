@@ -203,7 +203,7 @@ class VideoController {
 	def storeFile(fileToStore)
 	{		
 		File file = null
-		if(!fileToStore.isEmpty())
+		if(fileToStore != null && !fileToStore.isEmpty())
 		{
 			def tmpLocation = grailsApplication.config.uploadServerLocation			
 			def fileName = fileToStore.getOriginalFilename()
