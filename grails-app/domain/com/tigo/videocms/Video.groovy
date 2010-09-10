@@ -52,7 +52,7 @@ class Video {
 
 	static hasMany = [countries:Country, categories:Category]
 	
-	static transients = [ "extension" ] 
+	static transients = [ "extension", "uploaded" ] 
 	
 	static constraints = {
 		title(blank:false)
@@ -92,5 +92,9 @@ class Video {
 	
 	public Integer ratingAsInt(){
 		return this.rating.intValue()	
+	}
+	
+	public boolean isUploaded() {
+		return getUploadStatus() == Video.UPLOAD_FAIL_STATUS || getUploadStatus() == Video.UPLOAD_SUCCESS_STATUS 
 	}
 }
