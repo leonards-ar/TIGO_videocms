@@ -183,7 +183,7 @@ class VideoController {
 		if (videoInstance) {
 			try {
 				// Delete remote video
-				remoteVideoService.delete(videoInstance)
+				remoteVideoService.deleteVideo(videoInstance)
 				videoInstance.delete(flush: true)
 				flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
 				redirect(action: "list")
