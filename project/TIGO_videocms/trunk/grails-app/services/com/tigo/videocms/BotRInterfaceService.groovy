@@ -13,7 +13,7 @@ import ar.com.mindpool.bitsontherunapi.dto.VideoDTO;
 class BotRInterfaceService {
 	def config = ConfigurationHolder.config
 	
-    static transactional = true
+    static transactional = false
 	
 	VideosAPI api = new VideosAPI()
 	
@@ -69,7 +69,7 @@ class BotRInterfaceService {
 			} catch(Exception ex) {
 				log.error ex
 			}
-
+			aVideo.getCountryVideos()
 			if(!aVideo.save(flush:true)) {
 				aVideo.errors.each { err ->
 					log.error err
@@ -78,7 +78,7 @@ class BotRInterfaceService {
 		}
 	}
 
-	def delete(Video video) {
+	def deleteVideo(Video video) {
 		api.delete(video.getVideoKey())
 	}
 	

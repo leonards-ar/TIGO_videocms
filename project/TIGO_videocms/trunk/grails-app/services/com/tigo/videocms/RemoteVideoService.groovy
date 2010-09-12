@@ -14,6 +14,6 @@ class RemoteVideoService {
 	}
 	
 	def deleteVideo(Video video) {
-		botRInterfaceService.delete(video)
+		botRInterfaceService.deleteVideo(video)
 	}
 }

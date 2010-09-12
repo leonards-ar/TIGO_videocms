@@ -19,7 +19,7 @@ class VideoController {
 	}
 	
 	def list = {
-		def userCountries = getLoggedUserCountries().collect{it.getName()}
+		def userCountries = getLoggedUserCountries()
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		params.offset = params.offset? params.int('offset') : 0
 		params.order = params.order?params.order:'desc'
@@ -32,8 +32,8 @@ class VideoController {
 			firstResult(params.offset)
 			order(params.sort, params.order)
 						
-			countries {
-				inList('name',userCountries)
+			countryVideos {
+				inList('country',userCountries)
 			}
 		}
 				
@@ -42,8 +42,8 @@ class VideoController {
 			projections { 
 				countDistinct('id') 
 			}
-			countries {
-				inList('name',userCountries)
+			countryVideos {
+				inList('country',userCountries)
 			}
 		}
 						
@@ -54,12 +54,18 @@ class VideoController {
 		def videoInstance = new Video()
 		videoInstance.properties = params
 		def countryList = getLoggedUserCountries()
-		return [videoInstance: videoInstance, countryList:countryList]
+		
+		return [videoInstance: videoInstance, countryList:countryList, selectedCountryList:[]]
 	}
 	
 	def save = {
 		def videoInstance = new Video(params)
-			
+		def countryVideos = params.selectedCountryVideos
+		
+		countryVideos.each { countryId ->
+			videoInstance.addToCountryVideos(country:Country.get(countryId))
+		}
+
 		//Upload Video
 		String uploadFilename = params.uploadedFileId
 		File videoFile = null
@@ -96,15 +102,9 @@ class VideoController {
 		if (videoInstance.validate()) {
 			//TODO:Add transactional behaviour to the creation of the videos and the transfer of the files
 			def createdVideos = []
-			Set videoCountries = videoInstance.getCountries().collect{it.id} as Set
-			videoCountries.each{
-				Video auxVideo = new Video()
-				auxVideo.properties = videoInstance.properties
-				auxVideo.countries = new HashSet()
-				auxVideo.addToCountries(Country.get(it))				
-				auxVideo.save(flush:true)
-				createdVideos << auxVideo.id
-			}
+			
+			videoInstance.save(flush:true)
+			createdVideos << videoInstance.id
 			
 			//Transfering video & thumb to a temporary location in the server
 			storeFile(thumbUpload)
@@ -118,7 +118,7 @@ class VideoController {
 			videoInstance.setThumbnailUrl(null)
 			videoInstance.setUrl(null)
 			def countryList = getLoggedUserCountries()
-			render(view: "create", model: [videoInstance: videoInstance, countryList: countryList])
+			render(view: "create", model: [videoInstance: videoInstance, countryList: countryList, countryVideoList:countryVideos])
 		}
 	}
 	
@@ -141,13 +141,14 @@ class VideoController {
 		}
 		else {
 			def countryList = getLoggedUserCountries()			
-			return [videoInstance: videoInstance, countryList:countryList]
+			return [videoInstance: videoInstance, countryList:countryList, selectedCountryList: videoInstance.countryVideos*.country.id]
 		}
 	}
 	
 	def update = {
 		def videoInstance = Video.get(params.id)
 		def countryList = getLoggedUserCountries()
+		def selectedCountryVideos = params.selectedCountryVideos.collect { it.toLong() }
 		
 		if (videoInstance) {
 			if (params.version) {
@@ -155,12 +156,31 @@ class VideoController {
 				if (videoInstance.version > version) {
 					
 					videoInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'video.label', default: 'Video')] as Object[], "Another user has updated this Video while you were editing")
-					render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList])
+					render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList, selectedCountryList:selectedCountryVideos])
 					return
 				}
 			}
 			videoInstance.properties = params
-						
+			
+			// Set country videos
+			def countryVideosToRemove = videoInstance.countryVideos.findAll{!(it.country.id in selectedCountryVideos)}
+			println countryVideosToRemove
+			countryVideosToRemove.each { aCountryVideo ->
+				videoInstance.removeFromCountryVideos(aCountryVideo)
+			}
+			
+			def currentCountryVideos = videoInstance.countryVideos.collect {it.country.id}
+			println selectedCountryVideos
+			
+			selectedCountryVideos.each { countryId -> 
+					println "Check: $countryId"
+				if(!currentCountryVideos.contains(countryId)) {
+					println "Not contains: $countryId"
+					videoInstance.addToCountryVideos(country:Country.get(countryId))
+				}
+			}
+			println videoInstance.countryVideos
+			
 			//Setting update date
 			videoInstance.lastUpdate = new Date()
 			
@@ -169,7 +189,7 @@ class VideoController {
 				redirect(action: "show", id: videoInstance.id)
 			}
 			else {
-				render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList])
+				render(view: "edit", model: [videoInstance: videoInstance, countryList:countryList, selectedCountryVideos:selectedCountryVideos])
 			}
 		}
 		else {

@@ -189,10 +189,10 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="countries"><g:message code="video.countries.label" default="Countries" /></label>
+                                  <label for="selectedCountryVideos"><g:message code="video.countries.label" default="Countries" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'countries', 'errors')}">
-                                    <g:select name="countries" from="${countryList}" multiple="yes" optionKey="id" size="5" value="${videoInstance?.countries*.id}" />
+                                    <g:select name="selectedCountryVideos" from="${countryList}" multiple="yes" optionKey="id" size="5" value="${selectedCountryList}" />
                                 </td>
                             </tr>
                             
