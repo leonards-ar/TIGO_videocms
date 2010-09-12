@@ -164,22 +164,17 @@ class VideoController {
 			
 			// Set country videos
 			def countryVideosToRemove = videoInstance.countryVideos.findAll{!(it.country.id in selectedCountryVideos)}
-			println countryVideosToRemove
 			countryVideosToRemove.each { aCountryVideo ->
 				videoInstance.removeFromCountryVideos(aCountryVideo)
 			}
 			
 			def currentCountryVideos = videoInstance.countryVideos.collect {it.country.id}
-			println selectedCountryVideos
 			
 			selectedCountryVideos.each { countryId -> 
-					println "Check: $countryId"
 				if(!currentCountryVideos.contains(countryId)) {
-					println "Not contains: $countryId"
 					videoInstance.addToCountryVideos(country:Country.get(countryId))
 				}
 			}
-			println videoInstance.countryVideos
 			
 			//Setting update date
 			videoInstance.lastUpdate = new Date()
