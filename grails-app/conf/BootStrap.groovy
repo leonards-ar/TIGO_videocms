@@ -1,5 +1,6 @@
 import com.tigo.videocms.AudienceRestriction 
 import com.tigo.videocms.Country 
+import com.tigo.videocms.CountryVideo 
 import com.tigo.videocms.User
 import com.tigo.videocms.Category
 import com.tigo.videocms.Video 
@@ -91,8 +92,8 @@ class BootStrap {
 			active:true, rating: 5, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
-			.addToCountries(salvador)
-			.addToCountries(honduras)
+			.addToCountryVideos(country: salvador)
+			.addToCountryVideos(country: honduras)
 			.save(failOnError:true)
 		}
 		
@@ -106,8 +107,8 @@ class BootStrap {
 			active:true, rating:3.4, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCategories(deportes)
-			.addToCountries(salvador)
-			.addToCountries(guatemala)
+			.addToCountryVideos(country: salvador)
+			.addToCountryVideos(country: guatemala)
 			.save(failOnError:true)
 		}
 		
@@ -121,7 +122,7 @@ class BootStrap {
 			audienceRestriction: restrictionT, show:cartoonTV, rating:4,
 			uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
-			.addToCountries(honduras)
+			.addToCountryVideos(country: honduras)
 			.save(failOnError:true)
 		}
 
@@ -134,7 +135,7 @@ class BootStrap {
 			uploadStatus:Video.UPLOAD_SUCCESS_STATUS,
 			audienceRestriction: restrictionT)
 			.addToCategories(todos)
-			.addToCountries(honduras)
+			.addToCountryVideos(country: honduras)
 			.save(failOnError:true)
 		}
 	}

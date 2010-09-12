@@ -43,16 +43,20 @@ class Video {
 	//if countries is null the minSize validation won't kick off.
 	//Need to add constructor since grails does not create a default Set
 	//See http://jira.codehaus.org/browse/GRAILS-2808
-	Set countries = new HashSet()
+	Set countryVideos = new HashSet()
 	Set categories = new HashSet()
 
 	//Static list of home section
 	//TODO: In the future this can be an entity
 	static final def HOME_SECTIONS = [NO_HOME_SECTION,NEW_RELEASE,FULL_EPISODE]
 
-	static hasMany = [countries:Country, categories:Category]
+	static hasMany = [countryVideos:CountryVideo, categories:Category]
 	
 	static transients = [ "extension", "uploaded" ] 
+	
+	static mapping = {
+		countryVideos cascade: "all-delete-orphan"
+	}
 	
 	static constraints = {
 		title(blank:false)
@@ -60,7 +64,7 @@ class Video {
 		thumbnailUrl(blank:true)
 		audienceRestriction(blank:false)
 		homeSection(nullable:true, inList:HOME_SECTIONS)
-		countries(nullable:false,minSize:1)
+		countryVideos(nullable:false,minSize:1)
 		categories(nullable:false)
 		season(nullable:true)
 		episode(nullable:true)

@@ -147,7 +147,7 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${videoInstance.countries}" var="c">
+                                <g:each in="${videoInstance.countryVideos*.country}" var="c">
                                     <li>${c?.encodeAsHTML()}</li>
                                 </g:each>
                                 </ul>
