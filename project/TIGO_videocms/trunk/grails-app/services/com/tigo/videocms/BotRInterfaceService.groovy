@@ -79,7 +79,9 @@ class BotRInterfaceService {
 	}
 
 	def deleteVideo(Video video) {
-		api.delete(video.getVideoKey())
+		if(video != null && video.getVideoKey() != null) {
+			api.delete(video.getVideoKey())
+		}
 	}
 	
 	// Helper Methods
