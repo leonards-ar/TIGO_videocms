@@ -73,7 +73,7 @@
 
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.uploadStatus.label" default="Upload Status" /></td>
-                            <td valign="top" class="value">${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "uploadStatus"))}</td>                            
+                            <td valign="top" class="value">${message(code: 'video.' + fieldValue(bean: videoInstance, field: "uploadStatus"))}</td>                            
                        </tr>
                                             
                         <tr class="prop">
@@ -115,7 +115,7 @@
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="video.homeSection.label" default="Home Section" /></td>
-                            <td valign="top" class="value">${message(code: 'tigo.videocms.video.' + fieldValue(bean: videoInstance, field: "homeSection"))}</td>                            
+                            <td valign="top" class="value">${message(code: 'video.' + fieldValue(bean: videoInstance, field: "homeSection"))}</td>                            
                        </tr>
 
                         <tr class="prop">

@@ -6,10 +6,9 @@ import com.solution51.sfu.SuperFileUploadService
 
 @Secured(['ROLE_BACKOFFICE_USER','ROLE_ADMIN'])
 
-class VideoController {
+class VideoController extends BaseController {
 	SuperFileUploadService superFileUploadService
 	
-	def springSecurityService
 	def remoteVideoService
 	
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -94,7 +93,7 @@ class VideoController {
 		//Upload Thumbnail
 		def thumbUpload =  request.getFile("thumbnail")
 		
-		if (thumbUpload != null && !thumbUpload.isEmpty()){
+		if (!thumbUpload?.isEmpty()){
 			def fileName = thumbUpload.getOriginalFilename()
 			videoInstance.setThumbnailUrl(grailsApplication.config.thumbnailUploadUrl+fileName)
 		}
@@ -214,27 +213,5 @@ class VideoController {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
 			redirect(action: "list")
 		}
-	}
-		
-	
-	def storeFile(fileToStore)
-	{		
-		File file = null
-		if(fileToStore != null && !fileToStore.isEmpty())
-		{
-			def tmpLocation = grailsApplication.config.uploadServerLocation			
-			def fileName = fileToStore.getOriginalFilename()
-			file = new File(tmpLocation+fileName)
-			fileToStore.transferTo(file)
-		}
-		return file
-	}
-	
-	def getLoggedUserCountries(){
-		
-		def principal = springSecurityService.principal
-		User user = User.get(principal.id)
-				
-		return user.countries
 	}
 }

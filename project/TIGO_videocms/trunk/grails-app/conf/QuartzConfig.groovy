@@ -1,14 +1,15 @@
 
 quartz {
-    autoStartup = true
-    jdbcStore = false
-    waitForJobsToCompleteOnShutdown = true
+	autoStartup = true
+	jdbcStore = false
+	waitForJobsToCompleteOnShutdown = true
 }
 
 environments {
-    test {
-        quartz {
-            autoStartup = true
-        }
-    }
+	development {
+		quartz { autoStartup = false }
+	}
+	test {
+		quartz { autoStartup = true }
+	}
 }

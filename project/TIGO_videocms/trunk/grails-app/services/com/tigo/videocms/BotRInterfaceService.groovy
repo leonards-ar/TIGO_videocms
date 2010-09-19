@@ -29,7 +29,7 @@ class BotRInterfaceService {
 					deleteFile(aVideo.getLocalTmpFile())
 				}
 				
-				aVideo.setUrl(config.videoUploadUrl + videoToCreate.getKey() + aVideo.getExtension())
+				aVideo.setUrl(config.videoUploadUrl + videoToCreate.getKey())
 				aVideo.setThumbnailUrl(config.thumbnailUploadUrl + videoToCreate.getKey() + ".jpg")
 				aVideo.setUploadStatus(Video.UPLOAD_IN_PROGRESS_STATUS)
 				aVideo.setLocalTmpFile(null)
