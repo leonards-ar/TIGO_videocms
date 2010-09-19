@@ -198,7 +198,11 @@ class VideoController extends BaseController {
 			try {
 				if(videoInstance.isUploaded()) {
 					// Delete remote video
-					remoteVideoService.deleteVideo(videoInstance)
+					try {
+						remoteVideoService.deleteVideo(videoInstance)
+					} catch(Exception e) {
+						
+					}
 				}
 				videoInstance.delete(flush: true)
 				flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"

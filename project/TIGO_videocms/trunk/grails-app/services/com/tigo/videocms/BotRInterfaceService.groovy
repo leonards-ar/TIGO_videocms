@@ -7,6 +7,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder;
 import com.tigo.videocms.Video;
 
 import ar.com.mindpool.bitsontherunapi.VideosAPI;
+import ar.com.mindpool.bitsontherunapi.exception.NotFoundException;
 import ar.com.mindpool.bitsontherunapi.dto.VideoDTO;
 
 
@@ -80,7 +81,11 @@ class BotRInterfaceService {
 
 	def deleteVideo(Video video) {
 		if(video != null && video.getVideoKey() != null) {
-			api.delete(video.getVideoKey())
+			try {
+				api.delete(video.getVideoKey())
+			} catch(NotFoundException ex) {
+				log.error ex.getMessage()
+			}
 		}
 	}
 	
