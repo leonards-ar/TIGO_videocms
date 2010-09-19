@@ -47,19 +47,24 @@ grails.spring.bean.packages = []
 // set per-environment serverURL stem for creating absolute links
 environments {
 	production {
-		sfu.tempUploadDirectory = "/"
-		grails.serverURL = "http://www.changeme.com"
-		uploadServerLocation = "d:\\tigo\\"
-		videoUploadUrl = "http://mindpool-it.com/tigo/videos/"
-		thumbnailUploadUrl = "http://mindpool-it.com/tigo/thumb/"
+		sfu.tempUploadDirectory = "/tmp/"
+		grails.serverURL = "http://www.tigotvonline.com"
+		uploadServerLocation = "/var/www/elements_tigo/"
+		uploadBaseUrl = "http://www.tigotvonline.com/elements_tigo/"
+		videoUploadUrl = "http://content.bitsontherun.com/videos/"
+		thumbnailUploadUrl = "http://content.bitsontherun.com/thumbs/"
 		videoUploadRetries = 3
 		videoDeleteTmpFile = true
+		bi.renderingEngine = RenderingEngine.IMAGE_MAGICK
+		bi.imageMagickQuality = 100
+		bi.imageMagickCompression= 0
 	}
 	
 	development {
 		sfu.tempUploadDirectory = "d:\\tigo\\"
 		grails.serverURL = "http://localhost:8080/${appName}"
 		uploadServerLocation = "d:\\tigo\\"
+		uploadBaseUrl = "http://localhost:8080/tigo/"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
 		thumbnailUploadUrl = "http://content.bitsontherun.com/thumbs/"
 		videoUploadRetries = 3
@@ -70,10 +75,14 @@ environments {
 		sfu.tempUploadDirectory = "/tmp/"
 		grails.serverURL = "http://labs.mindpool.com.ar:8080/tigo"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
-		uploadServerLocation = "/opt/apache-tomcat-6.0.20/webapps/tigo/img/"
+		uploadServerLocation = "/var/www/elements_tigo/"
+		uploadBaseUrl = "http://labs.mindpool.com.ar/elements_tigo/"
 		thumbnailUploadUrl = "http://content.bitsontherun.com/thumbs/"
 		videoUploadRetries = 3
 		videoDeleteTmpFile = true
+		bi.renderingEngine = RenderingEngine.IMAGE_MAGICK
+		bi.imageMagickQuality = 100
+		bi.imageMagickCompression= 0
 	}
 }
 

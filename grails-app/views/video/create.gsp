@@ -156,7 +156,7 @@
 							    <label for="dose"><g:message code="video.homeSection.label" default="Home Section" />:</label>
 							  </td>
 							  <td valign="top" class="value ${hasErrors(bean: videoInstance, field: 'homeSection', 'errors')}">
-							    	<g:select name="homeSection" valueMessagePrefix="tigo.videocms.video" from="${com.tigo.videocms.Video.HOME_SECTIONS}" size="1" value="${fieldValue(bean: videoInstance, field: 'homeSection')}"/>
+							    	<g:select name="homeSection" valueMessagePrefix="video" from="${com.tigo.videocms.Video.HOME_SECTIONS}" size="1" value="${fieldValue(bean: videoInstance, field: 'homeSection')}"/>
 							  </td>
 							</tr>
                         

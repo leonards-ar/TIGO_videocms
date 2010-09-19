@@ -1,6 +1,7 @@
 import com.tigo.videocms.AudienceRestriction 
 import com.tigo.videocms.Country 
 import com.tigo.videocms.CountryVideo 
+import com.tigo.videocms.ElementType;
 import com.tigo.videocms.User
 import com.tigo.videocms.Category
 import com.tigo.videocms.Video 
@@ -15,17 +16,22 @@ class BootStrap {
 	
 	def init = { 		
 		
+		
 		def userBackofficeRole = SecRole.findByAuthority('ROLE_BACKOFFICE_USER') ?: new SecRole(authority: 'ROLE_BACKOFFICE_USER').save(failOnError: true)
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		
-		def honduras = Country.findByCode("HN")?:new Country(code:"HN", name:"HONDURAS")
+		def honduras = Country.findByCode("HN")?:new Country(code:"HN", name:"Honduras")
 		.save(failOnError:true)
 		
-		def salvador = Country.findByCode("SV")?:new Country(code:"SV", name:"EL SALVADOR")
+		def salvador = Country.findByCode("SV")?:new Country(code:"SV", name:"El Salvador")
 		.save(failOnError:true)
 		
-		def guatemala = Country.findByCode("GT")?:new Country(code:"GT", name:"GUATEMALA")
+		def guatemala = Country.findByCode("GT")?:new Country(code:"GT", name:"Guatemala")
 		.save(failOnError:true)
+
+		def homeMainGallery = ElementType.findByLabelKey("home_main_gallery")?:new ElementType(name:"Home Main Gallery Component", description:"Pictures that will be displayed in the home page main gallery component", labelKey:"home_main_gallery",allowedExtensions:"gif,jpg,png", width:490, height:300, maxSize:100.00).save(failOnError:true)
+		def videoThumbnail = ElementType.findByLabelKey("video_thumbnail")?:new ElementType(name:"Video Thumbnail", description:"Video Thumbnail", labelKey:"video_thumbnail",allowedExtensions:"gif,jpg,png", width:300, height:300, maxSize:100.00).save(failOnError:true)
+		
 		
 		def adminUser = User.findByUsername('admin') ?: new User(username: 'admin', password: springSecurityService.encodePassword('admin'), enabled: true,
 		email:"admin@mindpool-it.com",firstName:"Admin",lastName:"Admin")
