@@ -7,8 +7,9 @@ class HomeMainGalleryElement {
 	String targetUrl
 	String target
 	String text
-	Integer order
 	boolean active
+	
+	static belongsTo = [element:Element]
 	
     static constraints = {
 		element(nullable:false)

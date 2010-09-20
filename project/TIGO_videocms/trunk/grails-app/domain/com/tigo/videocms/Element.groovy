@@ -13,6 +13,8 @@ class Element {
 	
 	static hasMany = [countries:Country]
 	
+	static belongsTo = [type:ElementType]
+	
     static constraints = {
 		title(blank:false)
 		type(nullable:false)

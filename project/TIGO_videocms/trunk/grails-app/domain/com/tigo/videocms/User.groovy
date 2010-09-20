@@ -1,5 +1,8 @@
 package com.tigo.videocms
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 class User extends SecUser {
 	
 	String firstName
@@ -9,9 +12,12 @@ class User extends SecUser {
 	//if countries is null the minSize validation won't kick off.
 	//Need to add constructor since grails does not create a default Set
 	//See http://jira.codehaus.org/browse/GRAILS-2808
-	Set countries = new HashSet()
+	SortedSet countries = new TreeSet()
 	
 	static hasMany = [countries:Country]
+	
+	static mapping = {
+	}
 	
 	static constraints = {
 		email(blank:false,email:true)
