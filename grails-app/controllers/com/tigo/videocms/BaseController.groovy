@@ -42,4 +42,8 @@ abstract class BaseController {
 				
 		return user.countries
 	}
+	
+	def getLoggedUserNoPermissionCountries() {
+		return Country.list()?.removeAll(getLoggedUserCountries())
+	}
 }
