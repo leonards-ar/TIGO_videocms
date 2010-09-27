@@ -45,10 +45,12 @@ grails.logging.jul.usebridge = true
 grails.spring.bean.packages = []
 
 // set per-environment serverURL stem for creating absolute links
+image.list.thumbnail.height = 30
+image.list.thumbnail.width = 100
 environments {
 	production {
 		sfu.tempUploadDirectory = "/tmp/"
-		grails.serverURL = "http://www.tigotvonline.com"
+		grails.serverURL = "http://www.tigotvonline.com/${appName}"
 		uploadServerLocation = "/var/www/elements_tigo/"
 		uploadBaseUrl = "http://www.tigotvonline.com/elements_tigo/"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
@@ -73,7 +75,7 @@ environments {
 	
 	test {
 		sfu.tempUploadDirectory = "/tmp/"
-		grails.serverURL = "http://labs.mindpool.com.ar:8080/tigo"
+		grails.serverURL = "http://labs.mindpool.com.ar:8080/${appName}"
 		videoUploadUrl = "http://content.bitsontherun.com/videos/"
 		uploadServerLocation = "/var/www/elements_tigo/"
 		uploadBaseUrl = "http://labs.mindpool.com.ar/elements_tigo/"

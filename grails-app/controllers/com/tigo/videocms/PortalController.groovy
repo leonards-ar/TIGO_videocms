@@ -27,7 +27,7 @@ class PortalController {
 		}
 
 		def rowList = [0,1]
-		[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]
+		[countryCode: 'SV', newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]
 	}
 	
 	def playVideo = {
@@ -39,5 +39,14 @@ class PortalController {
 		else {
 			render(view: "playvideo", model:[videoInstance: videoInstance])
 		}	
+	}
+	
+	def homeMainGalleryElements = {
+		def country = Country.findByCode(params.countryCode)
+		
+		def elements = HomePage.findByCountry(country)?.homeMainGalleryElements
+		//TODO: Filter inactive elements
+		
+		render(view: "homeMainGalleryElements", model: [homeMainGalleryElementInstanceList: elements])
 	}
 }

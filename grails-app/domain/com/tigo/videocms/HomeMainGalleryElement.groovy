@@ -1,18 +1,8 @@
 package com.tigo.videocms
 
-class HomeMainGalleryElement {
-	Element element
-	String filename
-	String thumbnailFilename
+class HomeMainGalleryElement extends ElementContainer {
 	String targetUrl
 	String target
 	String text
-	boolean active
-	
-	static belongsTo = [element:Element]
-	
-    static constraints = {
-		element(nullable:false)
-    }
-
+	boolean active = true
 }

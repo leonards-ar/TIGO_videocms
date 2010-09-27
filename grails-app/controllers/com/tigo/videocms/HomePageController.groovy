@@ -12,7 +12,7 @@ class HomePageController extends BaseController {
 
 	def availableCountries(currentCountry)
 	{
-		def availableCountries = getLoggedUserCountries();
+		def availableCountries = getLoggedUserCountries()
 		availableCountries?.removeAll(HomePage.list()*.country)
 		if(currentCountry)
 		{
@@ -84,7 +84,7 @@ class HomePageController extends BaseController {
             redirect(action: "list")
         }
         else {
-            return [homePageInstance: homePageInstance]
+            return [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)]
         }
     }
 
@@ -133,4 +133,22 @@ class HomePageController extends BaseController {
             redirect(action: "list")
         }
     }
+	
+	def getAvailableElementList(homePageInstance) {
+		HomeMainGalleryElement.createCriteria().listDistinct {
+			
+			eq('active', true)
+			not {
+				inList('id', homePageInstance?.homeMainGalleryElements*.id)
+			}
+			element {
+				order('title', 'asc')
+				countries {
+					eq('id', homePageInstance?.country.id)
+				}
+				
+			}
+
+		}
+	}
 }

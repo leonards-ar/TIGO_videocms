@@ -13,7 +13,7 @@ hibernate {
 environments {
 	development {
 		dataSource {
-			dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+			dbCreate = "update" // one of 'create', 'create-drop','update'
 			url = "jdbc:mysql://devdb/tigo_videocms_db?useUnicode=true&characterEncoding=utf-8"
 		}
 	}
@@ -25,7 +25,7 @@ environments {
 	}
 	production {
 		dataSource {
-			dbCreate = "create-drop"
+			dbCreate = "update"
 			url = "jdbc:mysql://localhost/tigo_videocms_db?useUnicode=true&characterEncoding=utf-8"
 		}
 	}
