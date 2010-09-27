@@ -52,6 +52,11 @@
                                     	<tr><td>
                                     <table class="nostyle" style="width: 150px; border: 0;">
                                     	<tr>
+                                    		<td valign="top" align="center" class="name"><g:message code="homePage.homeMainGalleryElements.available.label"/></td>
+                                    		<td>&nbsp;</td>
+                                    		<td valign="top" align="center" class="name"><g:message code="homePage.homeMainGalleryElements.selected.label"/></td>                                    		
+                                    	</tr>
+                                    	<tr>
 	                                    	<td class="nostyle" style="text-align: center; vertical-align: middle; border: 1px solid #ccc;">
 	                                    		<!-- Available Home Main Gallery Elements -->
 			                                    <div id="availableElementDiv" style="overflow: auto; ${divHeight}">
@@ -82,7 +87,7 @@
 	                                    		<table class="nostyle">
 	                                    			<tr class="nostyle"><td class="nostyle">
 	                                    			<g:if test="${availableElementList?.size() > 0}">
-	                                    			<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.add', default: 'Add')}" src="${resource(dir:'images',file:'right.png')}" />
+	                                    			<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.add.label', default: 'Add')}" src="${resource(dir:'images',file:'right.png')}" />
 	                                    			</g:if>
 	                                    			<g:else>
 	                                    			&nbsp;
@@ -90,7 +95,7 @@
 	                                    			</td></tr>
 													<tr class="nostyle"><td class="nostyle">
 	                                    			<g:if test="${homePageInstance?.homeMainGalleryElements?.size() > 0}">
-	                                    			<g:actionSubmitImage action="removeElements" value="${message(code: 'homePage.homeMainGalleryElements.remove', default: 'Remove')}" src="${resource(dir:'images',file:'left.png')}" />
+	                                    			<g:actionSubmitImage action="removeElements" value="${message(code: 'homePage.homeMainGalleryElements.remove.label', default: 'Remove')}" src="${resource(dir:'images',file:'left.png')}" />
 	                                    			</g:if>
 	                                    			<g:else>
 	                                    			&nbsp;
@@ -117,7 +122,7 @@
                                    									<tr>
                                    										<td>
                                    										<g:if test="${i > 0}">
-                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.up', default: 'Up')}" src="${resource(dir:'images',file:'up.png')}" />
+                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.up.label', default: 'Up')}" src="${resource(dir:'images',file:'up.png')}" />
                                    										</g:if>
                                    										<g:else>
                                    										&nbsp;
@@ -125,7 +130,7 @@
                                    										</td>
                                    										<td>
                                    										<g:if test="${i < (homePageInstance?.homeMainGalleryElements?.size() - 1)}">
-                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.down', default: 'Down')}" src="${resource(dir:'images',file:'down.png')}" />
+                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.down.label', default: 'Down')}" src="${resource(dir:'images',file:'down.png')}" />
                                    										</g:if>
                                    										<g:else>
                                    										&nbsp;
