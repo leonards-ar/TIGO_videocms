@@ -136,8 +136,8 @@ class ElementController extends BaseController {
 				// New file has been uploaded
 				if (!elementFile?.isEmpty())
 				{
-					def oldFile = new File(elementInstance.getFilename())
-					oldFile.delete()
+					deleteElementFiles(elementInstance)
+					
 					def file = storeFile(elementFile)
 					elementInstance.setUrl(getFileUrl(file))
 					elementFile.setFilename(file.getAbsolutePath())
@@ -173,9 +173,7 @@ class ElementController extends BaseController {
             try {
                 elementInstance.delete(flush: true)
 				
-				//:TODO: Validate that the file was deleted from the file system
-				def oldFile = new File(elementInstance.getFilename())
-				oldFile.delete()
+				deleteElementFiles(elementInstance)
 				
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'element.label', default: 'Element'), params.id])}"
                 redirect(action: "list")

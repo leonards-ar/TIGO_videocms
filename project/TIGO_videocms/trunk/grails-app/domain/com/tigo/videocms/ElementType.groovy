@@ -22,6 +22,7 @@ class ElementType {
 	static mapping = {
 		elements cascade: "all-delete-orphan"
 	}
+	
     static constraints = {
 		name(blank:false)
 		labelKey(blank:false, unique:true)

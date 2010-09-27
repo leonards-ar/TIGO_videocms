@@ -74,7 +74,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			'allowScriptAccess','sameDomain',
 			'movie', '${resource(dir:'swf',file:'main_gallery')}',
 			'salign', '',
-			'FlashVars', 'xmlFile=${resource(dir:'swf',file:'config.xml')}'
+			'FlashVars', 'xmlFile=${link(action:'homeMainGalleryElements',controller:'portal', params:[countryCode:countryCode])}'
 			); //end AC code
 	}
 </script>
@@ -89,7 +89,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
                 <param name="wmode" value="transparent" />
                 <param name="bgcolor" value="#000000" />
                 <param name="FlashVars" value="xmlFile=${resource(dir:'swf',file:'config.xml')}" />
-                <embed src="${resource(dir:'swf',file:'main_gallery.swf')}" FlashVars="xmlFile=${resource(dir:'swf',file:'config.xml')}" quality="high" wmode="transparent" bgcolor="#000000" width="560" height="310" name="main_gallery" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                <embed src="${resource(dir:'swf',file:'main_gallery.swf')}" FlashVars="xmlFile=${link(action:'homeMainGalleryElements',controller:'portal', params:[countryCode:countryCode])}" quality="high" wmode="transparent" bgcolor="#000000" width="560" height="310" name="main_gallery" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
             </object>
             </noscript>
 

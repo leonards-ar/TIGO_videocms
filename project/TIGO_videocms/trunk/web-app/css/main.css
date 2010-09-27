@@ -274,3 +274,12 @@ th.desc a {
     margin-right:50px;
     float:right;
 }
+
+/* CUSTOM */
+.nostyle table {
+border: 0
+}
+.nostyle tr {
+}
+.nostyle td, th {
+}

@@ -71,25 +71,6 @@
                                     <input type="file" name="elementFile" id="elementFile"/>
                                 </td>
                             </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="url"><g:message code="element.url.label" default="Url" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: elementInstance, field: 'url', 'errors')}">
-                                    <g:textField name="url" disabled="true" value="${elementInstance?.url}" size="100"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="filename"><g:message code="element.filename.label" default="Filename" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: elementInstance, field: 'filename', 'errors')}">
-                                    <g:textField name="filename" disabled="true" value="${elementInstance?.filename}" size="100"/>
-                                </td>
-                            </tr>
-                        
                         </tbody>
                     </table>
                 </div>
