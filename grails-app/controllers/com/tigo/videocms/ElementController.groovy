@@ -116,8 +116,9 @@ class ElementController extends BaseController {
     }
 
     def update = {
-        def elementInstance = Element.get(params.id)
-        if (elementInstance) {
+        def elementInstance = Element.get(params.id?.toLong())
+		
+		if (elementInstance) {
             if (params.version) {
                 def version = params.version.toLong()
                 if (elementInstance.version > version) {
@@ -128,9 +129,9 @@ class ElementController extends BaseController {
                 }
             }
             elementInstance.properties = params
-
+			
 			def elementFile =  request.getFile("elementFile")
-
+			
 			if(elementInstance.validate())
 			{
 				// New file has been uploaded

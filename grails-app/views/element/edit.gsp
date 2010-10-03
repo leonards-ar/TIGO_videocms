@@ -24,7 +24,7 @@
                 <g:renderErrors bean="${elementInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form method="post" >
+            <g:form enctype="multipart/form-data" method="post">
                 <g:hiddenField name="id" value="${elementInstance?.id}" />
                 <g:hiddenField name="version" value="${elementInstance?.version}" />
                 <div class="dialog">
