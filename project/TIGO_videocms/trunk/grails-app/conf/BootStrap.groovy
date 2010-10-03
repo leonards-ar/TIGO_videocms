@@ -2,6 +2,7 @@ import com.tigo.videocms.AudienceRestriction
 import com.tigo.videocms.Country 
 import com.tigo.videocms.CountryVideo 
 import com.tigo.videocms.ElementType;
+import com.tigo.videocms.HomePage;
 import com.tigo.videocms.User
 import com.tigo.videocms.Category
 import com.tigo.videocms.Video 
@@ -31,8 +32,14 @@ class BootStrap {
 
 		def homeMainGallery = ElementType.findByLabelKey("home_main_gallery")?:new ElementType(name:"Home Main Gallery Component", description:"Pictures that will be displayed in the home page main gallery component", labelKey:"home_main_gallery",allowedExtensions:"gif,jpg,png", width:490, height:300, maxSize:100.00).save(failOnError:true)
 		def videoThumbnail = ElementType.findByLabelKey("video_thumbnail")?:new ElementType(name:"Video Thumbnail", description:"Video Thumbnail", labelKey:"video_thumbnail",allowedExtensions:"gif,jpg,png", width:300, height:300, maxSize:100.00).save(failOnError:true)
-		
-		
+
+		def hondurasHomePage = HomePage.findByCountry(honduras)?:new HomePage(country:honduras)	
+		.save(failOnError:true)
+		def salvadorHomePage = HomePage.findByCountry(salvador)?:new HomePage(country:salvador)
+		.save(failOnError:true)
+		def guatemalaHomePage = HomePage.findByCountry(guatemala)?:new HomePage(country:guatemala)
+		.save(failOnError:true)
+				
 		def adminUser = User.findByUsername('admin') ?: new User(username: 'admin', password: springSecurityService.encodePassword('admin'), enabled: true,
 		email:"admin@mindpool-it.com",firstName:"Admin",lastName:"Admin")
 		.addToCountries(salvador)

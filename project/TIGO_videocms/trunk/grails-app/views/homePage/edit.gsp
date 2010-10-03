@@ -12,9 +12,10 @@
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
+            <g:if test="${canCreateNewHomePage}">
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+			</g:if>
 			<span class="menuButton"><g:link class="list" action="list" controller="homeMainGalleryElement" params="[homePageId: homePageInstance?.id]"><g:message code="default.list.label" args="[message(code: 'homeMainGalleryElement.label', default: 'HomeMainGalleryElement')]" /></g:link></span>
-            
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -71,7 +72,7 @@
                                    						<g:each in="${availableElementList}" status="i" var="homeMainGalleryElementInstance">
                                    						<tr>
                                    							<td style="text-align: center; vertical-align: middle;">
-                                   								<g:checkBox name="selectedHomeMainGalleryElement" value="${homeMainGalleryElementInstance?.id}" />
+                                   								<g:checkBox name="selectedAvailableHomeMainGalleryElement" value="${homeMainGalleryElementInstance?.id}" checked="false"/>
                                    							</td>
                                    							<td style="text-align: center;">
                                    								<img src="${homeMainGalleryElementInstance?.element?.thumbnailUrl ?: homeMainGalleryElementInstance?.element?.url}" height="${grailsApplication.config.image.list.thumbnail.height}px" border="0" alt="${homeMainGalleryElementInstance?.element?.title}" title="${homeMainGalleryElementInstance?.element?.title}"/>
@@ -111,34 +112,32 @@
                                    						<g:each in="${homePageInstance?.homeMainGalleryElements}" status="i" var="homeMainGalleryElementInstance">
                                    						<tr>
                                    							<td style="text-align: center; vertical-align: middle;">
-                                   								<g:checkBox name="selectedHomeMainGalleryElement" value="${homeMainGalleryElementInstance?.id}" />
+                                   								<g:checkBox name="selectedHomeMainGalleryElement" value="${homeMainGalleryElementInstance?.id}" checked="false"/>
                                    								<g:hiddenField name="homeMainGalleryElements" value="${homeMainGalleryElementInstance?.id}" />
                                    							</td>
                                    							<td style="text-align: center;">
                                    								<img src="${homeMainGalleryElementInstance?.element?.thumbnailUrl ?: homeMainGalleryElementInstance?.element?.url}" height="${grailsApplication.config.image.list.thumbnail.height}px" border="0" alt="${homeMainGalleryElementInstance?.element?.title}" title="${homeMainGalleryElementInstance?.element?.title}"/>
                                    							</td>
                                    							<td style="text-align: center; vertical-align: middle;">
-                                   								<table style="border: 0; padding: 0;">
-                                   									<tr>
-                                   										<td>
-                                   										<g:if test="${i > 0}">
-                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.up.label', default: 'Up')}" src="${resource(dir:'images',file:'up.png')}" />
-                                   										</g:if>
-                                   										<g:else>
-                                   										&nbsp;
-                                   										</g:else>
-                                   										</td>
-                                   										<td>
-                                   										<g:if test="${i < (homePageInstance?.homeMainGalleryElements?.size() - 1)}">
-                                   										<g:actionSubmitImage action="addElements" value="${message(code: 'homePage.homeMainGalleryElements.down.label', default: 'Down')}" src="${resource(dir:'images',file:'down.png')}" />
-                                   										</g:if>
-                                   										<g:else>
-                                   										&nbsp;
-                                   										</g:else>
-                                   										</td>                                   										
-                                   									</tr>
-                                   								</table>
-                                   							</td>
+                          										<g:if test="${i > 0}">
+	                           										<g:link action="moveUp" params="[homePageId: homePageInstance?.id, elementIndex: i]">
+	                           											<img src="${resource(dir:'images',file:'up.png')}" border="0" alt="${message(code: 'homePage.homeMainGalleryElements.up.label', default: 'Up')}" title="${message(code: 'homePage.homeMainGalleryElements.up.label', default: 'Up')}"/>
+	                           										</g:link>
+                          										</g:if>
+                          										<g:else>
+                          										&nbsp;
+                          										</g:else>
+                       										</td>
+                                   							<td style="text-align: center; vertical-align: middle;">
+                         										<g:if test="${i < (homePageInstance?.homeMainGalleryElements?.size() - 1)}">
+                          										<g:link action="moveDown" params="[homePageId: homePageInstance?.id, elementIndex: i]">
+                          											<img src="${resource(dir:'images',file:'down.png')}" border="0" alt="${message(code: 'homePage.homeMainGalleryElements.down.label', default: 'Down')}" title="${message(code: 'homePage.homeMainGalleryElements.down.label', default: 'Down')}"/>
+                          										</g:link>
+                         										</g:if>
+                         										<g:else>
+                         										&nbsp;
+                         										</g:else>
+                       										</td>                                   										
                                    						</tr>
                                    						</g:each>
                                    					</table>			                                    
