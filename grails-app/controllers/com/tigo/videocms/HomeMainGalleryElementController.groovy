@@ -14,7 +14,8 @@ class HomeMainGalleryElementController extends BaseController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [homeMainGalleryElementInstanceList: HomeMainGalleryElement.list(params), homeMainGalleryElementInstanceTotal: HomeMainGalleryElement.count(), elementList: getHomeMainGalleryElements()]
+		
+        [homeMainGalleryElementInstanceList: HomeMainGalleryElement.list(params), homeMainGalleryElementInstanceTotal: HomeMainGalleryElement.count(), homePageId: getHomePage()?.id]
     }
 
     def create = {
@@ -56,7 +57,7 @@ class HomeMainGalleryElementController extends BaseController {
             redirect(action: "list")
         }
         else {
-            return [homeMainGalleryElementInstance: homeMainGalleryElementInstance]
+            return [homeMainGalleryElementInstance: homeMainGalleryElementInstance, elementList: getHomeMainGalleryElements(), homePageId: getHomePage()?.id]
         }
     }
 
@@ -110,12 +111,14 @@ class HomeMainGalleryElementController extends BaseController {
     }
 	
 	def getHomePage() {
-		HomePage.get params.homePageId
+		if(params.homePageId) {
+			HomePage.get params.homePageId
+		}
 	}
 	
 	def getHomeMainGalleryElements() {
 		def homePage = getHomePage()
-		
+
 		def elementsCriteria = Element.createCriteria()
 		
 		elementsCriteria.listDistinct {
@@ -124,10 +127,15 @@ class HomeMainGalleryElementController extends BaseController {
 			type {
 				eq('labelKey', 'home_main_gallery')
 			}
-			
+
 			countries {
-				eq('id', homePage?.country?.id)
+				if(homePage) {
+					eq('id', homePage?.country?.id)
+				} else {
+					inList('id', getLoggedUserCountries()*.id)
+				}
 			}
+			
 		}
 	}
 	

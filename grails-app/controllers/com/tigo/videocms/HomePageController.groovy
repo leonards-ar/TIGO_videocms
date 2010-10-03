@@ -73,7 +73,7 @@ class HomePageController extends BaseController {
             redirect(action: "list")
         }
         else {
-            [homePageInstance: homePageInstance]
+            [homePageInstance: homePageInstance, canCreateNewHomePage: availableCountries(null)?.size() > 0]
         }
     }
 
@@ -84,7 +84,7 @@ class HomePageController extends BaseController {
             redirect(action: "list")
         }
         else {
-            return [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)]
+            return [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance),canCreateNewHomePage: availableCountries(null)?.size() > 0]
         }
     }
 
@@ -134,12 +134,134 @@ class HomePageController extends BaseController {
         }
     }
 	
+	def addElements = {
+		def homePageInstance = HomePage.get(params.id)
+		if (homePageInstance) {
+			if (params.version) {
+				def version = params.version.toLong()
+				if (homePageInstance.version > version) {
+					
+					homePageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'homePage.label', default: 'HomePage')] as Object[], "Another user has updated this HomePage while you were editing")
+					render(view: "edit", model: [homePageInstance: homePageInstance])
+					return
+				}
+			}
+			
+			def added = []
+			params.selectedAvailableHomeMainGalleryElement?.each() { anElementId ->
+				def elementToAdd = HomeMainGalleryElement.get(anElementId)
+				if(elementToAdd) {
+					homePageInstance.addToHomeMainGalleryElements(elementToAdd)
+					added << anElementId
+				}
+			} 
+			
+			if(added?.size() <= 0) {
+				flash.message = "${message(code: 'homePage.element.not.added.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, message(code: 'homeMainGalleryElement.label', default: 'Home Main Gallery Element')])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			} else
+			if (!homePageInstance.hasErrors() && homePageInstance.save(flush: true)) {
+				flash.message = "${message(code: 'homePage.element.added.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, added])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			}
+			else {
+				render(view: "edit", model: [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)])
+			}
+		}
+		else {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'homePage.label', default: 'HomePage'), params.id])}"
+			redirect(action: "list")
+		}
+	}
+	
+	def removeElements = {
+		def homePageInstance = HomePage.get(params.id)
+		if (homePageInstance) {
+			if (params.version) {
+				def version = params.version.toLong()
+				if (homePageInstance.version > version) {
+					
+					homePageInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'homePage.label', default: 'HomePage')] as Object[], "Another user has updated this HomePage while you were editing")
+					render(view: "edit", model: [homePageInstance: homePageInstance])
+					return
+				}
+			}
+			
+			def removed = []
+			params.selectedHomeMainGalleryElement?.each() { anElementId ->
+				def elementToRemove = homePageInstance?.homeMainGalleryElements.find{ it.id == anElementId.toLong() }
+				if(elementToRemove) {
+					homePageInstance.removeFromHomeMainGalleryElements(elementToRemove)
+					removed << anElementId
+				}
+			} 
+			
+			if(removed?.size() <= 0) {
+				flash.message = "${message(code: 'homePage.element.not.removed.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, message(code: 'homeMainGalleryElement.label', default: 'Home Main Gallery Element')])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			} else
+			if (!homePageInstance.hasErrors() && homePageInstance.save(flush: true)) {
+				flash.message = "${message(code: 'homePage.element.removed.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, removed])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			}
+			else {
+				render(view: "edit", model: [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)])
+			}
+		}
+		else {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'homePage.label', default: 'HomePage'), params.id])}"
+			redirect(action: "list")
+		}
+	}
+	
+	def moveUp = {
+		def homePageInstance = HomePage.get(params.homePageId)
+		def elementIndex = params.elementIndex?.toInteger()
+		
+		if(homePageInstance && elementIndex && homePageInstance?.homeMainGalleryElements?.size() > elementIndex && elementIndex > 0) {
+			def elementGoingUp = homePageInstance?.homeMainGalleryElements?.remove(elementIndex)
+			homePageInstance?.homeMainGalleryElements?.add(elementIndex - 1, elementGoingUp)
+			
+			if (!homePageInstance.hasErrors() && homePageInstance.save(flush: true)) {
+				flash.message = "${message(code: 'homePage.element.up.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, elementGoingUp?.id])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			} else {
+				render(view: "edit", model: [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)])
+			}
+		} else {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'homePage.label', default: 'HomePage'), params.id])}"
+			redirect(action: "list")
+		}
+	}
+	
+	def moveDown = {
+		def homePageInstance = HomePage.get(params.homePageId)
+		def elementIndex = params.elementIndex?.toInteger()
+		
+		if(homePageInstance && homePageInstance?.homeMainGalleryElements?.size() - 1 > elementIndex && elementIndex >= 0) {
+			def elementGoingDown = homePageInstance?.homeMainGalleryElements?.remove(elementIndex)
+			homePageInstance?.homeMainGalleryElements?.add(elementIndex + 1, elementGoingDown)
+			
+			if (!homePageInstance.hasErrors() && homePageInstance.save(flush: true)) {
+				flash.message = "${message(code: 'homePage.element.down.message', args: [message(code: 'homePage.label', default: 'HomePage'), homePageInstance.id, elementGoingDown?.id])}"
+				redirect(action: "edit", id: homePageInstance.id)
+			} else {
+				render(view: "edit", model: [homePageInstance: homePageInstance, availableCountries: availableCountries(homePageInstance?.getCountry()), availableElementList: getAvailableElementList(homePageInstance)])
+			}
+		} else {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'homePage.label', default: 'HomePage'), params.id])}"
+			redirect(action: "list")
+		}
+	}
+	
 	def getAvailableElementList(homePageInstance) {
 		HomeMainGalleryElement.createCriteria().listDistinct {
 			
 			eq('active', true)
-			not {
-				inList('id', homePageInstance?.homeMainGalleryElements*.id)
+			if(homePageInstance?.homeMainGalleryElements?.size() > 0) {
+				not {
+					inList('id', homePageInstance?.homeMainGalleryElements*.id)
+				}
 			}
 			element {
 				order('title', 'asc')

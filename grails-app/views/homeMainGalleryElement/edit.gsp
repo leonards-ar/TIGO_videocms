@@ -14,6 +14,7 @@
             <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
+			<span class="menuButton"><g:link class="list" action="list" controller="homePage"><g:message code="default.list.label" args="[message(code: 'homePage.label', default: 'HomePage')]" /></g:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -38,7 +39,7 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: homeMainGalleryElementInstance, field: 'element', 'errors')}">
                                 	<g:set var="elementsPerRow" value="${(int)(650 / (grailsApplication.config.image.list.thumbnail.width + 1))}" /> 
-                                    <g:set var="emptySlots" value="${(elementList.size() % elementsPerRow == 0) ?: elementsPerRow - (elementList.size() % elementsPerRow)}"/>
+                                    <g:set var="emptySlots" value="${(elementList?.size() % elementsPerRow == 0) ?: elementsPerRow - (elementList?.size() % elementsPerRow)}"/>
                                     <div id="elementDiv" style="overflow: auto; ${(elementList?.size() > elementsPerRow * 3 ? 'height: 250px;' : '')}">
                                     	<table>
 	                                    	<g:each in="${elementList}" status="i" var="elementInstance">

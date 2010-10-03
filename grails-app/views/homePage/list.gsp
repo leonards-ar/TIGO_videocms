@@ -13,6 +13,7 @@
             <g:if test="${canCreateNewHomePage}">
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
 			</g:if>
+			<span class="menuButton"><g:link class="list" action="list" controller="homeMainGalleryElement" params="[homePageId: homePageInstance?.id]"><g:message code="default.list.label" args="[message(code: 'homeMainGalleryElement.label', default: 'HomeMainGalleryElement')]" /></g:link></span>
         </div>
         <div class="body">
             <h1><g:message code="default.list.label" args="[entityName]" /></h1>
