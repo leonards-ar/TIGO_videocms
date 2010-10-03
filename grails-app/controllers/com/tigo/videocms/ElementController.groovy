@@ -172,7 +172,9 @@ class ElementController extends BaseController {
         def elementInstance = Element.get(params.id)
         if (elementInstance) {
             try {
-                elementInstance.delete(flush: true)
+                deleteElementContainers(elementInstance)
+				
+				elementInstance.delete(flush: true)
 				
 				deleteElementFiles(elementInstance)
 				
@@ -189,4 +191,10 @@ class ElementController extends BaseController {
             redirect(action: "list")
         }
     }
+	
+	def deleteElementContainers(elementInstance) {
+		ElementContainer.findByElement(elementInstance)?.each { element ->
+			element.delete()
+		}
+	}
 }
