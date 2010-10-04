@@ -42,6 +42,8 @@ class PortalController {
 	}
 	
 	def homeMainGalleryElements = {
+		cache false
+		
 		def country = Country.findByCode(params.countryCode)
 		
 		def elements = HomePage.findByCountry(country)?.homeMainGalleryElements
