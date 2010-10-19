@@ -1,18 +1,20 @@
 @charset "utf-8";
 /* CSS Document */
 
-@font-face {  
-  font-family: 'cronos' ;  
-  src: url( ../fonts/cronos.otf ) format("opentype");  
-}  
+@font-face {    font-family: 'cronos' ;    src: url( ../fonts/cronos.otf ) format("opentype");  }  
  /* PARA INTERNET EXPLORER*/
 /* Then use it like you would any other font */  
-. { font-family: cronos , verdana, helvetica, sans-serif;  
-}  
+. { font-family: 'cronos' , verdana, helvetica, sans-serif; } 
 
-body{background-image:url(../img/background.jpg); background-repeat:no-repeat; background-position:top center; margin:0px; padding:0px; font-family:'cronos',Arial, Helvetica, sans-serif;}
-#banner_container{position:relative; width:728px; height:90px; margin:50px 0px 0px 40px;}
-#main_container{position:relative; background-image:url(../img/main_back.png); width:770px; height:365px; background-position:0px -5px; background-repeat:no-repeat;}
+body{background-image:url(../img/background.jpg); background-repeat:no-repeat; background-position:top center; margin:0px; padding:0px; font-family:'cronos',Arial, Helvetica, sans-serif; background-color:#426ab2;}
+
+body#series{background-image:url(../img/background_series.jpg); background-repeat:no-repeat; background-position:top center; margin:0px; padding:0px; font-family:'cronos',Arial, Helvetica, sans-serif; background-color:#FFFFFF;}
+
+
+#banner_container{position:relative; width:728px; height:90px; margin:30px 0px 0px 40px;}
+#main_container{position:relative; background-image:url(../img/main_back.png); width:770px; height:365px; background-position:0px 0px; background-repeat:no-repeat;}
+#main_container_busqueda{position:relative; background-image:url(../img/main_back.png); width:770px; background-position:0px 0px; background-repeat:no-repeat; margin:0px;top:-10px;}
+
 #date{position:absolute; left:210px; top:15px; font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px;}
 
 #search{ position:absolute; width:360px; height:28px; left:390px; top:5px; background-image:url(../img/search_back.png); background-repeat:no-repeat; background-position:0px 5px; }
@@ -23,7 +25,7 @@ form input.button{width:60px; height:22px; margin:5px 10px 0px 0px;}
 
 #main_gallery_container{position:absolute; width:580px; height:350px; left:200px; top:40px;}
 
-#series_container{position:relative; float:left; text-align:center; width:715px; height:120px; margin:10px 0px 0px 50px;}
+#series_container{position:relative; float:left; text-align:center; width:580px; height:160px; margin:0px 0px 0px 190px;}
 
 #tv_online{position:relative; float:left; top:20px;}
 #left_col{position:relative; float:left; width:130px;  text-align:right; left:50px;}
@@ -36,20 +38,43 @@ form input.button{width:60px; height:22px; margin:5px 10px 0px 0px;}
 #tv_online_content table{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold;}
 #tv_online_banner{position:relative; float:left;width:140px; height:345px; left:30px; top:20px;}
 
+/*Buscador*/
+
+#resultados_busqueda{position:relative; width:580px; left:189px; top:40px; background-color:#FFFFFF; margin:0px; }
+#resultados_busqueda_pie{position:relative; width:580px; height:50px; left:189px; background-image:url(../img/busqueda_pie_contenedor.png);background-repeat:no-repeat; top:30px;}
+
+#contenido_busqueda{width:540px; margin:10px; padding:0px 0px 0px 10px; border:1px solid #cccccc; background-image:url(../img/resultados_titulo.jpg); background-position:top center; background-repeat:no-repeat;}
+#busqueda_nav{position:relative;left:440px; top:30px; width:100px;}
+#busqueda_tabla_container{ position:relative; left:10px; top:40px; padding:0px 0px 50px 0px; margin:30px 0px 0px 0px;}
+#resultados{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold;}
+#busqueda_nav .botones{ width:23px; height:23px; text-indent:-9999px; background-image:url(../img/botones_busqueda.jpg); background-repeat:no-repeat; cursor:pointer; overflow:hidden; margin:2px;}
+#busqueda_nav .next{ background-position:-26px 0px;}
+#busqueda_nav .prev{ background-position:0px 0px;}
+#busqueda_nav a{ width:22px; height:22px; display:block;}
+
+#busqueda_nav .next:hover{ background-position:-26px -25px;}
+#busqueda_nav .prev:hover{ background-position:-0px -25px;}
+#texto_resultado_busqueda{position:relative;font-family:'cronos',Arial, Helvetica, sans-serif; font-size:14px; background-image:url(../img/triangulo_azul.jpg); background-position:middle left; background-repeat:no-repeat; text-indent:20px; margin:0px 0px 0px 0px; left:-10px; top:50px;}
+
+.color_azul{color:#426ab2;}
+
+/*seccion*/
+#contenido_seccion{width:540px; margin:10px; padding:0px 0px 0px 10px; border:1px solid #cccccc; background-image:url(../img/deportes_header.jpg); background-position:top center; background-repeat:no-repeat;}
+#seccion_nav{position:relative;left:440px; top:100px; width:100px;}
+#seccion_nav .botones{ width:23px; height:23px; text-indent:-9999px; background-image:url(../img/seccion_nav.png); background-repeat:no-repeat; cursor:pointer; overflow:hidden; margin:2px;}
+#seccion_nav .next{ background-position:-26px 0px;}
+#seccion_nav .prev{ background-position:0px 0px;}
+#seccion_nav a{ width:22px; height:22px; display:block;}
+#seccion_nav .next:hover{ background-position:-26px -25px;}
+#seccion_nav .prev:hover{ background-position:-0px -25px;}
+#seccion_tabla_container{ position:relative; left:20px; top:40px; padding:0px 0px 50px 0px; margin:70px 0px 0px 0px;}
+
 
 #footer{position:relative; float:left; width:740px;margin: 30px 0px 20px 30px; clear:both;font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px; color:#FFFFFF; border-top:1px solid #FFFFFF;border-bottom:1px solid #FFFFFF; text-align:center; height:25px; vertical-align:middle; line-height:2em; text-indent:30px;}
-#footer a{ color:#FFFFFF; text-decoration:none;}
-
+#footer a{ color:#FFFFFF; text-decoration:none; margin:0px 10px;}
+#footer a:hover{color:#000000;}
 #nav_text{position:absolute; width:110px; height:60px; top:210px; left:70px; font-family:'cronos',Arial, Helvetica, sans-serif; color:#FFFFFF;}
+#nav_top{position:relative;width:728px; margin:10px 0px 0px 40px; color:#FFFFFF; text-align:right; border-bottom:1px solid #FFFFFF;border-top:1px solid #FFFFFF;}
+#nav_top a{ font-family:'cronos',Arial, Helvetica, sans-serif; font-size:10px; color:#FFFFFF; text-decoration:none;}
+#nav_top a:hover{ color:#000000;}
 
-
-/*Remove doted lines for links on Firefox*/
-a:active
-{
-outline: none;
-}
-
-a:focus
-{
--moz-outline-style: none;
-}

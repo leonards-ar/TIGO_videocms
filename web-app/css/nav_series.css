@@ -1,0 +1,101 @@
+/* Default */
+
+#navegacion {
+width: 188px;
+height: 162px;
+position: relative;
+/*background: url(../img/menu_botones.jpg);*/
+/*background: url(../img/left_menu.png) no-repeat;*/
+margin: 0;
+padding: 0;
+background-position: 0px 0px;
+
+}
+
+#navegacion li {
+	float: left;
+	list-style-type: none;
+}
+
+#navegacion li a {
+position: absolute;
+top: 0;
+margin: 0;
+padding: 0;
+display: block;
+height: 52px;
+/*background: url(../img/menu_botones.jpg) no-repeat;*/
+background: url(../img/left_menu_negro.png) no-repeat;
+text-indent: -9999px;
+overflow: hidden;
+}
+
+
+/*up state*/
+li#nav_tv a {
+left: 0px;
+width: 48px;
+height:52px;
+background-position:0px 0px;
+}
+
+li#nav_noticias a {
+top:46px;
+left: 40px;
+width: 48px;
+background-position:-48px 0px;
+}
+
+li#nav_programas a {
+top:82px;
+left: 84px;
+width:62px;
+background-position:-96px 0px;
+}
+
+
+li#nav_promos a {
+top:108px;
+left: 140px;
+width:52px;
+background-position:-160px 0px;
+}
+
+
+/*hover state*/
+li#nav_tv a:hover {
+background-position:0px -55px;
+cursor:pointer;
+}
+
+li#nav_noticias a:hover {
+background-position: -48px -55px;
+cursor:pointer;
+}
+
+li#nav_programas a:hover {
+background-position: -96px -55px;
+cursor:pointer;
+}
+
+li#nav_promos a:hover {
+background-position: -160px -55px;
+cursor:pointer;
+}
+
+/*current state*/
+#body_quienes li#nav_quienes a {
+background-position: -255px -43px;
+}
+
+#body_servicios li#nav_servicios a {
+background-position: -370px -43px;
+}
+
+#body_clientes li#nav_clientes a {
+background-position: -450px -43px;
+}
+
+#body_contactenos li#nav_contacto a {
+background-position: -525px -43px;
+}

@@ -1,0 +1,63 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {  
+  font-family: 'cronos' ;  
+  src: url( ../fonts/cronos.otf ) format("opentype");  
+}  
+ /* PARA INTERNET EXPLORER*/
+/* Then use it like you would any other font */  
+. { font-family: cronos , verdana, helvetica, sans-serif;  
+}  
+
+body#tv_online{background-image:url(../img/background_tv_online.jpg); background-repeat:no-repeat; background-position:top center; margin:0px; padding:0px; font-family:'cronos',Arial, Helvetica, sans-serif; background-color:#FFFFFF;}
+
+#banner_container{position:relative; width:728px; height:90px; margin:30px 0px 0px 40px;}
+#main_container{position:relative; background-image:url(../img/series_main_back.png); width:770px; height:365px; background-position:-12px -35px; background-repeat:no-repeat;}
+#date{position:absolute; color:#999999; left:210px; top:15px; font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px;}
+
+#search{ position:absolute; width:180px; height:28px; left:560px; top:5px; background-image:url(../img/search_back.png); background-repeat:no-repeat; background-position:0px 5px; }
+form.search{margin:0px; padding:0px;}
+form input.search_content{border:0px; width:130px; font-size:10px; margin:6px 0px 0px 10px;}
+form input.button{width:60px; height:22px; margin:5px 10px 0px 0px;}
+#left_menu{position:absolute; width:200px; height:200px; top:215px; left:-10px;}
+
+#link_home{position:absolute; width:54px; height:17px; top:20px; left:120px; font-family:'cronos',Arial, Helvetica, sans-serif; color:#FFFFFF;}
+
+
+#main_gallery_container{position:absolute; width:580px; height:380px; left:200px; top:40px; overflow:visible;}
+
+#series_container{position:relative; float:left; text-align:center; width:580px; height:160px; margin:0px 0px 0px 190px;}
+
+#tv_online{position:relative; float:left; top:10px; width:100%; margin:0px 0px 10px 0px;}
+#left_col{position:relative; float:left; width:130px;  text-align:right; left:50px;}
+#left_col div.noticia{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:11px; color:#FFFFFF; text-align:right;}
+#left_col div.noticia span.titulo{font-size:16px; font-weight:bold;}
+#left_col div.noticia p.texto{margin:0px;}
+
+#series_elegir_container{position:relative; float:left; width:582px; left:170px; }
+#tv_online_content{position:relative; float:left; top:40px; left:20px;width:400px; margin:0px 0px 20px 0px;}
+#tv_online_content table{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold;}
+#tv_online_col_derecha{position:relative; float:left;width:160px;left:30px; top:20px; border-left:1px solid #cccccc; height:340px;}
+
+#series_recomendadas_container{position:relative; float:left; width:580px; left:170px; background-image:url(../img/back_series_recomendadas.jpg); background-repeat:repeat-x; background-color:#FFFFFF; top:20px;}
+#series_recomendadas_content{position:relative; float:left; top:0px; left:20px;width:400px;}
+#series_recomendadas_content table{font-family:'cronos',Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold;}
+#series_recomendadas_col_derecha{position:relative; float:left;width:160px;left:30px; border-left:1px solid #cccccc; height:300px;}
+
+
+
+#footer{position:relative; float:left; width:740px;margin: 30px 0px 20px 30px; clear:both;font-family:'cronos',Arial, Helvetica, sans-serif; font-size:13px; color:#444444; border-top:1px solid #444444;border-bottom:1px solid #444444; text-align:center; height:25px; vertical-align:middle; line-height:2em; text-indent:30px;}
+#footer a{ color:#444444; text-decoration:none; margin:0px 10px;}
+#footer a:hover{color:#000000;}
+#nav_text{position:absolute; width:110px; height:60px; top:210px; left:70px; font-family:'cronos',Arial, Helvetica, sans-serif; color:#FFFFFF;}
+#nav_top{position:relative;width:728px; margin:10px 0px 0px 40px; color:#FFFFFF; text-align:right; border-bottom:1px solid #FFFFFF;border-top:1px solid #FFFFFF;}
+#nav_top a{ font-family:'cronos',Arial, Helvetica, sans-serif; font-size:10px; color:#FFFFFF; text-decoration:none;}
+#nav_top a:hover{ color:#000000;}
+
+#tv_online_menu{position:relative;width:590px; left:150px; margin:10px 0px 0px 40px;}
+ul#lo_mejor{margin:10px 0px 0px 0px; padding:0px 0px 0px 15px; line-height:2em;}
+ul#lo_mejor li{ list-style-type:none; margin:0px; padding:0px 0px 0px 5px; color:#000000;}
+ul#lo_mejor li:hover{background-color:#62ba46; color:#FFFFFF; cursor:pointer;}
+ul#lo_mejor a{text-decoration:none; color:#000000; padding:5px 5px 5px 0px;}
+ul#lo_mejor a:hover{background-color:#62ba46;  color:#FFFFFF;}
