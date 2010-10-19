@@ -17,7 +17,6 @@ class BootStrap {
 	
 	def init = { 		
 		
-		
 		def userBackofficeRole = SecRole.findByAuthority('ROLE_BACKOFFICE_USER') ?: new SecRole(authority: 'ROLE_BACKOFFICE_USER').save(failOnError: true)
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 		
@@ -80,7 +79,7 @@ class BootStrap {
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
 
-		def shows = ["Cartoon TV", "Cadbury Ads", "CSI: NY", "Dexter"]
+		def shows = ["Programa Test 1", "Programa Test 2", "Programa Test 3", "Programa Test 4"]
 		shows.each{
 			TVShow.findByName(it)?:new TVShow(name:it).save(failOnError:true)
 		}
@@ -93,15 +92,15 @@ class BootStrap {
 		def restriction14 = AudienceRestriction.findByName("14")
 		def restriction18 = AudienceRestriction.findByName("18")
 		
-		def cartoonTV = TVShow.findByName("Cartoon TV")
-		def cadbury = TVShow.findByName("Cadbury Ads")
+		def show1 = TVShow.findByName("Programa Test 1")
+		def show2 = TVShow.findByName("Programa Test 2")
 		
-		if(!Video.findByTitle("Gorilla Drummer")){			
-			new Video(title:"Gorilla Drummer", duration:"01:30", 
-			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/gorilla.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/gorilla.gif",
-			videoKey:'JobN6UuK',
-			homeSection:Video.NEW_RELEASE,audienceRestriction: restrictionT, show:cadbury, 
+		if(!Video.findByTitle("Que si, que no")){			
+			new Video(title:"Que si, que no", duration:"00:29", 
+			url:"http://content.bitsontherun.com/players/ug3RJ4Ac-n7QZPPH0.js",
+			thumbnailUrl:"http://content.bitsontherun.com/thumbs/ug3RJ4Ac.jpg", 
+			videoKey:'ug3RJ4Ac',
+			homeSection:Video.NEW_RELEASE,audienceRestriction: restrictionT, show:show1, 
 			active:true, rating: 5, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCategories(spcEvnts)
@@ -110,11 +109,11 @@ class BootStrap {
 			.save(failOnError:true)
 		}
 		
-		if(!Video.findByTitle("The Extremist")){
-			new Video(title:"The Extremist", duration:"04:00", 
-			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/extremists.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/extremists.gif", 
-			videoKey:'soInU17z',
+		if(!Video.findByTitle("Fans")){
+			new Video(title:"Fans", duration:"00:25", 
+			url:"http://content.bitsontherun.com/players/GOTiSZjO-n7QZPPH0.js",
+			thumbnailUrl:"http://content.bitsontherun.com/thumbs/GOTiSZjO.jpg", 
+			videoKey:'GOTiSZjO',
 			homeSection:Video.FULL_EPISODE,
 			audienceRestriction: restriction14,
 			active:true, rating:3.4, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
@@ -125,25 +124,25 @@ class BootStrap {
 			.save(failOnError:true)
 		}
 		
-		if(!Video.findByTitle("The lion sleeps tonight")){
-			new Video(title:"The lion sleeps tonight", duration:"02:42", 
-			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/lionsleepstonight.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/lionsleepstonight.gif", 
-			videoKey:'iW5iQrSS',
+		if(!Video.findByTitle("Poirot")){
+			new Video(title:"Poirot", duration:"00:30", 
+			url:"http://content.bitsontherun.com/players/qipr65jv-n7QZPPH0.js",
+			thumbnailUrl:"http://content.bitsontherun.com/thumbs/qipr65jv.jpg", 
+			videoKey:'qipr65jv',
 			homeSection:Video.NEW_RELEASE, 
 			active:true,
-			audienceRestriction: restrictionT, show:cartoonTV, rating:4,
+			audienceRestriction: restrictionT, show:show2, rating:4,
 			uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCountryVideos(country: honduras)
 			.save(failOnError:true)
 		}
 
-		if(!Video.findByTitle("HS Americas")){
-			new Video(title:"HS Americas", duration:"05:42", 
-			url:"http://pseudo01.hddn.com/vod/mindpool.mindpoollmtd/demo/hsamericas.flv",
-			thumbnailUrl:"http://mindpool-it.com/tigo/thumb/hsamericas.gif", 
-			videoKey:'H2J5lDU4',
+		if(!Video.findByTitle("Dr. Martin")){
+			new Video(title:"Dr. Martin", duration:"00:25", 
+			url:"http://content.bitsontherun.com/players/UEGomhRo-n7QZPPH0.js",
+			thumbnailUrl:"http://content.bitsontherun.com/thumbs/UEGomhRo.jpg", 
+			videoKey:'UEGomhRo',
 			homeSection:Video.FULL_EPISODE, active:true, rating:1,
 			uploadStatus:Video.UPLOAD_SUCCESS_STATUS,
 			audienceRestriction: restrictionT)
