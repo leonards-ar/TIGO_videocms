@@ -10,7 +10,7 @@ abstract class BaseController {
 	def storeFile(fileToStore)
 	{
 		File file = null
-		if(!fileToStore?.isEmpty())
+		if(fileToStore && !(fileToStore.isEmpty()))
 		{
 			def location = grailsApplication.config.uploadServerLocation
 			def fileName = fileToStore.getOriginalFilename()

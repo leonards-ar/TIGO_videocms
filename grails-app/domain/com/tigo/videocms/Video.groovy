@@ -9,7 +9,7 @@ class Video {
 	public static String NEW_RELEASE = 'new_release'
 	public static String FULL_EPISODE = 'full_episode'
 	public static String NO_HOME_SECTION = 'no_home'
-	
+		
 	String title
 	Integer season
 	Integer episode
@@ -101,4 +101,38 @@ class Video {
 	public boolean isUploaded() {
 		return getUploadStatus() == Video.UPLOAD_FAIL_STATUS || getUploadStatus() == Video.UPLOAD_SUCCESS_STATUS 
 	}
+	
+	static def Video getRandomVideo(){
+		def videoN = Video.count()
+		def randomN = getRandomNumber(videoN)
+		return Video.get(randomN.toLong())
+	}
+
+	static def getTopByContent(content, maxNumber=2){
+		def aCriteria = Video.createCriteria()
+		aCriteria.listDistinct{
+			maxResults(maxNumber)
+			order("lastUpdate", "desc")
+			eq('active',true)
+			eq('homeSection', content)
+		}		
+	}
+
+	static def getTopByRating(maxNumber=2){
+		def aCriteria = Video.createCriteria()
+		aCriteria.listDistinct{
+			maxResults(maxNumber)
+			order("rating", "desc")
+			eq('active',true)
+		}
+	}
+	
+	private static def int getRandomNumber(int to){
+		System.out.println 'getRandomNumber - parameter to:' +to
+		def random = new Random()
+		def randomInt = random.nextInt(to) + 1
+		System.out.println 'Video Random Number Generated: '+randomInt
+		
+		return randomInt
+	}	
 }

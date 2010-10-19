@@ -11,7 +11,6 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 }
 </style>
 <![endif]-->
-
 <script language="javascript">AC_FL_RunContent = 0;</script>
 <script language="javascript" src="${resource(dir:'js',file:'AC_RunActiveContent.js')}"></script>
 <script type="text/javascript" src="${resource(dir:'js',file:'jquery.js')}"></script>
@@ -20,6 +19,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 </head>
 <body>
 <div id="wrapper" style="position:relative; margin:0px auto; width:770px;">
+<div id="nav_top">|  <a href="">CONTACTENOS</a>  |  <a href="">PREGUNTAS FRECUENTES</a></div>
 	<div id="banner_container"><img src="${resource(dir:'img',file:'banner.jpg')}" /></div>
 	<div id="main_container">
 		<div id="date"><g:formatDate date="${new Date()}" type="date" style="LONG" locale="es"/></div>
@@ -42,7 +42,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		</div>
 		<div id="left_menu">
 			<ul id="navegacion">
-				<li id="nav_tv"><a href="index.gsp">TVOnline</a></li>
+				<li id="nav_tv"><g:link controller="TVOnline" action="index">TVOnline</g:link></li>
 				<li id="nav_noticias"><a href="imagenes.html">Noticias</a></li>
 				<li id="nav_programas"><a href="videos.html">Programacion</a></li>
 				<li id="nav_promos"><a href="trivia.html">Promos</a></li>
@@ -97,6 +97,40 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 	</div>
 	<!--End main_container-->
 	<div id="series_container">
+		<script language="JavaScript" type="text/javascript">
+	AC_FL_RunContent(
+		'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
+		'width', '580',
+		'height', '160',
+		'src', '${resource(dir:'swf',file:'carousel')}',
+		'quality', 'high',
+		'pluginspage', 'http://www.adobe.com/go/getflashplayer',
+		'align', 'middle',
+		'play', 'true',
+		'loop', 'true',
+		'scale', 'showall',
+		'wmode', 'transparent',
+		'devicefont', 'false',
+		'id', 'carousel',
+		'bgcolor', '#ffffff',
+		'name', 'carousel',
+		'menu', 'true',
+		'allowFullScreen', 'false',
+		'allowScriptAccess','sameDomain',
+		'movie', '${resource(dir:'swf',file:'carousel')}',
+		'salign', ''
+		); //end AC code
+</script>
+		<noscript>
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="580" height="160" id="carousel" align="middle">
+			<param name="allowScriptAccess" value="sameDomain" />
+			<param name="allowFullScreen" value="false" />
+			<param name="movie" value="${resource(dir:'swf',file:'carousel.swf')}" />
+			<param name="quality" value="high" />
+			<param name="bgcolor" value="#ffffff" />
+			<embed src="${resource(dir:'swf',file:'carousel.swf')}" quality="high" bgcolor="#ffffff" width="580" height="160" name="carousel" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
+		</object>
+		</noscript>
 	</div>
 	<!--fin series-->
 	<div id="tv_online">
@@ -117,102 +151,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			<img src="${resource(dir:'img',file:'noticia_vermas.png')}" />
 		</div>
 		<div id="tv_online_container">
-			<div id="tv_online_content">
-				<table width="100%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<th align="left" width="130">ESTRENOS
-							</td>
-						<th align="left" width="130">MAS VOTADOS
-							</td>
-						<th align="left" width="130">EPISODIOS COMPLETOS
-							</td>
-					</tr>
-					<tr>
-						<td align="left"><img src="${resource(dir:'img',file:'flecha_verde.png')}"/></td>
-						<td align="left"><img src="${resource(dir:'img',file:'flecha_roja.png')}"/></td>
-						<td align="left"><img src="${resource(dir:'img',file:'flecha_amarilla.png')}" /></td>
-					</tr>
-					<!-- comienza es un reglon completo-->
-					<g:each in ="${rowList}">
-					<g:set var="newRelease" value="${newReleases[it]}" />                 
-                    <g:set var="mostPopular" value="${mostPopulars[it]}" />                 
-                    <g:set var="fullEpisode" value="${fullEpisodes[it]}" />                 
-					<tr>
-						<td><g:link action="playVideo" id="${newRelease?.id}"><img src="${newRelease?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
-                        <td><g:link action="playVideo" id="${mostPopular?.id}"><img src="${mostPopular?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
-                        <td><g:link action="playVideo" id="${fullEpisode?.id}"><img src="${fullEpisode?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
-					</tr>
-					<tr>
-						<td>
-
-                        <table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nGreen" value="${newRelease?.ratingAsInt()}" />
-                                     <g:set var = "nGreyRelease" value="${5 - newRelease?.ratingAsInt()}" />
-                                    <g:while test="${nGreen > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_verde.png')}" />
-                                       <g:set var = "nGreen" value="${nGreen -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyRelease > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyRelease" value="${nGreyRelease -1}" /> 
-                                    </g:while>    
-                                    </td>
-                                    <td>${newRelease?.duration}</td>
-                                </tr>   
-                            </table>
-						
-						</td>
-						<td><table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nRed" value="${mostPopular?.ratingAsInt()}" />
-                                     <g:set var = "nGreyPopular" value="${5 - mostPopular?.ratingAsInt()}" />
-                                    <g:while test="${nRed > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_roja.png')}" />
-                                       <g:set var = "nRed" value="${nRed -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyPopular > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyPopular" value="${nGreyPopular -1}" /> 
-                                    </g:while>    
-                                    </td>
-                                    <td>${mostPopular?.duration}</td>
-                                </tr>   
-							</table></td>
-						<td><table>
-                                <tr>
-                                    <td width="95">
-                                     <g:set var="nYellow" value="${fullEpisode?.ratingAsInt()}" />
-                                     <g:set var = "nGreyEpisodes" value="${5 - fullEpisode?.ratingAsInt()}" />
-                                    <g:while test="${nYellow > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_amarilla.png')}" />
-                                       <g:set var = "nYellow" value="${nYellow -1}" /> 
-                                    </g:while>    
-                                    <g:while test="${nGreyEpisodes > 0}">
-                                       <img src="${resource(dir:'img',file:'estrella_gris.png')}" />
-                                       <g:set var = "nGreyEpisodes" value="${nGreyEpisodes -1}" /> 
-                                    </g:while>    
-                                    </td>
-                                    <td>${fullEpisode?.duration}</td>
-                                </tr> 
-							</table></td>
-					</tr>
-					<tr>
-						<td>${newRelease?.title}<br />${newRelease?.show}</td>
-                        <td>${mostPopular?.title}<br />${mostPopular?.show}</td>
-                        <td>${fullEpisode?.title}<br />${fullEpisode?.show}</td>
-					</tr>
-					</g:each>
-					<!-- fin reglon completo-->
-					<tr>
-						<td><a href=""><img src="${resource(dir:'img',file:'ver_mas.png')}" border="0"/></a></td>
-                        <td><a href=""><img src="${resource(dir:'img',file:'ver_mas.png')}" border="0"/></a></td>
-                        <td><a href=""><img src="${resource(dir:'img',file:'ver_mas.png')}" border="0"/></a></td>
-					</tr>
-				</table>
-			</div>
+			<g:render template="/TVOnline/tvonlinecontent" model="[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
 			<div id="tv_online_banner"><img src="${resource(dir:'img',file:'tv_online_banner.png')}" /></div>
 		</div>
 	</div>
@@ -221,6 +160,52 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 	<a href="">HOME </a> I <a href=""> POLITICA DE USO </a> I <a href=""> POLITICA DE PRIVACIDAD </a> I <a href=""> PARTNERS </a> I <a href=""> ANUNCIESE AQUI </a> I <a href=""> MAPA DEL SITIO </a>
 	</div>
 </div>
+
+
+		<div id="slider" style="position:absolute; right:0px; top:50px;">
+			<script language="javascript">
+	if (AC_FL_RunContent == 0) {
+		alert("Esta página requiere el archivo AC_RunActiveContent.js.");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0',
+			'width', '240',
+			'height', '500',
+			'src', '${resource(dir:'swf',file:'panel_slider')}',
+			'quality', 'high',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', 'top',
+			'play', 'true',
+			'loop', 'true',
+			'scale', 'showall',
+			'wmode', 'transparent',
+			'devicefont', 'false',
+			'id', 'panel_slider',
+			'bgcolor', '#000000',
+			'name', 'panel_slider',
+			'menu', 'true',
+			'allowFullScreen', 'false',
+			'allowScriptAccess','sameDomain',
+			'movie', '${resource(dir:'swf',file:'panel_slider')}',
+			'salign', ''
+			); //end AC code
+	}
+</script>
+			<noscript>
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="500" id="panel_slider" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="allowFullScreen" value="false" />
+				<param name="movie" value="${resource(dir:'swf',file:'panel_slider.swf')}" />
+				<param name="quality" value="high" />
+				<param name="wmode" value="transparent" />
+				<param name="bgcolor" value="#000000" />
+				<embed src="${resource(dir:'swf',file:'panel_slider.swf')}" quality="high" wmode="transparent" bgcolor="#000000" width="240" height="500" name="panel_slider" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+			</noscript>
+		</div>
+
+
+
 </body>
 </html>
 <script>
