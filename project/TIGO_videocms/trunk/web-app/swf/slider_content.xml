@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<content>  
+    <proximamente img="../img/series/1.jpg" hora="23:30" texto="Este texto es de Proximamente" rating="3.8" link="http://www.google.com.ar" />
+	<estrenos img="../img/series/2.jpg" hora="13:30" texto="Este texto es de estrenos" rating="1.8" link="http://www.google.com.ar" />
+	<votados img="../img/series/3.jpg" hora="16:15" texto="Este texto es de mas votados" rating="4.8" link="http://www.google.com.ar" />
+	<completos img="../img/series/4.jpg" hora="15:15" texto="Este texto es de episodios completos" rating="2.3" link="http://www.google.com.ar" />
+</content>

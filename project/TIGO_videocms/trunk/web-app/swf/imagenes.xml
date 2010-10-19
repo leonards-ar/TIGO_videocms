@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<!--El script de flash, para que se vea bien y no se rompa, tiene como máximo 30 imágenes.
+si hay menos en este archivo, el script se encarga de repetirlas
+El tamańo de las imágenes para óptimo resultado deben ser de 120px ancho x 90px alto-->
+<images>                                                                    
+<image src="./120_1.jpg" link="http://www.google.com" />
+</images>
