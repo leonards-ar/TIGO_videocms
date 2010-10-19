@@ -45,7 +45,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			</ul>
 		</div>
 		<div id="main_gallery_container">
-            <script type="text/javascript" src="http://content.bitsontherun.com/players/${videoInstance?.videoKey}-WZmsKAtF.js"></script>
+            <script type="text/javascript" src="http://content.bitsontherun.com/players/${videoInstance?.videoKey}-n7QZPPH0.js"></script>
 		</div>
 	</div>
 	<!--fin series-->

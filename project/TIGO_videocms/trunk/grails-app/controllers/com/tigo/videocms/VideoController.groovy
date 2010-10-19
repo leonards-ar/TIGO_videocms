@@ -90,13 +90,6 @@ class VideoController extends BaseController {
 			videoInstance.setActive(false) // Video will be set active after complete upload
 		}
 		
-		//Upload Thumbnail
-		def thumbUpload =  request.getFile("thumbnail")
-		
-		if (!thumbUpload?.isEmpty()){
-			def fileName = thumbUpload.getOriginalFilename()
-			videoInstance.setThumbnailUrl(grailsApplication.config.thumbnailUploadUrl+fileName)
-		}
 				
 		if (videoInstance.validate()) {
 			//TODO:Add transactional behaviour to the creation of the videos and the transfer of the files
@@ -105,9 +98,6 @@ class VideoController extends BaseController {
 			videoInstance.save(flush:true)
 			createdVideos << videoInstance.id
 			
-			//Transfering video & thumb to a temporary location in the server
-			storeFile(thumbUpload)
-
 			flash.message = "${message(code: 'default.created.message', args: [message(code: 'video.label', default: 'Video'), createdVideos])}"
 			redirect(action: "list")
 		} else {

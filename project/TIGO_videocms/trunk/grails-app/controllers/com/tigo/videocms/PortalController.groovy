@@ -3,29 +3,10 @@ package com.tigo.videocms
 class PortalController {
 
     def index = { 
-		def newReleasesCriteria = Video.createCriteria()
-		def newReleases = newReleasesCriteria.listDistinct{			
-			maxResults(2)
-			order("lastUpdate", "desc")
-			eq('active',true)
-			eq('homeSection', Video.NEW_RELEASE)
-		}
+		def newReleases = Video.getTopByContent(Video.NEW_RELEASE)
+		def fullEpisodes = Video.getTopByContent(Video.FULL_EPISODE)
+		def mostPopulars = Video.getTopByRating()
 		
-		def fullEpisodeCriteria = Video.createCriteria()
-		def fullEpisodes = fullEpisodeCriteria.listDistinct{
-			maxResults(2)
-			order("lastUpdate", "desc")
-			eq('active',true)
-			eq('homeSection', Video.FULL_EPISODE)
-		}
-
-		def mostPopularCriteria = Video.createCriteria()
-		def mostPopulars = mostPopularCriteria.listDistinct{
-			maxResults(2)
-			order("rating", "desc")
-			eq('active',true)
-		}
-
 		def rowList = [0,1]
 		[countryCode: 'SV', newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]
 	}
