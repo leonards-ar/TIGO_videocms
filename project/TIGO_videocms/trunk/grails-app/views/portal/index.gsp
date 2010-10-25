@@ -102,7 +102,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
 		'width', '580',
 		'height', '160',
-		'src', '${resource(dir:'swf',file:'carousel')}',
+		'src', '${resource(dir:'swf',file:'carousel.swf')}',
 		'quality', 'high',
 		'pluginspage', 'http://www.adobe.com/go/getflashplayer',
 		'align', 'middle',
@@ -118,6 +118,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		'allowFullScreen', 'false',
 		'allowScriptAccess','sameDomain',
 		'movie', '${resource(dir:'swf',file:'carousel')}',
+		'flashvars', 'xml_url=${resource(dir:'swf',file:'imagenes.xml')}',		
 		'salign', ''
 		); //end AC code
 </script>
@@ -128,7 +129,8 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			<param name="movie" value="${resource(dir:'swf',file:'carousel.swf')}" />
 			<param name="quality" value="high" />
 			<param name="bgcolor" value="#ffffff" />
-			<embed src="${resource(dir:'swf',file:'carousel.swf')}" quality="high" bgcolor="#ffffff" width="580" height="160" name="carousel" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
+			<param name="FlashVars" value="xml_url=${resource(dir:'swf',file:'imagenes.xml')}" />			
+			<embed src="${resource(dir:'swf',file:'carousel.swf')}" FlashVars="xml_url=${resource(dir:'swf',file:'imagenes.xml')}" quality="high" bgcolor="#ffffff" width="580" height="160" name="carousel" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" />
 		</object>
 		</noscript>
 	</div>
@@ -187,6 +189,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			'allowFullScreen', 'false',
 			'allowScriptAccess','sameDomain',
 			'movie', '${resource(dir:'swf',file:'panel_slider')}',
+			'flashvars', 'xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}',				
 			'salign', ''
 			); //end AC code
 	}
@@ -199,6 +202,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 				<param name="quality" value="high" />
 				<param name="wmode" value="transparent" />
 				<param name="bgcolor" value="#000000" />
+				<param name="FlashVars" value="xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}" />				
 				<embed src="${resource(dir:'swf',file:'panel_slider.swf')}" quality="high" wmode="transparent" bgcolor="#000000" width="240" height="500" name="panel_slider" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 			</object>
 			</noscript>
