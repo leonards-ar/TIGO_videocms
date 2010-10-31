@@ -102,40 +102,98 @@ class Video {
 		return getUploadStatus() == Video.UPLOAD_FAIL_STATUS || getUploadStatus() == Video.UPLOAD_SUCCESS_STATUS 
 	}
 	
-	static def Video getRandomVideo(){
+	static def Video getRandomVideo()
+	{
 		def videoN = Video.count()
 		def randomN = getRandomNumber(videoN)
 		return Video.get(randomN.toLong())
 	}
 
-	static def getTopByContent(content, maxNumber=2){
+	static def getTopByContent(content, country, maxNumber=2)
+	{
 		def aCriteria = Video.createCriteria()
-		aCriteria.listDistinct{
-			maxResults(maxNumber)
-			order("lastUpdate", "desc")
-			eq('active',true)
-			eq('homeSection', content)
-		}		
+		
+		if (country)
+		{
+			aCriteria.listDistinct{
+				maxResults(maxNumber)
+				order("lastUpdate", "desc")
+				eq('active',true)
+				eq('homeSection', content)
+	
+				countryVideos {
+					eq('country',country)
+				}
+			}
+		}
+		else
+		{
+			aCriteria.listDistinct{
+				maxResults(maxNumber)
+				order("lastUpdate", "desc")
+				eq('active',true)
+				eq('homeSection', content)	
+			}
+		}
 	}
 
-	static def getTopByRating(maxNumber=2){
+	static def getTopByRating(country, maxNumber=2)
+	{
 		def aCriteria = Video.createCriteria()
-		aCriteria.listDistinct{
-			maxResults(maxNumber)
-			order("rating", "desc")
-			eq('active',true)
+		
+		if(country)
+		{
+			aCriteria.listDistinct{
+				maxResults(maxNumber)
+				order("rating", "desc")
+				eq('active',true)
+				
+				countryVideos {
+					eq('country',country)
+				}
+	
+			}
+		}
+		else
+		{
+			aCriteria.listDistinct{
+				maxResults(maxNumber)
+				order("rating", "desc")
+				eq('active',true)				
+			}
 		}
 	}
 
 	static def getByCategories(categoriesNameList, params){
 		def videoCriteria = Video.createCriteria()
-		videoCriteria.listDistinct{
-			maxResults(params.max)
-			firstResult(params.offset)
-			order("id",params.order)
-						
-			categories {
-				inList('name',categoriesNameList)
+		def countryCode = params.countryCode
+		if (countryCode != null)
+		{
+			Country country = Country.findByCode(countryCode)			
+			videoCriteria.listDistinct{
+				maxResults(params.max)
+				firstResult(params.offset)
+				order("id",params.order)
+							
+				categories {
+					inList('name',categoriesNameList)
+				}
+	
+				countryVideos {
+					eq('country',country)
+				}
+			}
+		}
+		else
+		{
+			videoCriteria.listDistinct{
+				maxResults(params.max)
+				firstResult(params.offset)
+				order("id",params.order)
+							
+				categories {
+					inList('name',categoriesNameList)
+				}	
 			}
 		}
 	}
