@@ -20,9 +20,21 @@
         <g:set var="fullEpisode" value="${fullEpisodes[it]}" />
                          
 		<tr>
-			<td><g:link controller="TVOnline" action="playVideo" id="${newRelease?.id}" params="[countryCode:countryCode]"><img src="${newRelease?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
-            <td><g:link controller="TVOnline" action="playVideo" id="${mostPopular?.id}" params="[countryCode:countryCode]"><img src="${mostPopular?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
-            <td><g:link controller="TVOnline" action="playVideo" id="${fullEpisode?.id}" params="[countryCode:countryCode]"><img src="${fullEpisode?.thumbnailUrl}" width="120" height="75" border="0"/></g:link></td>
+			<td>
+			<g:if test="${newRelease != null}">
+				<g:link controller="TVOnline" action="playVideo" id="${newRelease?.id}" params="[countryCode:countryCode]"><img src="${newRelease?.thumbnailUrl}" width="120" height="75" border="0"/></g:link>
+			</g:if>
+			</td>
+            <td>
+            <g:if test="${mostPopular != null}">
+	            <g:link controller="TVOnline" action="playVideo" id="${mostPopular?.id}" params="[countryCode:countryCode]"><img src="${mostPopular?.thumbnailUrl}" width="120" height="75" border="0"/></g:link>
+			</g:if>
+            </td>
+            <td>
+            <g:if test="${fullEpisode != null}">
+            <g:link controller="TVOnline" action="playVideo" id="${fullEpisode?.id}" params="[countryCode:countryCode]"><img src="${fullEpisode?.thumbnailUrl}" width="120" height="75" border="0"/></g:link>
+            </g:if>
+            </td>
 		</tr>
 		<tr>
 			<td>

@@ -1,10 +1,10 @@
 package com.tigo.videocms
 
-class PortalController {
+class PortalController extends PortalBaseController {
 
     def index = {
 		
-		def countryCode = 'SV'
+		def countryCode = getCountryCode()
 		def country = Country.findByCode(countryCode)
 		def newReleases = Video.getTopByContent(Video.NEW_RELEASE, country)
 		def fullEpisodes = Video.getTopByContent(Video.FULL_EPISODE, country)
@@ -17,7 +17,7 @@ class PortalController {
 	def homeMainGalleryElements = {
 		cache false
 		
-		def country = Country.findByCode(params.countryCode)
+		def country = Country.findByCode(getCountryCode())
 		
 		def elements = HomePage.findByCountry(country)?.homeMainGalleryElements
 		//TODO: Filter inactive elements

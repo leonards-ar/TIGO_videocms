@@ -102,19 +102,7 @@ src: url('fonts/cronos.otf');
 		
 		<div id="series_elegir_container">
 			<g:render template="/TVOnline/tvonlinecontent" model="[countryCode:countryCode, newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
-			<div id="tv_online_col_derecha">
-			<img src="${resource(dir:'img',file:'series_lomejor.jpg')}"/>
-			<ul id="lo_mejor">
-				<li><a href="">24</a></li>
-				<li><a href="">Prison Break</a></li>
-				<li><a href="">Padre de Familia</a></li>
-				<li><a href="">American Dad</a></li>
-				<li><a href="">Tiempo Final</a></li>
-				<li><a href="">Prison Break</a></li>
-				<li><a href="">Padre de Familia</a></li>
-				<li><a href="">American Dad</a></li>
-			</ul>
-			</div>
+			<g:render template="/TVOnline/tvshowthebest" model="[countryCode:countryCode, theBestTVShows: theBestTVShows]"/>
 		</div>
 	
 	

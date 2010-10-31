@@ -31,7 +31,8 @@ class BootStrap {
 
 		def homeMainGallery = ElementType.findByLabelKey("home_main_gallery")?:new ElementType(name:"Home Main Gallery Component", description:"Pictures that will be displayed in the home page main gallery component", labelKey:"home_main_gallery",allowedExtensions:"gif,jpg,png", width:490, height:300, maxSize:100.00).save(failOnError:true)
 		def videoThumbnail = ElementType.findByLabelKey("video_thumbnail")?:new ElementType(name:"Video Thumbnail", description:"Video Thumbnail", labelKey:"video_thumbnail",allowedExtensions:"gif,jpg,png", width:300, height:300, maxSize:100.00).save(failOnError:true)
-
+		def tvShowBackground = ElementType.findByLabelKey("tvshow_background")?:new ElementType(name:"TV Show Background", description:"TV Show Background Image", labelKey:"tvshow_background",allowedExtensions:"gif,jpg,png", width:1280, height:749, maxSize:1024.00).save(failOnError:true)
+		
 		def hondurasHomePage = HomePage.findByCountry(honduras)?:new HomePage(country:honduras)	
 		.save(failOnError:true)
 		def salvadorHomePage = HomePage.findByCountry(salvador)?:new HomePage(country:salvador)
@@ -80,9 +81,9 @@ class BootStrap {
 			AudienceRestriction.findByName(it)?:new AudienceRestriction(name:it).save(failOnError:true)
 		}
 
-		def shows = ["Programa Test 1", "Programa Test 2", "Programa Test 3", "Programa Test 4"]
+		def shows = ["24", "Prision Break", "Padre de Familia", "American Dad", "Tiempo Final"]
 		shows.each{
-			TVShow.findByName(it)?:new TVShow(name:it).save(failOnError:true)
+			TVShow.findByName(it)?:new TVShow(name:it, listInTheBest:true).save(failOnError:true)
 		}
 
 		def todos = Category.findByName("Todos")
@@ -93,8 +94,8 @@ class BootStrap {
 		def restriction14 = AudienceRestriction.findByName("14")
 		def restriction18 = AudienceRestriction.findByName("18")
 		
-		def show1 = TVShow.findByName("Programa Test 1")
-		def show2 = TVShow.findByName("Programa Test 2")
+		def show1 = TVShow.findByName("24")
+		def show2 = TVShow.findByName("Padre de Familia")
 		
 		if(!Video.findByTitle("Que si, que no")){			
 			new Video(title:"Que si, que no", duration:"00:29", 
