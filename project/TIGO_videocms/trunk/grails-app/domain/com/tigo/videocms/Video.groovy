@@ -126,7 +126,20 @@ class Video {
 			eq('active',true)
 		}
 	}
-	
+
+	static def getByCategories(categoriesNameList, params){
+		def videoCriteria = Video.createCriteria()
+		videoCriteria.listDistinct{
+			maxResults(params.max)
+			firstResult(params.offset)
+			order("id",params.order)
+						
+			categories {
+				inList('name',categoriesNameList)
+			}
+		}
+	}
+		
 	private static def int getRandomNumber(int to){
 		System.out.println 'getRandomNumber - parameter to:' +to
 		def random = new Random()
