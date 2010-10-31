@@ -39,7 +39,7 @@ src: url('fonts/cronos.otf');
 			<span class="texto" style="font-size:10px;"></span> </div>
 		<div id="left_menu">
 			<ul id="navegacion">
-				<li id="nav_tv"><g:link controller="TVOnline" action="index">TVOnline</g:link></li>
+				<li id="nav_tv"><g:link controller="TVOnline" action="index" params="[countryCode:countryCode]">TVOnline</g:link></li>
 				<li id="nav_noticias"><a href="imagenes.html">Noticias</a></li>
 				<li id="nav_programas"><a href="videos.html">Programacion</a></li>
 				<li id="nav_promos"><a href="trivia.html">Promos</a></li>
@@ -50,8 +50,8 @@ src: url('fonts/cronos.otf');
 				<div id="seccion_nav">
 					<table border="0" cellspacing="4" cellpadding="0">
 						<tr>
-							<td><div class="botones prev"><g:link action="categoryResults" params="[category:category.getName()]">prev</g:link></div></td>
-							<td><div class="botones next"><g:link action="categoryResults" params="[category:category.getName()]">next</g:link></div></td>
+							<td><div class="botones prev"><g:link action="categoryResults" params="[category:category.getName(),countryCode:countryCode]">prev</g:link></div></td>
+							<td><div class="botones next"><g:link action="categoryResults" params="[category:category.getName(),countryCode:countryCode]">next</g:link></div></td>
 						</tr>
 						<tr>
 							<td colspan="2"><span style="font-family:'cronos',Arial, Helvetica, sans-serif; font-size:10px;"><strong>PAGINA 1 DE 6</strong></span></td>
@@ -100,6 +100,50 @@ src: url('fonts/cronos.otf');
 	<!--End main_container-->
 	<div id="footer"> <a href="">HOME </a> I <a href=""> POLITICA DE USO </a> I <a href=""> POLITICA DE PRIVACIDAD </a> I <a href=""> PARTNERS </a> I <a href=""> ANUNCIESE AQUI </a> I <a href=""> MAPA DEL SITIO </a> </div>
 </div>
+
+		<div id="slider" style="position:absolute; right:0px; top:50px;">
+			<script language="javascript">
+	if (AC_FL_RunContent == 0) {
+		alert("Esta página requiere el archivo AC_RunActiveContent.js.");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0',
+			'width', '240',
+			'height', '500',
+			'src', '${resource(dir:'swf',file:'panel_slider')}',
+			'quality', 'high',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', 'top',
+			'play', 'true',
+			'loop', 'true',
+			'scale', 'showall',
+			'wmode', 'transparent',
+			'devicefont', 'false',
+			'id', 'panel_slider',
+			'bgcolor', '#000000',
+			'name', 'panel_slider',
+			'menu', 'true',
+			'allowFullScreen', 'false',
+			'allowScriptAccess','sameDomain',
+			'movie', '${resource(dir:'swf',file:'panel_slider')}',
+			'flashvars', 'xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}',				
+			'salign', ''
+			); //end AC code
+	}
+</script>
+			<noscript>
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="500" id="panel_slider" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="allowFullScreen" value="false" />
+				<param name="movie" value="${resource(dir:'swf',file:'panel_slider.swf')}" />
+				<param name="quality" value="high" />
+				<param name="wmode" value="transparent" />
+				<param name="bgcolor" value="#000000" />
+				<param name="FlashVars" value="xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}" />				
+				<embed src="${resource(dir:'swf',file:'panel_slider.swf')}" quality="high" wmode="transparent" bgcolor="#000000" width="240" height="500" name="panel_slider" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+			</noscript>
+		</div>
 </body>
 </html>
 <script>

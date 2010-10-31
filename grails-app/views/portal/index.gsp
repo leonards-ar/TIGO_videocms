@@ -42,7 +42,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		</div>
 		<div id="left_menu">
 			<ul id="navegacion">
-				<li id="nav_tv"><g:link controller="TVOnline" action="index">TVOnline</g:link></li>
+				<li id="nav_tv"><g:link controller="TVOnline" action="index" params="[countryCode:countryCode]">TVOnline</g:link></li>
 				<li id="nav_noticias"><a href="imagenes.html">Noticias</a></li>
 				<li id="nav_programas"><a href="videos.html">Programacion</a></li>
 				<li id="nav_promos"><a href="trivia.html">Promos</a></li>
@@ -153,7 +153,7 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 			<img src="${resource(dir:'img',file:'noticia_vermas.png')}" />
 		</div>
 		<div id="tv_online_container">
-			<g:render template="/TVOnline/tvonlinecontent" model="[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
+			<g:render template="/TVOnline/tvonlinecontent" model="[countryCode:countryCode, newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
 			<div id="tv_online_banner"><img src="${resource(dir:'img',file:'tv_online_banner.png')}" /></div>
 		</div>
 	</div>

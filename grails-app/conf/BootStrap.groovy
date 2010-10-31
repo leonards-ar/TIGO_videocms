@@ -103,7 +103,7 @@ class BootStrap {
 			videoKey:'ug3RJ4Ac',
 			homeSection:Video.NEW_RELEASE,audienceRestriction: restrictionT, show:show1, 
 			active:true, rating: 5, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
-			//.addToCategories(todos)
+			.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToCountryVideos(country: salvador)
 			.addToCountryVideos(country: honduras)
@@ -118,7 +118,7 @@ class BootStrap {
 			homeSection:Video.FULL_EPISODE,
 			audienceRestriction: restriction14,
 			active:true, rating:3.4, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
-			//.addToCategories(todos)
+			.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountryVideos(country: salvador)
 			.addToCountryVideos(country: guatemala)
@@ -136,6 +136,7 @@ class BootStrap {
 			uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
 			.addToCategories(todos)
 			.addToCountryVideos(country: honduras)
+			.addToCountryVideos(country: salvador)
 			.save(failOnError:true)
 		}
 
@@ -149,6 +150,7 @@ class BootStrap {
 			audienceRestriction: restrictionT)
 			.addToCategories(todos)
 			.addToCountryVideos(country: honduras)
+			.addToCountryVideos(country: salvador)
 			.save(failOnError:true)
 		}
 	}

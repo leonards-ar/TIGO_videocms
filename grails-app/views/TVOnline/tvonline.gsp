@@ -41,7 +41,7 @@ src: url('fonts/cronos.otf');
 			<span class="texto" style="font-size:10px;"></span> </div>
 		<div id="left_menu">
 			<ul id="navegacion">
-				<li id="nav_tv"><g:link controller="TVOnline" action="index">TVOnline</g:link></li>
+				<li id="nav_tv"><g:link controller="TVOnline" action="index" params="[countryCode:countryCode]">TVOnline</g:link></li>
 				<li id="nav_noticias"><a href="imagenes.html">Noticias</a></li>
 				<li id="nav_programas"><a href="videos.html">Programacion</a></li>
 				<li id="nav_promos"><a href="trivia.html">Promos</a></li>
@@ -81,7 +81,7 @@ src: url('fonts/cronos.otf');
 			'allowScriptAccess','sameDomain',
 			'movie', '${resource(dir:'swf',file:'tv_online_menu')}',
 			'salign', '',			
-			'flashvars','todos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Todos'])}&series_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Series"])}&eventos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Eventos Especiales"])}&deportes_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Deportes"])}&trailers_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Trailers"])}&noticias_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Noticias y Actualidad"])}&cultura_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Cultura"])}&estilos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Estilos y Tendencias"])}&otros_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Otros'])}&adultos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Adultos'])}'
+			'flashvars','todos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Todos',countryCode:'SV'])}&series_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Series",countryCode:countryCode])}&eventos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Eventos Especiales",countryCode:countryCode])}&deportes_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Deportes",countryCode:countryCode])}&trailers_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Trailers",countryCode:countryCode])}&noticias_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Noticias y Actualidad",countryCode:countryCode])}&cultura_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Cultura",countryCode:countryCode])}&estilos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Estilos y Tendencias",countryCode:countryCode])}&otros_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Otros',countryCode:countryCode])}&adultos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Adultos',countryCode:countryCode])}'
 			); //end AC code
 	}
 </script>
@@ -92,7 +92,7 @@ src: url('fonts/cronos.otf');
 	<param name="movie" value="tv_online_menu.swf" />
 	<param name="quality" value="high" />
 	<param name="bgcolor" value="#ffffff" />
-	<param name="FlashVars" value="todos_link=http://url_aqui.algo&series_link=http://url_aqui.algo&eventos_link=http://url_aqui.algo&deportes_link=http://url_aqui.algo&trailers_link=http://url_aqui.algo&noticias_link=http://url_aqui.algo&cultura_link=http://url_aqui.algo&estilos_link=http://url_aqui.algo&otros_link=http://url_aqui.algo&adultos_link=http://url_aqui.algo" />
+	<param name="FlashVars" value="todos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Todos',countryCode:'SV'])}&series_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Series",countryCode:countryCode])}&eventos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Eventos Especiales",countryCode:countryCode])}&deportes_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Deportes",countryCode:countryCode])}&trailers_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Trailers",countryCode:countryCode])}&noticias_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Noticias y Actualidad",countryCode:countryCode])}&cultura_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Cultura",countryCode:countryCode])}&estilos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Estilos y Tendencias",countryCode:countryCode])}&otros_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Otros',countryCode:countryCode])}&adultos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Adultos',countryCode:countryCode])}" />
 	<embed src="${resource(dir:'swf',file:'tv_online_menu.swf')}" quality="high" bgcolor="#ffffff" width="580" height="120" name="tv_online_menu" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 	</object>
 </noscript>
@@ -101,7 +101,7 @@ src: url('fonts/cronos.otf');
 	<div id="tv_online">
 		
 		<div id="series_elegir_container">
-			<g:render template="/TVOnline/tvonlinecontent" model="[newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
+			<g:render template="/TVOnline/tvonlinecontent" model="[countryCode:countryCode, newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
 			<div id="tv_online_col_derecha">
 			<img src="${resource(dir:'img',file:'series_lomejor.jpg')}"/>
 			<ul id="lo_mejor">
