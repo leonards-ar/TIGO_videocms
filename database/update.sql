@@ -1,0 +1,10 @@
+update category set header_file_name = 'header-todos.jpg' where name like 'Todos';
+update category set header_file_name = 'header-series.jpg' where name like 'Series';
+update category set header_file_name = 'header-eventos.jpg' where name like 'Eventos Especiales';
+update category set header_file_name = 'header-deportes.jpg' where name like 'Deportes';
+update category set header_file_name = 'header-trailers.jpg' where name like 'Trailers';
+update category set header_file_name = 'header-noticias.jpg' where name like 'Noticias y Actualidad';
+update category set header_file_name = 'header-cultura.jpg' where name like 'Cultura';
+update category set header_file_name = 'header-estilos.jpg' where name like 'Estilos y Tendencias';
+update category set header_file_name = 'header-otros.jpg' where name like 'Otros';
+update category set header_file_name = 'header-adultos.jpg' where name like 'Adultos';
