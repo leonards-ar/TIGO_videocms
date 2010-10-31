@@ -3,7 +3,7 @@ package com.tigo.videocms
 import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_BACKOFFICE_USER','ROLE_ADMIN'])
-class TVShowController {
+class TVShowController extends BaseController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -19,7 +19,7 @@ class TVShowController {
     def create = {
         def TVShowInstance = new TVShow()
         TVShowInstance.properties = params
-        return [TVShowInstance: TVShowInstance]
+        return [TVShowInstance: TVShowInstance, elementList: getBackgroundImageElements()]
     }
 
     def save = {
@@ -51,7 +51,7 @@ class TVShowController {
             redirect(action: "list")
         }
         else {
-            return [TVShowInstance: TVShowInstance]
+            return [TVShowInstance: TVShowInstance, elementList: getBackgroundImageElements()]
         }
     }
 
@@ -100,4 +100,21 @@ class TVShowController {
             redirect(action: "list")
         }
     }
+	
+	def getBackgroundImageElements() {
+		def elementsCriteria = Element.createCriteria()
+		
+		elementsCriteria.listDistinct {
+			order('title', 'asc')
+			
+			type {
+				eq('labelKey', 'tvshow_background')
+			}
+
+			countries {
+				inList('id', getLoggedUserCountries()*.id)
+			}
+			
+		}
+	}
 }

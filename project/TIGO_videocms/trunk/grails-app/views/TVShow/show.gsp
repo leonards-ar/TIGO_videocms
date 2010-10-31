@@ -36,6 +36,26 @@
                             
                         </tr>
                     
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="TVShow.listInTheBest.label" default="List in the Best" /></td>
+                            
+                            <td valign="top" class="value"><g:formatBoolean boolean="${TVShowInstance?.listInTheBest}" /></td>
+                            
+                        </tr> 
+                        
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="TVShow.backgroundImage.label" default="Background Image" /></td>
+                            
+                            <td valign="top" class="value">
+                            	<g:if test="${TVShowInstance?.backgroundImage}">
+                            	<img src="${TVShowInstance?.backgroundImage?.thumbnailUrl ?: TVShowInstance?.backgroundImage?.url}" width="${grailsApplication.config.image.list.thumbnail.width}px" border="0" alt="${TVShowInstance?.backgroundImage?.title}" title="${TVShowInstance?.backgroundImage?.title}"/>
+                            	</g:if>
+                            	<g:else>
+                            	&nbsp;
+                            	</g:else>
+                            </td>
+                            
+                        </tr>                                            
                     </tbody>
                 </table>
             </div>
