@@ -10,18 +10,7 @@ class PortalController {
 		def rowList = [0,1]
 		[countryCode: 'SV', newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]
 	}
-	
-	def playVideo = {
-		def videoInstance = Video.get(params.id.toLong())
-		if (!videoInstance) {
-			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'video.label', default: 'Video'), params.id])}"
-			redirect(action: "index")
-		}
-		else {
-			render(view: "playvideo", model:[videoInstance: videoInstance])
-		}	
-	}
-	
+		
 	def homeMainGalleryElements = {
 		cache false
 		

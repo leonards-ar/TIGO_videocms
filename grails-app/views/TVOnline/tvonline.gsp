@@ -80,8 +80,8 @@ src: url('fonts/cronos.otf');
 			'allowFullScreen', 'false',
 			'allowScriptAccess','sameDomain',
 			'movie', '${resource(dir:'swf',file:'tv_online_menu')}',
-			'salign', '',
-			'flashvars','todos_link=http://url_aqui.algo&series_link=http://url_aqui.algo&eventos_link=http://url_aqui.algo&deportes_link=http://url_aqui.algo&trailers_link=http://url_aqui.algo&noticias_link=http://url_aqui.algo&cultura_link=http://url_aqui.algo&estilos_link=http://url_aqui.algo&otros_link=http://url_aqui.algo&adultos_link=http://url_aqui.algo'
+			'salign', '',			
+			'flashvars','todos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Todos'])}&series_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Series"])}&eventos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Eventos Especiales"])}&deportes_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Deportes"])}&trailers_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Trailers"])}&noticias_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Noticias y Actualidad"])}&cultura_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Cultura"])}&estilos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:"Estilos y Tendencias"])}&otros_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Otros'])}&adultos_link=${createLink(action:'categoryResults',controller:'TVOnline', params:[category:'Adultos'])}'
 			); //end AC code
 	}
 </script>
@@ -123,6 +123,52 @@ src: url('fonts/cronos.otf');
 	
 	<div id="footer"> <a href="">HOME </a> I <a href=""> POLITICA DE USO </a> I <a href=""> POLITICA DE PRIVACIDAD </a> I <a href=""> PARTNERS </a> I <a href=""> ANUNCIESE AQUI </a> I <a href=""> MAPA DEL SITIO </a> </div>
 </div>
+
+		<div id="slider" style="position:absolute; right:0px; top:50px;">
+			<script language="javascript">
+	if (AC_FL_RunContent == 0) {
+		alert("Esta página requiere el archivo AC_RunActiveContent.js.");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0',
+			'width', '240',
+			'height', '500',
+			'src', '${resource(dir:'swf',file:'panel_slider')}',
+			'quality', 'high',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', 'top',
+			'play', 'true',
+			'loop', 'true',
+			'scale', 'showall',
+			'wmode', 'transparent',
+			'devicefont', 'false',
+			'id', 'panel_slider',
+			'bgcolor', '#000000',
+			'name', 'panel_slider',
+			'menu', 'true',
+			'allowFullScreen', 'false',
+			'allowScriptAccess','sameDomain',
+			'movie', '${resource(dir:'swf',file:'panel_slider')}',
+			'flashvars', 'xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}',				
+			'salign', ''
+			); //end AC code
+	}
+</script>
+			<noscript>
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="240" height="500" id="panel_slider" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="allowFullScreen" value="false" />
+				<param name="movie" value="${resource(dir:'swf',file:'panel_slider.swf')}" />
+				<param name="quality" value="high" />
+				<param name="wmode" value="transparent" />
+				<param name="bgcolor" value="#000000" />
+				<param name="FlashVars" value="xml_links=${resource(dir:'swf',file:'slider_links.xml')}&xml_content=${resource(dir:'swf',file:'slider_content.xml')}" />				
+				<embed src="${resource(dir:'swf',file:'panel_slider.swf')}" quality="high" wmode="transparent" bgcolor="#000000" width="240" height="500" name="panel_slider" align="middle" allowScriptAccess="sameDomain" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+			</noscript>
+		</div>
+
+
 </body>
 </html>
 <script>
@@ -130,7 +176,7 @@ $(document).ready(function() {
 	$("#nav_tv a").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('TVONLINE');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Mira la Tv Online');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -140,7 +186,7 @@ $(document).ready(function() {
 	$("#nav_noticias").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('NOTICIAS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Mantente informado');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -150,7 +196,7 @@ $(document).ready(function() {
 	$("#nav_programas").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('PROGRAMAS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Encuentra tu programa preferido');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -160,7 +206,7 @@ $(document).ready(function() {
 	$("#nav_promos").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('PROMOS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Siempre hay algo esperando por ti');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');

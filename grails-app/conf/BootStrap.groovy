@@ -70,8 +70,9 @@ class BootStrap {
 		}
 		
 		def categories = ["Todos","Series","Eventos Especiales","Deportes","Trailers","Noticias y Actualidad","Cultura","Estilos y Tendencias","Otros","Adultos"]
-		categories.each{
-			Category.findByName(it)?:new Category(name:it).save(failOnError:true)
+		def categoriesHeader = ["header-todos.jpg","header-series.jpg","header-eventos.jpg","header-deportes.jpg","header-trailers.jpg","header-noticias.jpg","header-cultura.jpg","header-estilos.jpg","header-otros.jpg","header-adultos.jpg"]
+		categories.eachWithIndex{name, index->
+			Category.findByName(name)?:new Category(name:name,headerFileName:categoriesHeader[index]).save(failOnError:true)
 		}
 		
 		def audiencesRestrictions = ["T", "14", "18", "X"]
@@ -102,7 +103,7 @@ class BootStrap {
 			videoKey:'ug3RJ4Ac',
 			homeSection:Video.NEW_RELEASE,audienceRestriction: restrictionT, show:show1, 
 			active:true, rating: 5, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
-			.addToCategories(todos)
+			//.addToCategories(todos)
 			.addToCategories(spcEvnts)
 			.addToCountryVideos(country: salvador)
 			.addToCountryVideos(country: honduras)
@@ -117,7 +118,7 @@ class BootStrap {
 			homeSection:Video.FULL_EPISODE,
 			audienceRestriction: restriction14,
 			active:true, rating:3.4, uploadStatus:Video.UPLOAD_SUCCESS_STATUS)
-			.addToCategories(todos)
+			//.addToCategories(todos)
 			.addToCategories(deportes)
 			.addToCountryVideos(country: salvador)
 			.addToCountryVideos(country: guatemala)

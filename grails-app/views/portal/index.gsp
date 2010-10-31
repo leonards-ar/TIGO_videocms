@@ -217,7 +217,7 @@ $(document).ready(function() {
 	$("#nav_tv a").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('TVONLINE');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Mira la Tv Online');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -227,7 +227,7 @@ $(document).ready(function() {
 	$("#nav_noticias").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('NOTICIAS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Mantente informado');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -237,7 +237,7 @@ $(document).ready(function() {
 	$("#nav_programas").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('PROGRAMAS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Encuentra tu programa preferido');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
@@ -247,7 +247,7 @@ $(document).ready(function() {
 	$("#nav_promos").hover(
 		function(){
 			$("#nav_text").children("span.titulo").html('PROMOS');
-			$("#nav_text").children("span.texto").html('MIRA LAS MEJORES SERIES ONLINE');
+			$("#nav_text").children("span.texto").html('Siempre hay algo esperando por ti');
 		},
 		function(){
 				$("#nav_text").children("span.titulo").html('');
