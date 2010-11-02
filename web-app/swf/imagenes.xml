@@ -3,5 +3,10 @@
 si hay menos en este archivo, el script se encarga de repetirlas
 El tamaño de las imágenes para óptimo resultado deben ser de 120px ancho x 90px alto-->
 <images>                                                                    
-<image src="/tigo_videocms/img/120_1.jpg" link="http://www.google.com" />
+<image src="/tigo_videocms/swf/carousel_img/24.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/1?countryCode=SV" />
+<image src="/tigo_videocms/swf/carousel_img/WalkingDead.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/18?countryCode=SV" />
+<image src="/tigo_videocms/swf/carousel_img/Padre.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/3?countryCode=SV" />
+<image src="/tigo_videocms/swf/carousel_img/DrH.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/1?countryCode=SV" />
+<image src="/tigo_videocms/swf/carousel_img/Avatar.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/1?countryCode=SV" />
+<image src="/tigo_videocms/swf/carousel_img/ESPN.gif" link="http://www.tigotvonline.com/tigo/TVOnline/showTVShow/1?countryCode=SV" />
 </images>

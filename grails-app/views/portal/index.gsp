@@ -135,8 +135,11 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 		</noscript>
 	</div>
 	<!--fin series-->
+	
 	<div id="tv_online">
-		<div id="left_col"> <img src="${resource(dir:'img',file:'titulo_noticias.png')}" />
+		<div id="left_col">
+		&nbsp;
+		<!-- img src="${resource(dir:'img',file:'titulo_noticias.png')}" />
 		    <img src="${resource(dir:'img',file:'noticias_img.png')}" /> 
 			<div class="noticia"> <span class="titulo">TITULAR DE NOTICIAS</span>
 				<p class="texto">Donec condimentum ultrices pharetra. Nulla id tellus arcu, eget feugiat mi. Class aptent taciti socios.</p>
@@ -150,11 +153,11 @@ src: url('${resource(dir:'fonts',file:'cronos.otf')}');
 				<p class="texto">Donec condimentum ultrices pharetra. Nulla id tellus arcu, eget feugiat mi. Class aptent taciti socios.</p>
 			</div>
 			<br />
-			<img src="${resource(dir:'img',file:'noticia_vermas.png')}" />
+			<img src="${resource(dir:'img',file:'noticia_vermas.png')}" /-->
 		</div>
 		<div id="tv_online_container">
 			<g:render template="/TVOnline/tvonlinecontent" model="[countryCode:countryCode, newReleases: newReleases, fullEpisodes:fullEpisodes, mostPopulars:mostPopulars, rowList: rowList]"/>
-			<div id="tv_online_banner"><img src="${resource(dir:'img',file:'tv_online_banner.png')}" /></div>
+			<div id="tv_online_banner"><img src="${resource(dir:'img',file:'banner.gif')}" /></div>
 		</div>
 	</div>
 	<!-- fin tv_online-->
